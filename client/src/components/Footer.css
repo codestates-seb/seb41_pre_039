@@ -4,7 +4,7 @@ footer {
   color: #9199a1;
   display: flex;
   justify-content: center;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 footer a {
@@ -14,7 +14,6 @@ footer a {
 footer a:hover{
   color: #9fa6ad;
 }
-
 
 .footer-container {
   width: 100%;
@@ -52,7 +51,7 @@ footer a:hover{
 
 .footer-sitemap-submenu--title {
   color: #babfc4;
-  font-size: 16px;
+  font-size: 13px;
   text-transform: uppercase;
   text-align: left;
   margin-bottom: 12px;
@@ -87,4 +86,46 @@ footer a:hover{
 
 .footer-copyright > p {
   max-width: 320px;
+}
+
+.footer-copyright > p > a{
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .footer-nav {
+    flex-direction: column;
+  }
+  .footer-sitemap {
+    flex-direction: column;
+  }
+  .footer-sitemap-submenu{
+    margin-bottom: 20px;
+  }
+  .footer-sitemap-submenu--container{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .footer-sitemap-submenu--container > li{
+    margin-right: 10px;
+  }
+  .footer-copyright--sns{
+    margin-bottom: 10px;
+  }
+  .footer-copyright > p{
+    max-width: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .footer-container {
+    flex-direction: column;
+    justify-content: start;
+  }
+  .footer-logo{
+    text-align: left;
+  }
+  .footer-nav{
+    padding: 0 20px;
+  }
 }

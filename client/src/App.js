@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
-import Question from './pages/Question';
+import Post from './pages/Post';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           <Sidebar />
         </div>
         <div className="content">
-          <Question />
+          <Post />
         </div>
       </div>
       <div className="footer">

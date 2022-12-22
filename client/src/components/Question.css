@@ -1,0 +1,128 @@
+/* 본문 컨테이너 */
+.question-container {
+  display: flex;
+  width: 70%;
+  height: 100%;
+  margin: 30px 0;
+}
+
+/* 본문 추천/비추천 */
+.content-recommend {
+  display: flex;
+  flex-direction: column;
+  width: 40px;
+  height: 50%;
+  margin-right: 20px;
+}
+
+.content-up {
+  width: 36px;
+  height: 36px;
+  background-image: url('https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27');
+  background-position: -2px -165px;
+}
+
+.content-down {
+  width: 36px;
+  height: 36px;
+  background-image: url('https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27');
+  background-position: -2px -215px;
+}
+
+.content-num {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+
+/* 본문 질문 */
+.content-question {
+  display: flex;
+  flex-direction: column;
+}
+
+.question-p {
+  display: flex;
+  margin-bottom: 16.5px;
+  text-align: left;
+}
+
+/* 본문 CODE 작성란 */
+.question-codeBox {
+  display: flex;
+  justify-content: center;
+  background-color: hsl(0deg 0% 96%);
+  border-radius: 5px;
+  text-align: left;
+}
+
+.question-code {
+  padding: 12px;
+}
+
+/* 태그 목록 */
+.content-tag {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag-span {
+  padding: 4.8px 6px;
+  height: 23px;
+  margin-right: 5px;
+  background-color: #d9eaf7;
+  border-radius: 5px;
+  font-size: 12px;
+  color: hsl(205deg 47% 42%);
+}
+
+/* 글 수정,작성자 정보 div */
+.content-writerInfo {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0px;
+}
+
+.content-edit {
+  color: hsl(214deg 7% 47%);
+  font-size: 13px;
+}
+.writer-box {
+  text-align: left;
+  width: 200px;
+  height: 67px;
+  padding: 5px 6px 7px 7px;
+  background-color: hsl(206deg 65% 91%);
+}
+
+.writer-avatar {
+  width: 32px;
+  height: 32px;
+}
+
+.asked-time {
+  font-size: 13px;
+  color: hsl(210deg 8% 46%);
+  margin-bottom: 5px;
+}
+
+.writer-name {
+  font-size: 20px;
+  margin-left: 10px;
+  color: hsl(206deg 100% 40%);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+}
+
+/* 코멘트 달기*/
+.add-comment {
+  text-align: left;
+  color: hsl(213deg 8% 73%);
+  font-size: 13px;
+}

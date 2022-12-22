@@ -1,4 +1,5 @@
 import './App.css';
+import Header from './components/Header.js';
 
 function App() {
   return (
@@ -9,7 +10,6 @@ function App() {
         <div className="sidebar">Sidebar</div>
         <div className="content">Main</div>
       </div>
-
       <div className="footer">Footer</div>
     </div>
   );

@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 164px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-top: 20px;
 }
 
@@ -20,11 +20,11 @@ aside {
   position: relative;
 }
 
-.sidebar-nav > li:hover{
+.sidebar-nav > li:hover {
   color: #000;
 }
 
-.sidebar-nav > li.active{
+.sidebar-nav > li.active {
   font-weight: bold;
   background-color: #f1f2f3;
   border-right: #f48225 3px solid;

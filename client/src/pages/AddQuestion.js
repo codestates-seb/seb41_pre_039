@@ -61,12 +61,12 @@ const InputBox = styled.div`
   }
 `;
 
-const NextButton = styled.button`
-  background-color: hsl(206deg 100% 52%);
+const Button = styled.button`
   color: #fff;
   border: 1px solid transparent;
-  box-shadow: inset 0 1px 0 0 hsl(206deg 100% 52%),
-    inset 0 2px 0 0 hsla(0, 0%, 100%, 0.4);
+  background-color: hsl(206deg 100% 52%);
+  box-shadow: inset 0 0.4px 0 0 hsl(206deg 100% 52%),
+    inset 0 1px 0 0 hsla(0, 0%, 100%, 0.4);
   border-radius: 3px;
   font-size: 13px;
   padding: 0.8em;
@@ -86,6 +86,23 @@ const NextButton = styled.button`
           }
         `
       : undefined}
+`;
+
+const SaveButton = styled(Button)`
+  background-color: rgba(255, 104, 10, 0.8);
+  box-shadow: inset 0 0.4px 0 0 rgba(255, 104, 10, 0.8),
+    inset 0 1px 0 0 hsla(0, 0%, 100%, 0.4);
+  &:hover {
+    background-color: rgba(255, 104, 10, 1);
+  }
+`;
+const DiscardButton = styled(Button)`
+  background-color: transparent;
+  box-shadow: none;
+  color: #ab262a;
+  &:hover {
+    background-color: #fdf2f2;
+  }
 `;
 
 const AddQuestion = () => {
@@ -191,9 +208,9 @@ const AddQuestion = () => {
             ref={titleRef}
           />
           {inputStep === 1 ? (
-            <NextButton name="titleNext" onClick={(e) => moveNextInput(e)}>
+            <Button name="titleNext" onClick={(e) => moveNextInput(e)}>
               Next
-            </NextButton>
+            </Button>
           ) : undefined}
         </InputBox>
         <InputBox>
@@ -210,13 +227,13 @@ const AddQuestion = () => {
             ref={problemRef}
           />
           {inputStep === 2 ? (
-            <NextButton
+            <Button
               name="problemNext"
               onClick={(e) => moveNextInput(e)}
               disabled={problem.length < 20}
             >
               Next
-            </NextButton>
+            </Button>
           ) : undefined}
         </InputBox>
         <InputBox>
@@ -235,13 +252,13 @@ const AddQuestion = () => {
             ref={tryForRef}
           />
           {inputStep === 3 ? (
-            <NextButton
+            <Button
               name="tryForNext"
               onClick={(e) => moveNextInput(e)}
               disabled={tryFor.length < 20}
             >
               Next
-            </NextButton>
+            </Button>
           ) : undefined}
         </InputBox>
         <InputBox>
@@ -261,34 +278,34 @@ const AddQuestion = () => {
             />
           </div>
           {inputStep === 4 ? (
-            <NextButton
+            <Button
               name="tagsNext"
               onClick={(e) => moveNextInput(e)}
               disabled={tags.length < 1}
             >
               Next
-            </NextButton>
+            </Button>
           ) : undefined}
         </InputBox>
-        <button
+        <Button
           type="form"
           form="addQuestion--form"
           className="addQuestion--submit submitButton"
         >
           Review your question
-        </button>
-        <button
+        </Button>
+        <SaveButton
           className="addQuestion--draft-save submitButton"
           onClick={(e) => saveDraftHandler(e)}
         >
           Save draft
-        </button>
-        <button
+        </SaveButton>
+        <DiscardButton
           className="addQuestion--draft-discard submitButton"
           onClick={(e) => deleteDraftHandler(e)}
         >
           Discard draft
-        </button>
+        </DiscardButton>
       </form>
     </section>
   );

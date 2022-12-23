@@ -48,37 +48,6 @@
   list-style-type: disc;
 }
 
-.addQuestion-container button {
-  border: none;
-  border-radius: 3px;
-  font-size: 14px;
-  padding: 10px;
-  cursor: pointer;
+.addQuestion-container .submitButton {
   margin-right: 10px;
-}
-
-.addQuestion--submit {
-  background-color: hsl(206deg 100% 52%);
-  color: #fff;
-  font-weight: 500;
-}
-
-.addQuestion--draft-save {
-  background-color: rgba(255, 104, 10, 0.8);
-  color: #fff;
-  font-weight: 500;
-}
-
-.addQuestion--draft-save:hover {
-  background-color: rgba(255, 104, 10, 1);
-}
-
-.addQuestion--draft-discard {
-  background-color: #fdf2f2;
-  color: #ab262a;
-  font-weight: 500;
-}
-
-.addQuestion--draft-discard:hover {
-  background-color: #fdf2f2;
 }

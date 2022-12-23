@@ -13,9 +13,9 @@ export default function Question() {
           </div>
         </div>
         <div className="question-info">
-          <span>Asked</span>
-          <span>Modified</span>
-          <span>Viewed</span>
+          <span className="info">Asked</span>
+          <span className="info">Modified</span>
+          <span className="info">Viewed</span>
         </div>
       </div>
       <div className="content-layout">

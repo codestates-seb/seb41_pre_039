@@ -1,9 +1,9 @@
-package com.seb_pre_039.stackoverflowclone.Question.controller;
+package com.seb_pre_039.stackoverflowclone.question.controller;
 
-import com.seb_pre_039.stackoverflowclone.Question.mapper.QuestionMapper;
-import com.seb_pre_039.stackoverflowclone.Question.dto.QuestionDto;
-import com.seb_pre_039.stackoverflowclone.Question.entity.Question;
-import com.seb_pre_039.stackoverflowclone.Question.service.QuestionService;
+import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
+import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
+import com.seb_pre_039.stackoverflowclone.question.entity.Question;
+import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
 import com.seb_pre_039.stackoverflowclone.response.MultiResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

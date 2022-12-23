@@ -1,4 +1,4 @@
-package com.seb_pre_039.stackoverflowclone.Question.dto;
+package com.seb_pre_039.stackoverflowclone.question.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

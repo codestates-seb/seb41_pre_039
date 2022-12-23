@@ -1,8 +1,8 @@
-package com.seb_pre_039.stackoverflowclone.Question.service;
+package com.seb_pre_039.stackoverflowclone.question.service;
 
 
-import com.seb_pre_039.stackoverflowclone.Question.entity.Question;
-import com.seb_pre_039.stackoverflowclone.Question.repository.QuestionRepository;
+import com.seb_pre_039.stackoverflowclone.question.entity.Question;
+import com.seb_pre_039.stackoverflowclone.question.repository.QuestionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

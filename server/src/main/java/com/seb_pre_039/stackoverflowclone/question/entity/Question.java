@@ -1,4 +1,4 @@
-package com.seb_pre_039.stackoverflowclone.Question.entity;
+package com.seb_pre_039.stackoverflowclone.question.entity;
 
 import com.seb_pre_039.stackoverflowclone.audit.BaseTimeEntity;
 import lombok.*;

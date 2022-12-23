@@ -1,7 +1,7 @@
-package com.seb_pre_039.stackoverflowclone.Question.mapper;
+package com.seb_pre_039.stackoverflowclone.question.mapper;
 
-import com.seb_pre_039.stackoverflowclone.Question.dto.QuestionDto;
-import com.seb_pre_039.stackoverflowclone.Question.entity.Question;
+import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
+import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

@@ -1,13 +1,11 @@
 package com.seb_pre_039.stackoverflowclone.member.entitiy;
 
-import com.seb_pre_039.stackoverflowclone.Question.Question;
+import com.seb_pre_039.stackoverflowclone.question.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Getter

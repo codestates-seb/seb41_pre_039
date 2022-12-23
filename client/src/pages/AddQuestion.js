@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useState, useRef } from 'react';
 import './AddQuestion.css';
 
@@ -64,7 +64,6 @@ const InputBox = styled.div`
 const NextButton = styled.button`
   background-color: hsl(206deg 100% 52%);
   color: #fff;
-  cursor: pointer;
   border: 1px solid transparent;
   box-shadow: inset 0 1px 0 0 hsl(206deg 100% 52%),
     inset 0 2px 0 0 hsla(0, 0%, 100%, 0.4);
@@ -73,8 +72,20 @@ const NextButton = styled.button`
   padding: 0.8em;
   margin-top: 16px;
   &:hover {
+    cursor: pointer;
     background-color: hsl(206deg 100% 40%);
   }
+  ${(props) =>
+    props.disabled
+      ? css`
+          background-color: #85caff;
+          box-shadow: none;
+          &:hover {
+            cursor: default;
+            background-color: #85caff;
+          }
+        `
+      : undefined}
 `;
 
 const AddQuestion = () => {
@@ -173,7 +184,11 @@ const AddQuestion = () => {
             ref={problemRef}
           />
           {inputStep === 2 ? (
-            <NextButton name="problemNext" onClick={(e) => moveNextInput(e)}>
+            <NextButton
+              name="problemNext"
+              onClick={(e) => moveNextInput(e)}
+              disabled={problem.length < 20}
+            >
               Next
             </NextButton>
           ) : undefined}
@@ -194,7 +209,11 @@ const AddQuestion = () => {
             ref={tryForRef}
           />
           {inputStep === 3 ? (
-            <NextButton name="tryForNext" onClick={(e) => moveNextInput(e)}>
+            <NextButton
+              name="tryForNext"
+              onClick={(e) => moveNextInput(e)}
+              disabled={tryFor.length < 20}
+            >
               Next
             </NextButton>
           ) : undefined}
@@ -216,7 +235,11 @@ const AddQuestion = () => {
             />
           </div>
           {inputStep === 4 ? (
-            <NextButton name="tagsNext" onClick={(e) => moveNextInput(e)}>
+            <NextButton
+              name="tagsNext"
+              onClick={(e) => moveNextInput(e)}
+              disabled={tags.length < 1}
+            >
               Next
             </NextButton>
           ) : undefined}

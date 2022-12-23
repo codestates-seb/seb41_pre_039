@@ -157,6 +157,9 @@
   font-size: 13px;
 }
 
+.content-edit:hover {
+  color: hsl(210deg 8% 55%);
+}
 .writer-box {
   text-align: left;
   width: 200px;

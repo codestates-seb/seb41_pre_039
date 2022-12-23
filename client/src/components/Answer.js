@@ -78,7 +78,7 @@ export default function Answer() {
             <br />
             <div className="content-answerInfo">
               <a href="%PUBLIC_URL%" className="content-edit">
-                edit
+                Edit
               </a>
               <div className="answer-box">
                 <p className="asked-time">asked 58 mins ago</p>

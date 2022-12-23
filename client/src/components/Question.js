@@ -59,7 +59,7 @@ export default function Question() {
             </div>
             <div className="content-writerInfo">
               <a href="%PUBLIC_URL%" className="content-edit">
-                edit
+                Edit
               </a>
               <div className="writer-box">
                 <p className="asked-time">asked 58 mins ago</p>

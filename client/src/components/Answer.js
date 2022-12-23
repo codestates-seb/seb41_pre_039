@@ -102,6 +102,7 @@ export default function Answer() {
 
 function YourAnswer() {
   const [help, setHelp] = useState(false);
+  const [inputValue, setInputValue] = useState('');
   return (
     <>
       <form className="ya-box">
@@ -111,6 +112,8 @@ function YourAnswer() {
         <textarea
           onClick={() => setHelp(true)}
           className="ya-textarea"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
         ></textarea>
         {help ? <YourAnswerModal /> : null}
         <NextButton>Post Your Answer</NextButton>

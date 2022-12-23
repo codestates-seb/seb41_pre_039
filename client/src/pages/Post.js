@@ -1,3 +1,4 @@
+import Answer from '../components/Answer';
 import Question from '../components/Question';
 import './Post.css';
 
@@ -20,7 +21,7 @@ export default function Post() {
         </div>
         <Question />
         <h2>1 Answer</h2>
-        <Question />
+        <Answer />
       </div>
     </div>
   );

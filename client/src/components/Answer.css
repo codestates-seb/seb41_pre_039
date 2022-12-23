@@ -95,7 +95,7 @@
   width: 200px;
   height: 67px;
   padding: 5px 6px 7px 7px;
-  background-color: hsl(206deg 65% 91%);
+  border-radius: 5px;
 }
 
 .answer-avatar {

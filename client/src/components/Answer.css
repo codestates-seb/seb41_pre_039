@@ -49,29 +49,6 @@
   margin-right: 20px;
 }
 
-.content-up {
-  width: 36px;
-  height: 36px;
-  background-image: url('https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27');
-  background-position: -2px -165px;
-}
-
-.content-down {
-  width: 36px;
-  height: 36px;
-  background-image: url('https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27');
-  background-position: -2px -215px;
-}
-
-.content-num {
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-}
-
 /* 본문 질문 */
 .content-answer {
   display: flex;
@@ -120,10 +97,6 @@
   margin: 25px 0px;
 }
 
-.content-edit {
-  color: hsl(214deg 7% 47%);
-  font-size: 13px;
-}
 .answer-box {
   text-align: left;
   width: 200px;
@@ -149,16 +122,8 @@
   color: hsl(206deg 100% 40%);
 }
 
-.userInfo {
-  display: flex;
-  align-items: center;
-}
-
-/* 코멘트 달기*/
-.add-comment {
-  text-align: left;
-  color: hsl(213deg 8% 73%);
-  font-size: 13px;
+.answer-name:hover {
+  color: hsl(206deg 100% 52%);
 }
 
 /* YOUR ANSWER */

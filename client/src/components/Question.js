@@ -47,26 +47,40 @@ export default function Question() {
             </div>
             <br />
             <div className="content-tag">
-              <span className="tag-span">태그</span>
-              <span className="tag-span">태그</span>
-              <span className="tag-span">태그</span>
+              <a href="%PUBLIC_URL%" className="tag-a">
+                태그
+              </a>
+              <a href="%PUBLIC_URL%" className="tag-a">
+                태그
+              </a>
+              <a href="%PUBLIC_URL%" className="tag-a">
+                태그
+              </a>
             </div>
             <div className="content-writerInfo">
-              <span className="content-edit">edit</span>
+              <a href="%PUBLIC_URL%" className="content-edit">
+                edit
+              </a>
               <div className="writer-box">
                 <p className="asked-time">asked 58 mins ago</p>
                 <div className="userInfo">
-                  <img
-                    src="http://placeimg.com/24/24/any"
-                    alt="writer-avatar"
-                    className="writer-avatar"
-                  ></img>
-                  <span className="writer-name">Writer</span>
+                  <a href="%PUBLIC_URL%">
+                    <img
+                      src="http://placeimg.com/24/24/any"
+                      alt="writer-avatar"
+                      className="writer-avatar"
+                    ></img>
+                  </a>
+                  <a href="%PUBLIC_URL%" className="writer-name">
+                    Writer
+                  </a>
                 </div>
               </div>
             </div>
             <br />
-            <span className="add-comment">Add a comment</span>
+            <a href="%PUBLIC_URL%" className="add-comment">
+              Add a comment
+            </a>
           </article>
         </div>
       </div>

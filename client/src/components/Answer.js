@@ -42,8 +42,8 @@ export default function Answer() {
           </div>
           <div>
             <select name="sorted" className="answer-sorted">
-              <option value="hightes score">Hightes score (default)</option>
-              <option value="Date created">Date created (oldest first)</option>
+              <option value="Date created">Date created (default)</option>
+              <option value="hightes score">Hightes score</option>
             </select>
           </div>
         </div>
@@ -77,21 +77,29 @@ export default function Answer() {
             </div>
             <br />
             <div className="content-answerInfo">
-              <span className="content-edit">edit</span>
+              <a href="%PUBLIC_URL%" className="content-edit">
+                edit
+              </a>
               <div className="answer-box">
                 <p className="asked-time">asked 58 mins ago</p>
                 <div className="userInfo">
-                  <img
-                    src="http://placeimg.com/24/24/any"
-                    alt="answer-avatar"
-                    className="answer-avatar"
-                  ></img>
-                  <span className="answer-name">Answer</span>
+                  <a href="%PUBLIC_URL%">
+                    <img
+                      src="http://placeimg.com/24/24/any"
+                      alt="answer-avatar"
+                      className="answer-avatar"
+                    ></img>
+                  </a>
+                  <a href="%PUBLIC_URL%" className="answer-name">
+                    Answer
+                  </a>
                 </div>
               </div>
             </div>
             <br />
-            <span className="add-comment">Add a comment</span>
+            <a href="%PUBLIC_URL%" className="add-comment">
+              Add a comment
+            </a>
           </article>
         </div>
       </div>

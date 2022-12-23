@@ -1,6 +1,5 @@
 package com.seb_pre_039.stackoverflowclone.member.entitiy;
 
-import com.seb_pre_039.stackoverflowclone.question.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

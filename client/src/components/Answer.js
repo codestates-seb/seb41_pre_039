@@ -64,6 +64,18 @@ export default function Answer() {
           </article>
         </div>
       </div>
+      <YourAnswer />
     </>
+  );
+}
+
+function YourAnswer() {
+  return (
+    <form className="ya-box">
+      <div className="ya-title">
+        <h2>Your Answer</h2>
+      </div>
+      <textarea className="ya-textarea"></textarea>
+    </form>
   );
 }

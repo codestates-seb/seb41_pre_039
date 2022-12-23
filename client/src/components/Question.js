@@ -50,7 +50,7 @@ export default function Question() {
             </div>
           </div>
           <br />
-          <span className="add-comment">add a comment</span>
+          <span className="add-comment">Add a comment</span>
         </article>
       </div>
     </div>

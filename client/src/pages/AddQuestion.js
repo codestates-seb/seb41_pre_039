@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './AddQuestion.css';
 
 const InputBox = styled.div`
@@ -100,6 +100,18 @@ const AddQuestion = () => {
   const tryForRef = useRef(null);
   const tagsRef = useRef(null);
 
+  useEffect(() => {
+    if (localStorage.draft) {
+      console.log(localStorage.draft);
+      const draft = JSON.parse(localStorage.getItem('draft'));
+      setTitle(draft.title || '');
+      setProblem(draft.problem || '');
+      setTryFor(draft.tryFor || '');
+      setTags(draft.tags || []);
+      setInputStep(draft.inputStep || 1);
+    }
+  }, []);
+
   const moveNextInput = (e) => {
     const name = e.target.name;
     e.preventDefault();
@@ -123,6 +135,20 @@ const AddQuestion = () => {
       default:
         return undefined;
     }
+  };
+
+  const saveDraftHandler = (e) => {
+    e.preventDefault();
+    localStorage.setItem(
+      'draft',
+      JSON.stringify({ title, problem, tryFor, tags, inputStep })
+    );
+  };
+
+  const deleteDraftHandler = (e) => {
+    e.preventDefault();
+    localStorage.removeItem('draft');
+    location.reload();
   };
 
   return (
@@ -251,10 +277,16 @@ const AddQuestion = () => {
         >
           Review your question
         </button>
-        <button className="addQuestion--draft-save submitButton">
+        <button
+          className="addQuestion--draft-save submitButton"
+          onClick={(e) => saveDraftHandler(e)}
+        >
           Save draft
         </button>
-        <button className="addQuestion--draft-discard submitButton">
+        <button
+          className="addQuestion--draft-discard submitButton"
+          onClick={(e) => deleteDraftHandler(e)}
+        >
           Discard draft
         </button>
       </form>

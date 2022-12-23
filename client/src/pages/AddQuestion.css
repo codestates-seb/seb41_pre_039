@@ -1,0 +1,84 @@
+.addQuestion-container {
+  background-color: #f8f9f9;
+  padding: 20px;
+  padding-bottom: 60px;
+}
+
+.addQuestion-container > h2 {
+  font-weight: 500;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.addQuestion--advice{
+  width: 100%;
+  padding: 24px;
+  color: #3b4045;
+  border-radius: 3px;
+  background-color: #ebf4fb;
+  border: 1px solid #a6ceed;
+  margin-bottom: 16px;
+}
+
+.addQuestion--advice > h3 {
+  font-size: 20px;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
+.addQuestion--advice > p {
+  font-size: 15px;
+}
+.addQuestion--advice > p:last-of-type {
+  margin-bottom: 15px;
+}
+
+.addQuestion--advice > h4 {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.addQuestion--advice > ul {
+  list-style-type: disc; 
+  font-size: 13px;
+  padding-left: 32px;
+}
+.addQuestion--advice > ul li {
+  list-style-type: disc;
+}
+
+.addQuestion-container button {
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 10px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.addQuestion--submit {
+  background-color: hsl(206deg 100% 52%);
+  color: #fff;
+  font-weight: 500;
+}
+
+.addQuestion--draft-save {
+  background-color: rgba(255, 104, 10, 0.8);
+  color: #fff;
+  font-weight: 500;
+}
+
+.addQuestion--draft-save:hover {
+  background-color: rgba(255, 104, 10, 1);
+}
+
+.addQuestion--draft-discard {
+  background-color: #fdf2f2;
+  color: #ab262a;
+  font-weight: 500;
+}
+
+.addQuestion--draft-discard:hover {
+  background-color: #fdf2f2;
+}

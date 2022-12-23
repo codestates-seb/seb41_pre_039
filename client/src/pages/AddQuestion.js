@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './AddQuestion.css';
 
 const InputBox = styled.div`
@@ -11,6 +11,18 @@ const InputBox = styled.div`
   color: #0c0d0e;
   text-align: left;
   margin-bottom: 16px;
+  position: relative;
+
+  .disable {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(235, 235, 235, 0.7);
+    cursor: not-allowed;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
   label {
     cursor: pointer;
     font-weight: 600;
@@ -66,6 +78,42 @@ const NextButton = styled.button`
 `;
 
 const AddQuestion = () => {
+  const [title, setTitle] = useState('');
+  const [problem, setProblem] = useState('');
+  const [tryFor, setTryFor] = useState('');
+  const [tags, setTags] = useState([]);
+  const [inputStep, setInputStep] = useState(1);
+
+  const titleRef = useRef(null);
+  const problemRef = useRef(null);
+  const tryForRef = useRef(null);
+  const tagsRef = useRef(null);
+
+  const moveNextInput = (e) => {
+    const name = e.target.name;
+    e.preventDefault();
+    switch (name) {
+      case 'titleNext':
+        problemRef.current.focus();
+        setInputStep(2);
+        break;
+      case 'problemNext':
+        tryForRef.current.focus();
+        setInputStep(3);
+        break;
+      case 'tryForNext':
+        tagsRef.current.focus();
+        setInputStep(4);
+        break;
+      case 'tagsNext':
+        tagsRef.current.blur();
+        setInputStep(5);
+        break;
+      default:
+        return undefined;
+    }
+  };
+
   return (
     <section className="addQuestion-container">
       <h2>Ask a public question</h2>
@@ -101,19 +149,37 @@ const AddQuestion = () => {
             id="title"
             type="text"
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            ref={titleRef}
           />
-          <NextButton>Next</NextButton>
+          {inputStep === 1 ? (
+            <NextButton name="titleNext" onClick={(e) => moveNextInput(e)}>
+              Next
+            </NextButton>
+          ) : undefined}
         </InputBox>
         <InputBox>
+          {inputStep >= 2 ? undefined : <div className="disable"></div>}
           <label htmlFor="problem">What are the details of your problem?</label>
           <p>
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </p>
-          <textarea id="problem" />
-          <NextButton>Next</NextButton>
+          <textarea
+            id="problem"
+            value={problem}
+            onChange={(e) => setProblem(e.target.value)}
+            ref={problemRef}
+          />
+          {inputStep === 2 ? (
+            <NextButton name="problemNext" onClick={(e) => moveNextInput(e)}>
+              Next
+            </NextButton>
+          ) : undefined}
         </InputBox>
         <InputBox>
+          {inputStep >= 3 ? undefined : <div className="disable"></div>}
           <label htmlFor="tryForProblem">
             What did you try and what were you expecting?
           </label>
@@ -121,10 +187,20 @@ const AddQuestion = () => {
             Describe what you tried, what you expected to happen, and what
             actually resulted. Minimum 20 characters.
           </p>
-          <textarea id="tryForProblem" />
-          <NextButton>Next</NextButton>
+          <textarea
+            id="tryForProblem"
+            value={tryFor}
+            onChange={(e) => setTryFor(e.target.value)}
+            ref={tryForRef}
+          />
+          {inputStep === 3 ? (
+            <NextButton name="tryForNext" onClick={(e) => moveNextInput(e)}>
+              Next
+            </NextButton>
+          ) : undefined}
         </InputBox>
         <InputBox>
+          {inputStep >= 4 ? undefined : <div className="disable"></div>}
           <label htmlFor="tags">Tags</label>
           <p>
             Add up to 5 tags to describe what your question is about. Start
@@ -135,9 +211,15 @@ const AddQuestion = () => {
               id="tags"
               type="text"
               placeholder={'e.g. (css sql-server asp.net-mvc)'}
+              onChange={(e) => setTags(e.target.value.split(' '))}
+              ref={tagsRef}
             />
           </div>
-          <NextButton>Next</NextButton>
+          {inputStep === 4 ? (
+            <NextButton name="tagsNext" onClick={(e) => moveNextInput(e)}>
+              Next
+            </NextButton>
+          ) : undefined}
         </InputBox>
         <button
           type="form"

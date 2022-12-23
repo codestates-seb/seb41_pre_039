@@ -7,6 +7,41 @@
 }
 
 /* 본문 추천/비추천 */
+
+.answer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+}
+
+/* 답변 정렬 */
+.sorted-box {
+  display: flex;
+  justify-content: space-around;
+  min-width: 320px;
+  height: 100%;
+}
+
+.sorted-info {
+  display: flex;
+  align-items: center;
+}
+
+.sorted-text {
+  font-size: 14px;
+  color: hsl(210deg 2% 38%);
+}
+
+.answer-sorted {
+  min-width: 240px;
+  height: 100%;
+  text-align: left;
+  border-color: hsl(207deg 7% 75%);
+  border-radius: 5px;
+  color: rgb(53, 54, 56);
+}
+
 .content-recommend {
   display: flex;
   flex-direction: column;
@@ -125,4 +160,30 @@
   text-align: left;
   color: hsl(213deg 8% 73%);
   font-size: 13px;
+}
+
+/* YOUR ANSWER */
+.ya-box {
+  width: 100%;
+  border-top: 1px solid hsl(216deg 7% 85%);
+  padding: 10px 0;
+}
+
+.ya-title {
+  display: flex;
+  width: 100%;
+  height: 45px;
+}
+
+.ya-textarea {
+  width: 100%;
+  height: 200px;
+  resize: vertical;
+  padding: 10px;
+}
+
+.ya-textarea:focus {
+  outline-color: hsl(206deg 90% 70%);
+  box-shadow: 0px 0px 6px rgb(128, 191, 215);
+  border-radius: 5px;
 }

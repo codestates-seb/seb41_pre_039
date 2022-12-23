@@ -3,7 +3,20 @@ import './Answer.css';
 export default function Answer() {
   return (
     <>
-      <h2>1 Answer </h2>
+      <div className="answer-header">
+        <h2>1 Answer </h2>
+        <div className="sorted-box">
+          <div className="sorted-info">
+            <span className="sorted-text">Sorted by:</span>
+          </div>
+          <div>
+            <select name="sorted" className="answer-sorted">
+              <option value="hightes score">Hightes score (default)</option>
+              <option value="Date created">Date created (oldest first)</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <div className="content-layout">
         <div className="answer-container">
           <div className="content-recommend">

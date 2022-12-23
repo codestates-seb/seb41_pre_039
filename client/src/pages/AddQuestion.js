@@ -96,12 +96,46 @@ const SaveButton = styled(Button)`
     background-color: rgba(255, 104, 10, 1);
   }
 `;
+
 const DiscardButton = styled(Button)`
   background-color: transparent;
   box-shadow: none;
   color: #ab262a;
   &:hover {
     background-color: #fdf2f2;
+  }
+`;
+
+const TagWrapper = styled.span`
+  background-color: #e1ecf4;
+  font-size: 12px;
+  margin: 2px;
+  padding: 8px;
+  border-radius: 3px;
+  color: rgb(57, 115, 157);
+  span {
+    padding: 0 4px;
+  }
+  button {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 3px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-radius: 3px;
+    svg {
+      vertical-align: bottom;
+      fill: rgb(57, 115, 157);
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(57, 115, 157);
+      svg {
+        fill: #e1ecf4;
+      }
+    }
   }
 `;
 
@@ -128,6 +162,28 @@ const AddQuestion = () => {
       setInputStep(draft.inputStep || 1);
     }
   }, []);
+
+  const Tag = ({ tag, key: idx }) => {
+    const removeTagHandler = (idx) => {
+      setTags((prev) => prev.filter((_, i) => i !== idx));
+    };
+
+    return (
+      <TagWrapper>
+        <span>{tag}</span>
+        <button onClick={() => removeTagHandler(idx)}>
+          <svg
+            className="svg-icon iconClearSm pe-none"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+          >
+            <path d="M12 3.41L10.59 2 7 5.59 3.41 2 2 3.41 5.59 7 2 10.59 3.41 12 7 8.41 10.59 12 12 10.59 8.41 7z"></path>
+          </svg>
+        </button>
+      </TagWrapper>
+    );
+  };
 
   const moveNextInput = (e) => {
     const name = e.target.name;
@@ -276,6 +332,11 @@ const AddQuestion = () => {
               onChange={(e) => setTags(e.target.value.split(' '))}
               ref={tagsRef}
             />
+            <div className="tags-list">
+              {tags.map((tag, idx) => (
+                <Tag tag={tag} key={idx} />
+              ))}
+            </div>
           </div>
           {inputStep === 4 ? (
             <Button

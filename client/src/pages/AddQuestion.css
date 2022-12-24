@@ -10,7 +10,7 @@
   margin-bottom: 40px;
 }
 
-.addQuestion--advice{
+.addQuestion--advice {
   width: 100%;
   padding: 24px;
   color: #3b4045;
@@ -40,7 +40,7 @@
 }
 
 .addQuestion--advice > ul {
-  list-style-type: disc; 
+  list-style-type: disc;
   font-size: 13px;
   padding-left: 32px;
 }

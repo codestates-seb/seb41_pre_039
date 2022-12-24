@@ -59,6 +59,11 @@ const InputBox = styled.div`
       box-shadow: 0 0 0 4px rgb(0 116 204 / 15%);
     }
   }
+
+  .validation {
+    font-size: 12px;
+    color: #ab262a;
+  }
 `;
 
 const Button = styled.button`
@@ -110,7 +115,7 @@ const TagWrapper = styled.span`
   background-color: #e1ecf4;
   font-size: 12px;
   margin: 2px;
-  padding: 8px;
+  padding: 2px 4px;
   border-radius: 3px;
   color: rgb(57, 115, 157);
   span {
@@ -126,7 +131,7 @@ const TagWrapper = styled.span`
     background-color: transparent;
     border-radius: 3px;
     svg {
-      vertical-align: bottom;
+      vertical-align: text-top;
       fill: rgb(57, 115, 157);
     }
     &:hover {
@@ -139,11 +144,39 @@ const TagWrapper = styled.span`
   }
 `;
 
+const TagEditor = styled.div`
+  width: 100%;
+  padding: 2px 4px;
+  outline: none;
+  border: 1px solid
+    ${(props) => (props.valid ? 'rgb(193, 193, 193)' : '#ab262a')};
+  border-radius: 3px;
+
+  .tags-list {
+    display: flex;
+    align-items: center;
+  }
+
+  .tags-list #tag {
+    flex: 1 0 0;
+    height: 28px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .svg-icon.iconAlertCircle {
+    margin-right: 5px;
+    fill: #ab262a;
+  }
+`;
+
 const AddQuestion = () => {
   const [title, setTitle] = useState('');
   const [problem, setProblem] = useState('');
   const [tryFor, setTryFor] = useState('');
   const [tags, setTags] = useState([]);
+  const [tag, setTag] = useState('');
   const [inputStep, setInputStep] = useState(1);
 
   const titleRef = useRef(null);
@@ -163,7 +196,7 @@ const AddQuestion = () => {
     }
   }, []);
 
-  const Tag = ({ tag, key: idx }) => {
+  const Tag = ({ tag, idx }) => {
     const removeTagHandler = (idx) => {
       setTags((prev) => prev.filter((_, i) => i !== idx));
     };
@@ -173,7 +206,7 @@ const AddQuestion = () => {
         <span>{tag}</span>
         <button onClick={() => removeTagHandler(idx)}>
           <svg
-            className="svg-icon iconClearSm pe-none"
+            className="svg-icon iconClearSm"
             width="14"
             height="14"
             viewBox="0 0 14 14"
@@ -222,6 +255,16 @@ const AddQuestion = () => {
     e.preventDefault();
     localStorage.removeItem('draft');
     location.reload();
+  };
+
+  const addTagHandler = (e) => {
+    if (e.code === 'Space') {
+      if (tag === ' ') setTag('');
+      else {
+        setTags((prev) => [...prev, tag.slice(0, -1)]);
+        setTag('');
+      }
+    }
   };
 
   return (
@@ -324,25 +367,45 @@ const AddQuestion = () => {
             Add up to 5 tags to describe what your question is about. Start
             typing to see suggestions.
           </p>
-          <div className="tag-editer">
-            <input
-              id="tags"
-              type="text"
-              placeholder={'e.g. (css sql-server asp.net-mvc)'}
-              onChange={(e) => setTags(e.target.value.split(' '))}
-              ref={tagsRef}
-            />
+          <TagEditor valid={tags.length <= 5}>
             <div className="tags-list">
               {tags.map((tag, idx) => (
-                <Tag tag={tag} key={idx} />
-              ))}
+                <Tag tag={tag} key={idx} idx={idx} />
+              ))}{' '}
+              <input
+                id="tag"
+                type="text"
+                value={tag}
+                ref={tagsRef}
+                onChange={(e) => setTag(e.target.value)}
+                onKeyUp={(e) => addTagHandler(e)}
+                placeholder={
+                  tag.length || tags.length
+                    ? ''
+                    : 'e.g. (css sql-server asp.net-mvc)'
+                }
+              />
+              {tags.length <= 5 ? undefined : (
+                <svg
+                  aria-hidden="true"
+                  className="svg-icon iconAlertCircle"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                >
+                  <path d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8ZM8 4v6h2V4H8Zm0 8v2h2v-2H8Z"></path>
+                </svg>
+              )}
             </div>
-          </div>
+          </TagEditor>
+          {tags.length <= 5 ? undefined : (
+            <div className="validation">Please enter no more than 5 tags.</div>
+          )}
           {inputStep === 4 ? (
             <Button
               name="tagsNext"
               onClick={(e) => moveNextInput(e)}
-              disabled={tags.length < 1}
+              disabled={tags.length < 1 || tags.length > 5}
             >
               Next
             </Button>
@@ -352,6 +415,7 @@ const AddQuestion = () => {
           type="form"
           form="addQuestion--form"
           className="addQuestion--submit submitButton"
+          disabled={inputStep < 5}
         >
           Review your question
         </Button>

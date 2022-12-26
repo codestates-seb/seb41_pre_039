@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import './SignUp.css';
 
-const Input = styled.div`
+const Input = styled.input`
   width: 100%;
   height: 32px;
   margin-top: 5px;

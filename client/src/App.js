@@ -1,9 +1,8 @@
 import './App.css';
-import Footer from './components/Footer';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-import QuestionList from './components/QuestionList';
-import Home from './pages/Home';
+import Footer from './components/Footer';
+
 
 function App() {
   return (
@@ -17,7 +16,8 @@ function App() {
           <Sidebar />
         </div>
         <div className="content">
-          <Home />
+          {/* 내용을 채우기 위한 임시 요소 */}
+          <div>pages</div>
         </div>
       </div>
       <div className="footer">

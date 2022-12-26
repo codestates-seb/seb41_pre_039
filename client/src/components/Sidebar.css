@@ -1,9 +1,9 @@
 .sidebar--container {
   width: 100%;
-  min-width: 164px;
+  max-width: 164px;
   display: flex;
-  justify-content: end;
-  height: 100vh;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 aside {

@@ -1,9 +1,12 @@
 package com.seb_pre_039.stackoverflowclone.question.entity;
 
 import com.seb_pre_039.stackoverflowclone.audit.BaseTimeEntity;
+import com.seb_pre_039.stackoverflowclone.member.entitiy.Member;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,9 +19,6 @@ public class Question extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int questionId;
 
-    /* Object -> ?? 수정 필요
-     Object는 mapping되는 타입이 없어서 일단 String으로 대체
-    */
     private String image;
 
     @Column(nullable = false, length = 150)
@@ -42,6 +42,14 @@ public class Question extends BaseTimeEntity {
 
     private int questionVoteId;
 
-    private int memberId;
+    @OneToMany(mappedBy = "question")
+    private List<QuestionTag> questionTags = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    public void addMember(Member member) {
+        this.member = member;
+    }
 
 }

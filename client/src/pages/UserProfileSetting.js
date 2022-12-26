@@ -50,34 +50,10 @@ const SideMenuBar = styled.a`
   }
 `;
 
-const ForTitle = styled.div`
-  height: 30px;
-  border-radius: 20px;
-  background-color: transparent;
-  margin-top: 20px;
-  text-align: left;
-  font-size: 15px;
-`;
-
 const Menu = styled.span`
   margin-left: 10px;
 `;
 
-const MenuTitle = styled.h4`
-  margin-left: 10px;
-  font-weight: 600;
-`;
-
-const EditTitle = styled.div`
-  height: 20px;
-  font-weight: 700;
-  margin: 7px 0;
-`;
-
-const EditItem = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 const EditInput = styled.input`
   width: 65%;
   height: 30px;
@@ -108,10 +84,13 @@ const SaveButton = styled.button`
   }
 `;
 
-const CancelButton = styled(SaveButton)`
+const Cancel = styled.a`
   background-color: white;
-  box-shadow: none;
   color: hsl(206deg 100% 40%);
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 0.8em;
 
   &:hover {
     color: hsl(209deg 99% 38%);
@@ -200,9 +179,9 @@ const UserProfileSetting = () => {
       </nav>
       <section className="userProfile-contents">
         <div className="menubar-container">
-          <ForTitle>
-            <MenuTitle>PERSONAL INFOMATION</MenuTitle>
-          </ForTitle>
+          <div className="fortitle">
+            <h4 className="menu-title">PERSONAL INFOMATION</h4>
+          </div>
           <SideMenuBar className="active">
             <Menu>Edit profile</Menu>
           </SideMenuBar>
@@ -217,8 +196,8 @@ const UserProfileSetting = () => {
           <div className="edit-wrapper">
             <h1 className="info-title">Public information</h1>
             <div className="edit-container">
-              <EditTitle>Profile image</EditTitle>
-              <div>
+              <div className="edit-title">Profile image</div>
+              <div className="edit-item">
                 <img
                   className="userProfile-userinfo--userImage change"
                   src="http://placeimg.com/128/128/any"
@@ -226,43 +205,43 @@ const UserProfileSetting = () => {
                 />
                 <button className="changeImg">change picture</button>
               </div>
-              <EditItem>
-                <EditTitle>Display name</EditTitle>
+              <div className="edit-item">
+                <div className="edit-title">Display name</div>
                 <EditInput
                   type="text"
                   value={nameValue}
                   onChange={(e) => setNameValue(e.target.value)}
                 ></EditInput>
-              </EditItem>
-              <EditItem>
-                <EditTitle>Location</EditTitle>
+              </div>
+              <div className="edit-item">
+                <div className="edit-title">Location</div>
                 <EditInput
                   type="text"
                   value={locationValue}
                   onChange={(e) => setLocationValue(e.target.value)}
                 ></EditInput>
-              </EditItem>
-              <EditItem>
-                <EditTitle>Title</EditTitle>
+              </div>
+              <div>
+                <div className="edit-title">Title</div>
                 <EditInput
                   placeholder="No title has been set"
                   type="text"
                   value={titleValue}
                   onChange={(e) => setTitleValue(e.target.value)}
                 ></EditInput>
-              </EditItem>
-              <EditItem>
-                <EditTitle>About me</EditTitle>
+              </div>
+              <div className="edit-item">
+                <div className="edit-title">About me</div>
                 <textarea
                   className="am-textarea"
                   value={inputAboutMe}
                   onChange={(e) => setInputAboutMe(e.target.value)}
                 ></textarea>
-              </EditItem>
+              </div>
             </div>
             <div className="save-container">
               <SaveButton>Save profile</SaveButton>
-              <CancelButton>Cancel</CancelButton>
+              <Cancel>Cancel</Cancel>
             </div>
           </div>
         </div>

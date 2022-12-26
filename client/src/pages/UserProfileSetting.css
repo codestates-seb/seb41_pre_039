@@ -84,6 +84,18 @@
   height: 100vh;
 }
 
+.fortitle {
+  height: 30px;
+  border-radius: 20px;
+  background-color: transparent;
+  margin-top: 20px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.menu-title {
+  margin-left: 10px;
+}
 /* 수정 컨테이너 */
 
 .edit-wrapper {
@@ -114,6 +126,11 @@
   font-weight: 200;
 }
 
+.edit-tiem {
+  display: flex;
+  flex-direction: column;
+}
+
 /* 이미지 변경 */
 .changeImg {
   position: relative;
@@ -128,6 +145,12 @@
 .changeImg:hover {
   cursor: pointer;
   background-color: hsl(210deg 8% 25%);
+}
+
+.edit-title {
+  height: 20px;
+  font-weight: 700;
+  margin: 7px 0;
 }
 
 /* 자기소개란 */

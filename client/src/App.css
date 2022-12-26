@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-}
-
 ul,
 ol,
 li {
@@ -50,6 +46,7 @@ li {
   padding-top: 50px;
   padding-left: 164px;
   background-color: rgb(255, 255, 255);
+  padding: 24px;
 }
 
 .footer {

@@ -3,7 +3,6 @@ package com.seb_pre_039.stackoverflowclone.comment.mapper;
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentDto;
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentPatchDto;
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentPostDto;
-import com.seb_pre_039.stackoverflowclone.comment.dto.CommentResponseDto;
 import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-26T10:01:28+0900",
+    date = "2022-12-26T10:41:54+0900",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.16 (Azul Systems, Inc.)"
 )
 @Component
@@ -47,7 +46,7 @@ public class CommentMapperImpl implements CommentMapper {
     }
 
     @Override
-    public CommentResponseDto commentToCommentResponse(Comment comment) {
+    public CommentDto.Response commentToCommentResponse(Comment comment) {
         if ( comment == null ) {
             return null;
         }

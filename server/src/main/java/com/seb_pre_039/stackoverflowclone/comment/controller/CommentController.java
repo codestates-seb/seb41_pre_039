@@ -1,6 +1,8 @@
 package com.seb_pre_039.stackoverflowclone.comment.controller;
 
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentDto;
+import com.seb_pre_039.stackoverflowclone.comment.dto.CommentPatchDto;
+import com.seb_pre_039.stackoverflowclone.comment.dto.CommentPostDto;
 import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
 import com.seb_pre_039.stackoverflowclone.comment.mapper.CommentMapper;
 import com.seb_pre_039.stackoverflowclone.comment.service.CommentService;
@@ -15,6 +17,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
+    private final static String MEMBER_DEFAULT_URL = "/members";
     private final CommentService commentService;
     private final CommentMapper mapper;
 
@@ -24,7 +27,7 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity postComment(@Valid @RequestBody CommentDto.Post post){
+    public ResponseEntity postComment(@Valid @RequestBody CommentPostDto post){
         Comment comment = commentService.createComment(mapper.commentPostToComment(post));
 
         return new ResponseEntity<>(mapper.commentToCommentResponse(comment), HttpStatus.CREATED);
@@ -32,7 +35,7 @@ public class CommentController {
 
     @PatchMapping("/{comment-id}")
     public ResponseEntity patchComment(@PathVariable("comment-id") int commentId,
-                                       @Valid @RequestBody CommentDto.Patch patch) {
+                                       @Valid @RequestBody CommentPatchDto patch) {
         patch.setCommentId(commentId);
         Comment comment = commentService.updateComment(mapper.commentPatchToComment(patch));
 

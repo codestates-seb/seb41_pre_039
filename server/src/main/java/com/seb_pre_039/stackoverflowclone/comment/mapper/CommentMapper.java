@@ -1,5 +1,8 @@
 package com.seb_pre_039.stackoverflowclone.comment.mapper;
 
+import com.seb_pre_039.stackoverflowclone.comment.dto.CommentPatchDto;
+import com.seb_pre_039.stackoverflowclone.comment.dto.CommentPostDto;
+import com.seb_pre_039.stackoverflowclone.comment.dto.CommentResponseDto;
 import org.mapstruct.Mapper;
 import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentDto;
@@ -7,10 +10,10 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface CommentMapper {
-    Comment commentPostToComment(CommentDto.Post post);
-    Comment commentPatchToComment(CommentDto.Patch patch);
+    Comment commentPostToComment(CommentPostDto post);
+    Comment commentPatchToComment(CommentPatchDto patch);
     CommentDto.Response commentToCommentResponse(Comment comment);
-    List<CommentDto.Response> commentsToCommentResponseDtos(List<Comment> comments);
+    List<CommentResponseDto> commentsToCommentResponseDtos(List<Comment> comments);
 }

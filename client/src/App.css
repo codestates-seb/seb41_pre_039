@@ -4,18 +4,10 @@
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-}
-
 ul,
 ol,
 li {
   list-style-type: none;
-}
-
-.App {
-  text-align: center;
 }
 
 .header {
@@ -49,6 +41,7 @@ li {
   max-width: 1100px;
   height: 1000vh;
   background-color: rgb(255, 255, 255);
+  padding: 24px;
 }
 
 .footer {

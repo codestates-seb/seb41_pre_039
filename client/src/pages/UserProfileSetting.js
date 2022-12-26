@@ -24,7 +24,9 @@ const EllipseButton = styled.a`
   }
 `;
 
-const SideMenuBar = styled.button`
+const SideMenuBar = styled.a`
+  display: flex;
+  align-items: center;
   width: 45%;
   height: 30px;
   border-radius: 20px;

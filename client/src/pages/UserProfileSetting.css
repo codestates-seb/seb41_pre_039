@@ -113,6 +113,8 @@
   font-size: 25px;
   font-weight: 200;
 }
+
+/* 이미지 변경 */
 .changeImg {
   position: relative;
   right: 128px;
@@ -125,8 +127,10 @@
 
 .changeImg:hover {
   cursor: pointer;
+  background-color: hsl(210deg 8% 25%);
 }
 
+/* 자기소개란 */
 .am-textarea {
   border-color: hsl(207deg 7% 75%);
   border-radius: 3px;
@@ -142,6 +146,7 @@
   border-radius: 3px;
 }
 
+/* 저장/취소 */
 .save-container {
   display: flex;
 }

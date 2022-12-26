@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import './UserProfile.css';
+import './UserProfileSetting.css';
 
 const EllipseButton = styled.a`
   display: flex;
@@ -23,22 +23,42 @@ const EllipseButton = styled.a`
   }
 `;
 
-// const List = styled.ul`
-//   width: 100%;
-//   border-radius: 3px;
-//   border: 1px soild #ccc;
-//   li {
-//     padding: 12px;
-//     border-bottom: 1px soild #ccc;
-//     a {
-//       display: inline-flex;
-//       color: #39739d;
-//       background-color: #e1ecf4;
-//       border-radius: 3px;
-//     }
-//   }
-// `;
+const SideMenuBar = styled.button`
+  width: 45%;
+  height: 30px;
+  border-radius: 20px;
+  background-color: transparent;
+  text-align: left;
+  font-size: 15px;
 
+  &:hover {
+    background-color: hsl(210deg 8% 90%);
+  }
+`;
+
+const ForTitle = styled.div`
+  height: 30px;
+  border-radius: 20px;
+  background-color: transparent;
+  margin-top: 20px;
+  text-align: left;
+  font-size: 15px;
+`;
+
+const Menu = styled.span`
+  margin-left: 10px;
+`;
+
+const MenuTitle = styled.h4`
+  margin-left: 10px;
+  font-weight: 600;
+`;
+
+const EditTitle = styled.div`
+  height: 20px;
+  font-weight: 700;
+  margin: 10px 0;
+`;
 const UserProfile = () => {
   return (
     <section className="userProfile-container">
@@ -115,40 +135,40 @@ const UserProfile = () => {
         </ul>
       </nav>
       <section className="userProfile-contents">
-        {/* <div>
-          <article className="userProfile-contents--stats">
-            <h4>Stats</h4>
-            <div className="userProfile-contents--stat">
-              <span>1</span>
-              <span>reputation</span>
-            </div>
-            <div className="userProfile-contents--stat">
-              <span>1</span>
-              <span>reached</span>
-            </div>
-            <div className="userProfile-contents--stat">
-              <span>1</span>
-              <span>answers</span>
-            </div>
-            <div className="userProfile-contents--stat">
-              <span>1</span>
-              <span>questions</span>
-            </div>
-          </article>
+        <div className="menubar-container">
+          <ForTitle>
+            <MenuTitle>PERSONAL INFOMATION</MenuTitle>
+          </ForTitle>
+          <SideMenuBar>
+            <Menu>Edit profile</Menu>
+          </SideMenuBar>
+          <SideMenuBar>
+            <Menu>Delete profile</Menu>
+          </SideMenuBar>
         </div>
-        <div>
-          <article className="userProfile-contents--about">
-            <h4>About</h4>
-            <p>hello world</p>
-          </article>
-          <article className="userProfile-contents--answers">
-            <h4>Answers</h4>
-            <List></List>
-          </article>
-          <article className="userProfile-contents--questions">
-            <h4>Questions</h4>
-          </article>
-        </div> */}
+        <div className="edit-wrapper">
+          <div className="editTitle-container">
+            <h2>Edit your profile</h2>
+          </div>
+          <div className="edit-wrapper">
+            <h1>Public information</h1>
+            <div className="edit-container">
+              <EditTitle>Profile image</EditTitle>
+              <div>
+                <img
+                  className="userProfile-userinfo--userImage change"
+                  src="http://placeimg.com/128/128/any"
+                  alt="user"
+                />
+                <button className="changeImg">change picture</button>
+              </div>
+              <EditTitle>Display name</EditTitle>
+              <EditTitle>Location</EditTitle>
+              <EditTitle>Title</EditTitle>
+              <EditTitle>About me</EditTitle>
+            </div>
+          </div>
+        </div>
       </section>
     </section>
   );

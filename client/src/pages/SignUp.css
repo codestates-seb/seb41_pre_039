@@ -1,0 +1,99 @@
+.signupWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: baseline;
+  width: 100%;
+  height: 100vh;
+  background-color: hsl(210deg 8% 95%);
+}
+
+.signupInfo {
+  margin-bottom: 128px;
+  margin-right: 48px;
+  text-align: left;
+  width: 421px;
+}
+
+.signupInfo > h1 {
+  margin-bottom: 32px;
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.signupInfo > div {
+  margin-bottom: 24px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.signupInfoFooter {
+  font-size: 13px;
+}
+
+.signupInfoFooter > div {
+  color: rgb(106, 115, 124);
+}
+
+.signupInfoFooter > a {
+  color: rgb(0, 116, 204);
+  text-decoration-line: none;
+}
+
+.signupContainer {
+  display: flex;
+  background-color: white;
+}
+
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 10px;
+  width: 316px;
+  height: 500px;
+  background-color: white;
+  font-weight: 700;
+  line-height: 17px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.signupForm > div {
+  display: flex;
+  flex-direction: column;
+  margin: 6px;
+}
+
+.passwordGuide {
+  margin: 6px;
+  color: rgb(106, 115, 124);
+  font-size: 12px;
+}
+
+.signupFooter > button {
+  width: 100%;
+  margin: 6px;
+  background-color: hsl(206deg 100% 52%);
+  color: #fff;
+  cursor: pointer;
+  border: 1px soContentLid transparent;
+  box-shadow: inset 0 1px 0 0 hsl(206deg 100% 52%),
+    inset 0 2px 0 0 hsla(0, 0%, 100%, 0.4);
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 0.8em;
+}
+
+.signupFooter > div {
+  margin: 6px;
+  color: rgb(106, 115, 124);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.signupAgree > a {
+  color: rgb(0, 116, 204);
+  text-decoration-line: none;
+}

@@ -1,0 +1,66 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: hsl(210deg 8% 95%);
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-width: 288px;
+  height: 570px;
+}
+
+.login-logo-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-logo {
+  width: 50px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 50%;
+  background-color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.login-input {
+  width: 100%;
+}
+
+.login-btn {
+  width: 80%;
+}
+
+.pw-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.find-pw {
+  font-size: 12px;
+  font-weight: 500;
+  color: hsl(206deg 100% 40%);
+}
+
+.login-footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 10%;
+}

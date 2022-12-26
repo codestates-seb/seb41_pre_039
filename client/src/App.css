@@ -46,7 +46,10 @@ li {
   padding-top: 50px;
   padding-left: 164px;
   background-color: rgb(255, 255, 255);
-  padding: 24px;
+}
+
+.content.none-sidebar{
+  padding: 0;
 }
 
 .footer {

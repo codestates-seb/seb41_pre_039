@@ -1,27 +1,40 @@
 import './App.css';
+import { Route, Routes, Link, BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Post from './pages/Post';
+import Home from './pages/Home';
+import AddQuestion from './pages/AddQuestion';
+import Login from './pages/Login';
+import { useState } from 'react';
 
 function App() {
+  const [isSidebar, setIsSidebar] = useState(true);
   return (
-    <div className="App">
-      <div className="header">
-        <Header />
-      </div>
-      <div className="container">
-        <div className="sidebar">
-          <Sidebar />
+    <BrowserRouter>
+      <div className="App">
+        <div className="header">
+          <Header />
         </div>
-        <div className="content">
-          <Post />
+        <div className="container">
+          <div className="sidebar">
+            <Sidebar />
+          </div>
+          <div className={`content ${isSidebar ? '' : 'none-sidebar'}`}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/question" element={<Post />} />
+              <Route path="/addquestion" element={<AddQuestion />} />
+              <Route path="/signin" element={<Login />} />
+            </Routes>
+          </div>
+        </div>
+        <div className="footer">
+          <Footer />
         </div>
       </div>
-      <div className="footer">
-        <Footer />
-      </div>
-    </div>
+    </BrowserRouter>
   );
 }
 export default App;

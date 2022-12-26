@@ -4,7 +4,6 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Post from './pages/Post';
 
-
 function App() {
   return (
     <div className="App">

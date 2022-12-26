@@ -1,4 +1,4 @@
-.login-container {
+.login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
   background-color: hsl(210deg 8% 95%);
 }
 
-.login-wrapper {
+.login-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -15,6 +15,7 @@
   height: 570px;
 }
 
+/* 로고 */
 .login-logo-box {
   display: flex;
   justify-content: center;
@@ -25,6 +26,7 @@
   width: 50px;
 }
 
+/* 로그인 폼 */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -38,6 +40,7 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
+/* email/pw 인풋창 */
 .login-input {
   width: 100%;
 }
@@ -58,6 +61,7 @@
   color: hsl(206deg 100% 40%);
 }
 
+/* 로그인 푸터 */
 .login-footer-container {
   display: flex;
   flex-direction: column;

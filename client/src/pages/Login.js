@@ -47,8 +47,8 @@ export default function Login() {
   const [idValue, idSetValue] = useState('');
   const [pwValue, pwSetValue] = useState('');
   return (
-    <div className="login-container">
-      <div className="login-wrapper">
+    <div className="login-wrapper">
+      <div className="login-container">
         <div className="login-logo-box">
           <a href="%PUBLIC_URL%">
             <img className="login-logo" src={logo} alt="logo"></img>

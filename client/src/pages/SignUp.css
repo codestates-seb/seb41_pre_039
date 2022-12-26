@@ -12,6 +12,7 @@
   margin-bottom: 128px;
   margin-right: 48px;
   text-align: left;
+  width: 421px;
 }
 
 .signupInfo > h1 {
@@ -23,6 +24,20 @@
 .signupInfo > div {
   margin-bottom: 24px;
   font-size: 15px;
+  font-weight: 400;
+}
+
+.signupInfoFooter {
+  font-size: 13px;
+}
+
+.signupInfoFooter > div {
+  color: rgb(106, 115, 124);
+}
+
+.signupInfoFooter > a {
+  color: rgb(0, 116, 204);
+  text-decoration-line: none;
 }
 
 .signupContainer {
@@ -76,4 +91,9 @@
   color: rgb(106, 115, 124);
   font-size: 12px;
   font-weight: 400;
+}
+
+.signupAgree > a {
+  color: rgb(0, 116, 204);
+  text-decoration-line: none;
 }

@@ -26,12 +26,14 @@ export default function Signup() {
           <div>Save your favorite tags, filters, and jobs</div>
           <div>Earn reputation and badges</div>
           <div>
-            <div>
-              Collaborate and share knowledge with a private group for FREE.
+            <div className="signupInfoFooter">
+              <div>
+                Collaborate and share knowledge with a private group for FREE.
+              </div>
+              <a href="https://stackoverflow.co/teams/?utm_source=so-owned&utm_medium=product&utm_campaign=free-50&utm_content=public-sign-up">
+                Get Stack Overflow for Teams free for up to 50 users.
+              </a>
             </div>
-            <a href="https://stackoverflow.co/teams/?utm_source=so-owned&utm_medium=product&utm_campaign=free-50&utm_content=public-sign-up">
-              Get Stack Overflow for Teams free for up to 50 users.
-            </a>
           </div>
         </div>
         <div className="signupContatiner">
@@ -56,8 +58,13 @@ export default function Signup() {
 
               <button>Sign up</button>
               <div className="signupAgree">
-                By clicking “Sign up”, you agree to our terms of service,
-                privacy policy and cookie policy
+                By clicking “Sign up”, you agree to our{' '}
+                <a href="https://stackoverflow.com/legal/privacy-policy">
+                  terms of service, privacy policy&nbsp;
+                </a>
+                <a href="https://stackoverflow.com/legal/cookie-policy">
+                  cookie policy
+                </a>
               </div>
             </div>
           </form>

@@ -36,6 +36,47 @@ const Stat = styled.div`
   }
 `;
 
+const ListWrapper = styled.ul`
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #d6d9dc;
+  margin-bottom: 16px;
+  li {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+    &:last-of-type {
+      border: none;
+    }
+    display: flex;
+    align-items: center;
+    .badge {
+      color: #39739d;
+      border: 1px solid #d6d9dc;
+      border-radius: 3px;
+      padding: 0px 8px;
+      font-size: 12px;
+      margin-right: 10px;
+      div {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    a {
+      display: block;
+      flex: 1 0;
+      color: #39739d;
+      text-decoration: none;
+    }
+    .date {
+      color: #6a737c;
+      font-size: 13px;
+    }
+  }
+`;
+
 const UserProfile = () => {
   return (
     <section className="userProfile-container">
@@ -158,47 +199,6 @@ const UserProfile = () => {
     </section>
   );
 };
-
-const ListWrapper = styled.ul`
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid #d6d9dc;
-  margin-bottom: 16px;
-  li {
-    padding: 12px;
-    border-bottom: 1px solid #ccc;
-    &:last-of-type {
-      border: none;
-    }
-    display: flex;
-    align-items: center;
-    .badge {
-      color: #39739d;
-      border: 1px solid #d6d9dc;
-      border-radius: 3px;
-      padding: 0px 8px;
-      font-size: 12px;
-      margin-right: 10px;
-      div {
-        width: 24px;
-        height: 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-    a {
-      display: block;
-      flex: 1 0;
-      color: #39739d;
-      text-decoration: none;
-    }
-    .date {
-      color: #6a737c;
-      font-size: 13px;
-    }
-  }
-`;
 
 const List = () => {
   return (

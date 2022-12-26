@@ -1,10 +1,13 @@
 package com.seb_pre_039.stackoverflowclone.question.controller;
 
+import com.seb_pre_039.stackoverflowclone.question.dto.QuestionTagResponseDto;
 import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
 import com.seb_pre_039.stackoverflowclone.response.MultiResponseDto;
+import com.seb_pre_039.stackoverflowclone.tag.service.TagService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,24 +18,29 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
+    private final TagService tagService;
 
-    public QuestionController(QuestionMapper mapper, QuestionService questionService) {
+    public QuestionController(QuestionMapper mapper, QuestionService questionService, TagService tagService) {
         this.questionService = questionService;
         this.mapper = mapper;
-
+        this.tagService = tagService;
     }
 
     @PostMapping
     public ResponseEntity<?> postQuestion(@Valid @RequestBody QuestionDto.Post post) {
-        Question createdQuestion = questionService.createQuestion(mapper.questionPostToQuestion(post));
+        Question createdQuestion
+                = questionService.createQuestion(mapper.questionPostToQuestion(post));
 
-        return new ResponseEntity<>(mapper.questionToQuestionResponse(createdQuestion), HttpStatus.CREATED);
+        tagService.createTag(post.getQuestionTags());
+
+        return new ResponseEntity<>(createdQuestion, HttpStatus.CREATED);
     }
 
     @GetMapping("/{question-id}")
@@ -75,5 +83,7 @@ public class QuestionController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 
 }

@@ -258,8 +258,9 @@ const AddQuestion = () => {
   };
 
   const addTagHandler = (e) => {
-    if (e.code === 'Space') {
-      if (tag === ' ') setTag('');
+    e.preventDefault();
+    if (e.code === 'Space' || e.key === 'Enter') {
+      if (tag === ' ' || tag === '') setTag('');
       else {
         setTags((prev) => [...prev, tag.slice(0, -1)]);
         setTag('');

@@ -1,4 +1,19 @@
+import styled from 'styled-components';
 import './Question.css';
+
+const TagA = styled.a`
+  padding: 4.8px 6px;
+  height: 23px;
+  margin-right: 5px;
+  background-color: #d9eaf7;
+  border-radius: 3px;
+  font-size: 12px;
+  color: hsl(205deg 47% 42%);
+  &:hover {
+    background-color: hsl(205deg 51% 88%);
+    color: hsl(205deg 46% 32%);
+  }
+`;
 
 export default function Question() {
   return (
@@ -47,15 +62,7 @@ export default function Question() {
             </div>
             <br />
             <div className="content-tag">
-              <a href="%PUBLIC_URL%" className="tag-a">
-                태그
-              </a>
-              <a href="%PUBLIC_URL%" className="tag-a">
-                태그
-              </a>
-              <a href="%PUBLIC_URL%" className="tag-a">
-                태그
-              </a>
+              <TagA href="%PUBLIC_URL%">태그</TagA>
             </div>
             <div className="content-writerInfo">
               <a href="%PUBLIC_URL%" className="content-edit">
@@ -77,7 +84,6 @@ export default function Question() {
                 </div>
               </div>
             </div>
-            <br />
             <a href="%PUBLIC_URL%" className="add-comment">
               Add a comment
             </a>

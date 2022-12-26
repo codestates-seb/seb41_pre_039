@@ -130,11 +130,6 @@
   flex-wrap: wrap;
 }
 
-.tag-a:hover {
-  background-color: hsl(205deg 51% 88%);
-  color: hsl(205deg 46% 32%);
-}
-
 /* 글 수정,작성자 정보 div */
 .content-writerInfo {
   display: flex;

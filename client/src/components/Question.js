@@ -9,7 +9,12 @@ const TagA = styled.a`
   border-radius: 3px;
   font-size: 12px;
   color: hsl(205deg 47% 42%);
+  &:hover {
+    background-color: hsl(205deg 51% 88%);
+    color: hsl(205deg 46% 32%);
+  }
 `;
+
 export default function Question() {
   return (
     <>

@@ -23,6 +23,19 @@ const EllipseButton = styled.a`
   }
 `;
 
+const Stat = styled.div`
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  font-size: 14px;
+  color: #525960;
+  font-weight: normal;
+  margin: 10px 0;
+  span {
+    font-size: 18px;
+  }
+`;
+
 const UserProfile = () => {
   return (
     <section className="userProfile-container">
@@ -103,22 +116,22 @@ const UserProfile = () => {
           <article className="userProfile-contents--stats">
             <h4>Stats</h4>
             <div>
-              <div className="userProfile-contents--stat">
+              <Stat>
                 <span>1</span>
                 reputation
-              </div>
-              <div className="userProfile-contents--stat">
+              </Stat>
+              <Stat>
                 <span>1</span>
                 reached
-              </div>
-              <div className="userProfile-contents--stat">
+              </Stat>
+              <Stat>
                 <span>1</span>
                 answers
-              </div>
-              <div className="userProfile-contents--stat">
+              </Stat>
+              <Stat>
                 <span>1</span>
                 questions
-              </div>
+              </Stat>
             </div>
           </article>
         </div>
@@ -129,7 +142,7 @@ const UserProfile = () => {
               hello world hello world hello world hello world hello world hello
               world hello world hello world hello world hello world hello world
               hello world hello world hello world hello world hello world hello
-              world hello world hello world hello world{' '}
+              world hello world hello world hello world
             </p>
           </article>
           <article className="userProfile-contents--answers">

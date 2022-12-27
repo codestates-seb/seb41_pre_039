@@ -61,7 +61,7 @@ public class QuestionService {
 
 
 
-    public List<MyPageQuestionResponse> findQuestions(Long memberId) {
+    public List<Question> findQuestions(Long memberId) {
 
         return questionRepository.findByMemberId(memberId);
     }

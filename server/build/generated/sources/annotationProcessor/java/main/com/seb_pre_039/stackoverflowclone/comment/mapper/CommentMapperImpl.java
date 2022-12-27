@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-26T10:01:28+0900",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.16 (Azul Systems, Inc.)"
+    date = "2022-12-27T18:07:00+0900",
+    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
 public class CommentMapperImpl implements CommentMapper {
@@ -47,7 +47,7 @@ public class CommentMapperImpl implements CommentMapper {
     }
 
     @Override
-    public CommentResponseDto commentToCommentResponse(Comment comment) {
+    public CommentDto.Response commentToCommentResponse(Comment comment) {
         if ( comment == null ) {
             return null;
         }
@@ -60,7 +60,9 @@ public class CommentMapperImpl implements CommentMapper {
         commentId = comment.getCommentId();
         content = comment.getContent();
         totalVote = comment.getTotalVote();
-        createdAt = comment.getCreatedAt();
+        if ( comment.getCreatedAt() != null ) {
+            createdAt = LocalDateTime.parse( comment.getCreatedAt() );
+        }
 
         CommentDto.Response response = new CommentDto.Response( commentId, content, totalVote, createdAt );
 
@@ -68,16 +70,29 @@ public class CommentMapperImpl implements CommentMapper {
     }
 
     @Override
-    public List<CommentDto.Response> commentsToCommentResponseDtos(List<Comment> comments) {
+    public List<CommentResponseDto> commentsToCommentResponseDtos(List<Comment> comments) {
         if ( comments == null ) {
             return null;
         }
 
-        List<CommentDto.Response> list = new ArrayList<CommentDto.Response>( comments.size() );
+        List<CommentResponseDto> list = new ArrayList<CommentResponseDto>( comments.size() );
         for ( Comment comment : comments ) {
-            list.add( commentToCommentResponse( comment ) );
+            list.add( commentToCommentResponseDto( comment ) );
         }
 
         return list;
+    }
+
+    protected CommentResponseDto commentToCommentResponseDto(Comment comment) {
+        if ( comment == null ) {
+            return null;
+        }
+
+        CommentResponseDto.CommentResponseDtoBuilder commentResponseDto = CommentResponseDto.builder();
+
+        commentResponseDto.commentId( comment.getCommentId() );
+        commentResponseDto.content( comment.getContent() );
+
+        return commentResponseDto.build();
     }
 }

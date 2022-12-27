@@ -57,10 +57,9 @@ public class MemberService {
 
     public Member showMemberPage(long memberId) {
        Member findMember = findVerifiedMember(memberId);
-//        List<Question> questionList = findMember.getQuestions();
+        List<Question> questionList = findMember.getQuestions();
         //List<Comment> commentList = findMember.getComments();
-        List<MyPageQuestionResponse> questionList = questionService.findQuestions(memberId);
-
+        questionList = questionService.findQuestions(memberId);
         findMember.setQuestions(questionList);
         return findMember;
     }

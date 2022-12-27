@@ -44,12 +44,18 @@ public class QuestionController {
 
     @PostMapping
     public ResponseEntity<?> postQuestion(@Valid @RequestBody QuestionDto.Post post) {
+        Question question = mapper.questionPostToQuestion(post);
+        question.setMember(memberService.findMember(1));
+        questionService.createQuestion(question);
+
+        /*
         Question createdQuestion
                 = questionService.createQuestion(mapper.questionPostToQuestion(post));
 
         createdQuestion.setMember(memberService.findMember(1));
+        */
 
-        return new ResponseEntity<>(mapper.questionToQuestionResponse(createdQuestion), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.questionToQuestionResponse(question), HttpStatus.CREATED);
     }
 
     @GetMapping("/search")

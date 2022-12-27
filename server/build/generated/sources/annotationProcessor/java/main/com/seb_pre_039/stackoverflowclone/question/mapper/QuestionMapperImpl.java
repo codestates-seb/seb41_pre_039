@@ -2,7 +2,6 @@ package com.seb_pre_039.stackoverflowclone.question.mapper;
 
 import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-26T09:09:30+0900",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.16 (Azul Systems, Inc.)"
+    date = "2022-12-27T18:06:59+0900",
+    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
 public class QuestionMapperImpl implements QuestionMapper {
@@ -26,6 +25,10 @@ public class QuestionMapperImpl implements QuestionMapper {
 
         question.title( post.getTitle() );
         question.content( post.getContent() );
+        List<String> list = post.getTags();
+        if ( list != null ) {
+            question.tags( new ArrayList<String>( list ) );
+        }
 
         return question.build();
     }
@@ -41,6 +44,10 @@ public class QuestionMapperImpl implements QuestionMapper {
         question.questionId( patch.getQuestionId() );
         question.title( patch.getTitle() );
         question.content( patch.getContent() );
+        List<String> list = patch.getTags();
+        if ( list != null ) {
+            question.tags( new ArrayList<String>( list ) );
+        }
 
         return question.build();
     }
@@ -54,10 +61,11 @@ public class QuestionMapperImpl implements QuestionMapper {
         int questionId = 0;
         String title = null;
         String content = null;
-        LocalDateTime createdAt = null;
-        LocalDateTime modifiedAt = null;
+        String createdAt = null;
+        String modifiedAt = null;
         int commentCount = 0;
         int viewCount = 0;
+        List<String> tags = null;
 
         questionId = question.getQuestionId();
         title = question.getTitle();
@@ -66,10 +74,12 @@ public class QuestionMapperImpl implements QuestionMapper {
         modifiedAt = question.getModifiedAt();
         commentCount = question.getCommentCount();
         viewCount = question.getViewCount();
+        List<String> list = question.getTags();
+        if ( list != null ) {
+            tags = new ArrayList<String>( list );
+        }
 
-        boolean isChosen = false;
-
-        QuestionDto.Response response = new QuestionDto.Response( questionId, title, content, createdAt, modifiedAt, isChosen, commentCount, viewCount );
+        QuestionDto.Response response = new QuestionDto.Response( questionId, title, content, createdAt, modifiedAt, commentCount, viewCount, tags );
 
         return response;
     }

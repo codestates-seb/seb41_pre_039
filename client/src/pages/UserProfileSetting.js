@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import './UserProfileSetting.css';
-import UserProfileHeader from './UserProfileHeader';
+import UserProfileHeader from '../components/UserProfileHeader';
 
 const SideMenuBar = styled.a`
   display: flex;

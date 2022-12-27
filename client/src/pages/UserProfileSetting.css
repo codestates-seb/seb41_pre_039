@@ -42,10 +42,6 @@
   font-size: 25px;
 }
 
-.info-title {
-  margin-top: 20px;
-}
-
 .edit-container {
   padding: 20px;
   border: 1px solid hsl(216deg 7% 85%);
@@ -56,6 +52,7 @@
 .info-title {
   font-size: 25px;
   font-weight: 200;
+  margin-top: 20px;
 }
 
 .edit-tiem {

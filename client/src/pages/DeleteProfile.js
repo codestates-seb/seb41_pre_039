@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import UserProfileHeader from './UserProfileHeader';
+import UserProfileHeader from '../components/UserProfileHeader';
 import './DeleteProfile.css';
 import { useState } from 'react';
 

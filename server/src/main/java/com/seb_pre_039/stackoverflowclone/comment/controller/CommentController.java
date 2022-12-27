@@ -23,7 +23,6 @@ import java.util.List;
 public class CommentController {
     private final static String MEMBER_DEFAULT_URL = "/members";
     private final CommentService commentService;
-
     private final MemberService memberService;
     private final CommentMapper mapper;
 
@@ -35,9 +34,7 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity postComment(@Valid @RequestBody CommentPostDto post){
-        Comment comment = mapper.commentPostToComment(post);
-        comment.setMember(memberService.findMember(1));
-        commentService.createComment(comment);
+        Comment comment = commentService.createComment(mapper.commentPostToComment(post));
 
         return new ResponseEntity<>(mapper.commentToCommentResponse(comment), HttpStatus.CREATED);
     }
@@ -50,6 +47,7 @@ public class CommentController {
 
         return new ResponseEntity<>(mapper.commentToCommentResponse(comment), HttpStatus.OK);
     }
+
 
 
     @GetMapping("/{comment-id}")

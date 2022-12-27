@@ -2,7 +2,6 @@ package com.seb_pre_039.stackoverflowclone.comment.service;
 
 import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
 import com.seb_pre_039.stackoverflowclone.comment.repository.CommentRepository;
-import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

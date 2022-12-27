@@ -3,10 +3,11 @@ package com.seb_pre_039.stackoverflowclone.comment.entity;
 import com.seb_pre_039.stackoverflowclone.audit.BaseTimeEntity;
 import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter

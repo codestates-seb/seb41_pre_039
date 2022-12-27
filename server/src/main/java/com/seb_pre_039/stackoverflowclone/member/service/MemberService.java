@@ -8,11 +8,13 @@ import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import com.seb_pre_039.stackoverflowclone.member.repository.MemberRepository;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
+import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,9 +57,10 @@ public class MemberService {
 
     public Member showMemberPage(long memberId) {
        Member findMember = findVerifiedMember(memberId);
-        List<Question> questionList = findMember.getQuestions();
+//        List<Question> questionList = findMember.getQuestions();
         //List<Comment> commentList = findMember.getComments();
-        questionList.add(questionService.findQuestion(1));
+        List<MyPageQuestionResponse> questionList = questionService.findQuestions(memberId);
+
         findMember.setQuestions(questionList);
         return findMember;
     }

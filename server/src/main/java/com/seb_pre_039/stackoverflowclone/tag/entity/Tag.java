@@ -1,6 +1,5 @@
 package com.seb_pre_039.stackoverflowclone.tag.entity;
 
-import com.seb_pre_039.stackoverflowclone.audit.BaseTimeEntity;
 import com.seb_pre_039.stackoverflowclone.question.entity.QuestionTag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Tag extends BaseTimeEntity {
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int tagId;

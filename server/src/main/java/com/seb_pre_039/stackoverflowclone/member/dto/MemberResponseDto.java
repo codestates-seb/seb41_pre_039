@@ -19,5 +19,5 @@ public class MemberResponseDto {
     private String myTitle;
     private String aboutMe;
     private String region;
-    private LocalDateTime createdAt;
+    private String createdAt;
 }

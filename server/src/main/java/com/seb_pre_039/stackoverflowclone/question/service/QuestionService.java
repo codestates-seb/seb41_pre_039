@@ -22,18 +22,22 @@ import java.util.Optional;
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final TagRepository tagRepository;
-    private final MemberService memberService;
+//    private final MemberService memberService;
 
-    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository, MemberService memberService) {
+//    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository, MemberService memberService) {
+//        this.questionRepository = questionRepository;
+//        this.tagRepository = tagRepository;
+//        this.memberService = memberService;
+//    }
+
+    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository) {
         this.questionRepository = questionRepository;
         this.tagRepository = tagRepository;
-        this.memberService = memberService;
     }
-
 
     public Question createQuestion(Question question) {
         verifyExistQuestion(question.getQuestionId());
-        question.setMember(memberService.findMember(1));
+//        question.setMember(memberService.findMember(1));
 
         return questionRepository.save(question);
     }
@@ -57,9 +61,9 @@ public class QuestionService {
 
 
 
-    public List<MyPageQuestionResponse> findQuestions(int memberId) {
+    public List<MyPageQuestionResponse> findQuestions(Long memberId) {
 
-        return questionRepository.findByMemberId(memberService.findMember(1));
+        return questionRepository.findByMemberId(memberId);
     }
 
 //    public List<>

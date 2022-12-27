@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -29,7 +28,7 @@ public class TagService {
     public List<QuestionTag> findQuestionTags(int questionId) {
         Question question = questionService.findQuestion(questionId);
 
-        return question.getQuestionTags();
+        return null;
     }
 
     private void verifyExistTag(String name) {

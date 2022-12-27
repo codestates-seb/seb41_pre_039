@@ -1,7 +1,7 @@
 package com.seb_pre_039.stackoverflowclone.question.entity;
 
 import com.seb_pre_039.stackoverflowclone.audit.BaseTimeEntity;
-import com.seb_pre_039.stackoverflowclone.member.entitiy.Member;
+import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;

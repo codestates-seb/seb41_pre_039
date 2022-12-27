@@ -1,5 +1,6 @@
 package com.seb_pre_039.stackoverflowclone.question.controller;
 
+import com.seb_pre_039.stackoverflowclone.member.service.MemberService;
 import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
@@ -26,18 +27,27 @@ public class QuestionController {
     private final QuestionMapper mapper;
     private final TagService tagService;
 
-    public QuestionController(QuestionMapper mapper, QuestionService questionService, TagService tagService) {
+    private final MemberService memberService;
+
+    public QuestionController(QuestionService questionService, QuestionMapper mapper, TagService tagService, MemberService memberService) {
         this.questionService = questionService;
         this.mapper = mapper;
         this.tagService = tagService;
+        this.memberService = memberService;
     }
+
+//    public QuestionController(QuestionMapper mapper, QuestionService questionService, TagService tagService) {
+//        this.questionService = questionService;
+//        this.mapper = mapper;
+//        this.tagService = tagService;
+//    }
 
     @PostMapping
     public ResponseEntity<?> postQuestion(@Valid @RequestBody QuestionDto.Post post) {
         Question createdQuestion
                 = questionService.createQuestion(mapper.questionPostToQuestion(post));
 
-//        tagService.createTag(post.getQuestionTags());
+        createdQuestion.setMember(memberService.findMember(1));
 
         return new ResponseEntity<>(mapper.questionToQuestionResponse(createdQuestion), HttpStatus.CREATED);
     }

@@ -1,0 +1,76 @@
+.userProfile-container {
+  width: 100%;
+  padding: 24px;
+}
+
+.userProfile-contents {
+  display: flex;
+}
+
+.menubar-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 25%;
+  height: 70vh;
+}
+
+.fortitle {
+  height: 30px;
+  border-radius: 20px;
+  background-color: transparent;
+  margin-top: 20px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.menu-title {
+  margin-left: 10px;
+}
+
+/* 삭제 컨테이너 */
+.delete-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.deleteTitle-container {
+  height: 60px;
+  border-bottom: 1px solid hsl(216deg 7% 85%);
+  font-size: 25px;
+}
+
+.delete-container {
+  padding: 20px 0;
+  border-radius: 5px;
+}
+
+.delete-p {
+  margin-bottom: 16.5px;
+}
+
+.delete-li-container {
+  margin-bottom: 16.5px;
+  padding-left: 40px;
+}
+
+.delete-li {
+  margin-bottom: 8.25px;
+  list-style: disc;
+}
+
+/* 체크박스 */
+.checkbox-label {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.checkbox-container {
+  border: none;
+  margin-bottom: 20px;
+}
+
+#d-check {
+  margin-right: 10px;
+  border: 1px solid hsl(213deg 9% 75%);
+}

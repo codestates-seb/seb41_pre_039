@@ -31,6 +31,10 @@ li {
   position: relative;
 }
 
+.container.none-sidebar {
+  max-width: none;
+}
+
 .sidebar {
   width: 164px;
   height: 100vh;
@@ -49,7 +53,7 @@ li {
 }
 
 .content.none-sidebar{
-  padding: 0;
+  padding-left: 0px;
 }
 
 .footer {

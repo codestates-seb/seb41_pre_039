@@ -3,6 +3,8 @@ package com.seb_pre_039.stackoverflowclone.question.service;
 
 import com.seb_pre_039.stackoverflowclone.exception.BusinessLogicException;
 import com.seb_pre_039.stackoverflowclone.exception.ExceptionCode;
+import com.seb_pre_039.stackoverflowclone.member.service.MemberService;
+import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.repository.QuestionRepository;
 import com.seb_pre_039.stackoverflowclone.tag.repository.TagRepository;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,14 +22,18 @@ import java.util.Optional;
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final TagRepository tagRepository;
+    private final MemberService memberService;
 
-    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository) {
+    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository, MemberService memberService) {
         this.questionRepository = questionRepository;
         this.tagRepository = tagRepository;
+        this.memberService = memberService;
     }
+
 
     public Question createQuestion(Question question) {
         verifyExistQuestion(question.getQuestionId());
+        question.setMember(memberService.findMember(1));
 
         return questionRepository.save(question);
     }
@@ -42,6 +49,15 @@ public class QuestionService {
 
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("createdAt").descending()));
     }
+
+
+
+    public List<MyPageQuestionResponse> findQuestions(int memberId) {
+
+        return questionRepository.findByMemberId(memberService.findMember(1));
+    }
+
+//    public List<>
 
     public Question updateQuestion(Question question) {
         Question foundQuestion =findExistedQuestion(question.getQuestionId());

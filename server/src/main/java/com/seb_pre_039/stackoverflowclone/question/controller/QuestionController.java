@@ -1,6 +1,5 @@
 package com.seb_pre_039.stackoverflowclone.question.controller;
 
-import com.seb_pre_039.stackoverflowclone.question.dto.QuestionTagResponseDto;
 import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
@@ -38,10 +37,11 @@ public class QuestionController {
         Question createdQuestion
                 = questionService.createQuestion(mapper.questionPostToQuestion(post));
 
-        tagService.createTag(post.getQuestionTags());
+//        tagService.createTag(post.getQuestionTags());
 
-        return new ResponseEntity<>(createdQuestion, HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.questionToQuestionResponse(createdQuestion), HttpStatus.CREATED);
     }
+
 
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") int questionId) {

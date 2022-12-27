@@ -1,9 +1,6 @@
 package com.seb_pre_039.stackoverflowclone.question.dto;
 
-import com.seb_pre_039.stackoverflowclone.question.entity.QuestionTag;
-import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +18,7 @@ public class QuestionDto {
         @Size(min = 20, message = "20자 이상부터 입력 가능")
         private String content;
 
-        private List<QuestionTag> questionTags;
+        private List<String> tags;
     }
 
     @Getter
@@ -33,7 +30,7 @@ public class QuestionDto {
         @Size(min = 20, message = "20자 이상부터 입력 가능")
         private String content;
 
-        private List<QuestionTag> questionTags;
+        private List<String> tags;
 
         public void setQuestionId(int questionId) {
             this.questionId = questionId;
@@ -47,12 +44,13 @@ public class QuestionDto {
         private int questionId;
         private String title;
         private String content;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
+        private String createdAt;
+        private String modifiedAt;
         private boolean isChosen;
         private int commentCount;
         private int viewCount;
-        private List<QuestionTagResponseDto> questionTags;
+        private List<String> tags;
 
     }
+
 }

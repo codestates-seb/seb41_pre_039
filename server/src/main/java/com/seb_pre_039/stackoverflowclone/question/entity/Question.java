@@ -5,7 +5,6 @@ import com.seb_pre_039.stackoverflowclone.member.entitiy.Member;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -42,8 +41,10 @@ public class Question extends BaseTimeEntity {
 
     private int questionVoteId;
 
-    @OneToMany(mappedBy = "question")
-    private List<QuestionTag> questionTags = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "QUESTION_ID"))
+    private List<String> tags;
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;

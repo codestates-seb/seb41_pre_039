@@ -1,75 +1,7 @@
-.svg-icon {
-  fill: #6a737c;
-  vertical-align: bottom;
-}
-
+/* 컨테이너 */
 .userProfile-container {
   width: 100%;
   padding: 24px;
-}
-
-.userProfile-userinfo {
-  display: flex;
-  position: relative;
-  margin-bottom: 16px;
-}
-.userProfile-userinfo--editButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.userProfile-userinfo--editButton > button {
-  border: 1px solid #9fa6ad;
-  border-radius: 3px;
-  padding: 0.8em;
-  font-size: 12px;
-  background-color: transparent;
-  color: #6a737c;
-}
-
-.userProfile-userinfo--editButton > button:hover {
-  color: #525960;
-  cursor: pointer;
-}
-
-.userProfile-userinfo--user {
-  padding: 16px;
-}
-
-.userProfile-userinfo--user > h3 {
-  font-size: 36px;
-  font-weight: normal;
-  margin-bottom: 4px;
-}
-
-.userProfile-userinfo--user > div > span {
-  color: #6a737c;
-  font-size: 13px;
-  margin-right: 10px;
-}
-
-.userProfile-userinfo--user > div > span .svg-icon {
-  margin-right: 3px;
-}
-
-.userProfile-userinfo--editButton .svg-icon {
-  margin-right: 3px;
-}
-
-.userProfile-userinfo--editButton > button:hover .svg-icon {
-  fill: #525960;
-}
-
-.userProfile-userinfo--userImage {
-  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
-    0 2px 8px hsla(0, 0%, 0%, 0.05);
-}
-
-.userProfile-sidemenu ul {
-  display: flex;
-  justify-content: start;
-  align-items: center;
 }
 
 .userProfile-contents {
@@ -80,7 +12,7 @@
 .menubar-container {
   display: flex;
   flex-direction: column;
-  min-width: 40%;
+  min-width: 25%;
   height: 100vh;
 }
 
@@ -96,8 +28,8 @@
 .menu-title {
   margin-left: 10px;
 }
-/* 수정 컨테이너 */
 
+/* 수정 컨테이너 */
 .edit-wrapper {
   width: 100%;
   display: flex;
@@ -110,10 +42,6 @@
   font-size: 25px;
 }
 
-.edit-wrapper {
-  padding: 20px 0;
-}
-
 .edit-container {
   padding: 20px;
   border: 1px solid hsl(216deg 7% 85%);
@@ -124,6 +52,7 @@
 .info-title {
   font-size: 25px;
   font-weight: 200;
+  margin-top: 20px;
 }
 
 .edit-tiem {

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import './Login.css';
 import logo from '../assets/icon.svg';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const NextButton = styled.button`
   width: 100%;
@@ -46,6 +46,26 @@ const FooterText = styled.div`
 export default function Login() {
   const [idValue, idSetValue] = useState('');
   const [pwValue, pwSetValue] = useState('');
+  const emailInput = useRef();
+  const pwInput = useRef();
+  const regex =
+    /^[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+  const vaildHandler = () => {
+    if (regex.test(idValue)) {
+      return '';
+    }
+    return '올바르지 않은 이메일 형식입니다.';
+  };
+  const loginHandler = (e) => {
+    if (idValue === '')
+      e.preventDefault(),
+        alert('아이디를 확인해주십시오.'),
+        emailInput.current.focus();
+    if (pwValue === '')
+      e.preventDefault(),
+        alert('비밀번호를 확인해주십시오.'),
+        pwInput.current.focus();
+  };
   return (
     /* connect */
     <div className="login-wrapper">
@@ -64,8 +84,10 @@ export default function Login() {
                 type="text"
                 value={idValue}
                 onChange={(e) => idSetValue(e.target.value)}
+                ref={emailInput}
               ></InputInner>
             </div>
+            <p className="email-vaild">{idValue && vaildHandler()}</p>
           </InputBox>
           <InputBox>
             <div className="pw-wrapper">
@@ -80,11 +102,12 @@ export default function Login() {
                 type="password"
                 value={pwValue}
                 onChange={(e) => pwSetValue(e.target.value)}
+                ref={pwInput}
               ></InputInner>
             </div>
           </InputBox>
           <div className="login-btn">
-            <NextButton>Log in</NextButton>
+            <NextButton onClick={loginHandler}>Log in</NextButton>
           </div>
         </form>
         <div className="login-footer-container">

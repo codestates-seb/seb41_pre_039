@@ -10,24 +10,10 @@ const Sidebar = () => {
           <li className={location.pathname === '/' ? 'active' : ''}>
             <Link to="/">Home</Link>
           </li>
-          <li
-            className={
-              location.pathname === '/question' ||
-              location.pathname === '/addquestion'
-                ? 'active'
-                : ''
-            }
-          >
+          <li className={location.pathname.match(/question/g) ? 'active' : ''}>
             <Link to="/question">Questions</Link>
           </li>
-          <li
-            className={
-              location.pathname === '/user' ||
-              location.pathname === '/user/setting'
-                ? 'active'
-                : ''
-            }
-          >
+          <li className={location.pathname.match(/user/g) ? 'active' : ''}>
             <Link to="/user">Users</Link>
           </li>
         </ul>

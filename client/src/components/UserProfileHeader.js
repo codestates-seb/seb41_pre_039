@@ -1,7 +1,8 @@
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import './UserProfileHeader.css';
 
-const EllipseButton = styled.a`
+const EllipseButton = styled(Link)`
   display: flex;
   padding: 6px 12px;
   border-radius: 1000px;
@@ -9,6 +10,7 @@ const EllipseButton = styled.a`
   color: #525960;
   font-size: 14px;
   margin-right: 3px;
+  text-decoration: none;
 
   &:hover {
     background-color: #e3e6e8;
@@ -25,6 +27,7 @@ const EllipseButton = styled.a`
 `;
 
 export default function UserProfileHeader() {
+  const location = useLocation();
   return (
     <>
       <div className="userProfile-userinfo">
@@ -92,10 +95,22 @@ export default function UserProfileHeader() {
       <nav className="userProfile-sidemenu">
         <ul>
           <li>
-            <EllipseButton>Profile</EllipseButton>
+            <EllipseButton
+              to="/user"
+              className={location.pathname === '/user' ? 'active' : ''}
+            >
+              Profile
+            </EllipseButton>
           </li>
           <li>
-            <EllipseButton className="active">Settings</EllipseButton>
+            <EllipseButton
+              to="/user/setting"
+              className={
+                location.pathname.match(/setting|delete/) ? 'active' : ''
+              }
+            >
+              Settings
+            </EllipseButton>
           </li>
         </ul>
       </nav>

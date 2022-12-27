@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import UserProfileHeader from '../components/UserProfileHeader';
 import './DeleteProfile.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const SideMenuBar = styled.a`
+const SideMenuBar = styled(Link)`
   display: flex;
   align-items: center;
   width: 70%;
@@ -13,6 +14,7 @@ const SideMenuBar = styled.a`
   text-align: left;
   font-size: 15px;
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     background-color: hsl(210deg 8% 90%);
@@ -73,10 +75,10 @@ export default function DeleteProfile() {
           <div className="fortitle">
             <h4 className="menu-title">PERSONAL INFOMATION</h4>
           </div>
-          <SideMenuBar>
+          <SideMenuBar to="/user/setting">
             <Menu>Edit profile</Menu>
           </SideMenuBar>
-          <SideMenuBar className="active">
+          <SideMenuBar to="/user/delete" className="active">
             <Menu>Delete profile</Menu>
           </SideMenuBar>
         </div>

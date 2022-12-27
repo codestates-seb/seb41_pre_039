@@ -7,6 +7,9 @@ import Post from './pages/Post';
 import Home from './pages/Home';
 import AddQuestion from './pages/AddQuestion';
 import Login from './pages/Login';
+import UserProfile from './pages/UserProfile';
+import UserProfileSetting from './pages/UserProfileSetting';
+import DeleteProfile from './pages/DeleteProfile';
 import { useState } from 'react';
 
 function App() {
@@ -26,12 +29,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/question" element={<Post />} />
               <Route path="/addquestion" element={<AddQuestion />} />
-              {/* User 컴포넌트로 수정 필요 */}
-              <Route path="/user" element={<AddQuestion />} />
-              {/* Setting 컴포넌트로 수정 필요 */}
-              <Route path="/user/setting" element={<AddQuestion />} />
-              {/* Delete 컴포넌트로 수정 필요 */}
-              <Route path="/user/delete" element={<AddQuestion />} />
+              <Route path="/user" element={<UserProfile />} />
+              <Route path="/user/setting" element={<UserProfileSetting />} />
+              <Route path="/user/delete" element={<DeleteProfile />} />
               <Route path="/login" element={<Login />} />
               {/* SignUp 컴포넌트로 수정 필요 */}
               <Route path="/signup" element={<Login />} />

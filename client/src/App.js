@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, Link, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
@@ -26,7 +26,15 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/question" element={<Post />} />
               <Route path="/addquestion" element={<AddQuestion />} />
-              <Route path="/signin" element={<Login />} />
+              {/* User 컴포넌트로 수정 필요 */}
+              <Route path="/user" element={<AddQuestion />} />
+              {/* Setting 컴포넌트로 수정 필요 */}
+              <Route path="/user/setting" element={<AddQuestion />} />
+              {/* Delete 컴포넌트로 수정 필요 */}
+              <Route path="/user/delete" element={<AddQuestion />} />
+              <Route path="/login" element={<Login />} />
+              {/* SignUp 컴포넌트로 수정 필요 */}
+              <Route path="/signup" element={<Login />} />
             </Routes>
           </div>
         </div>

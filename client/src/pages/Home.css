@@ -30,6 +30,7 @@
   cursor: pointer;
   transition: ease background-color 250ms;
   box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px 0px inset;
+  text-decoration: none;
 }
 
 .askQuestion:hover {

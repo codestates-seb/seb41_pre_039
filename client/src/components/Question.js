@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import './Question.css';
 
@@ -24,7 +25,9 @@ export default function Question() {
             <h1>Change color of Slider Text Input Widget in Shiny R?</h1>
           </span>
           <div className="question-ask">
-            <button className="ask-button">Ask Question</button>
+            <Link className="ask-button" to="/addquestion">
+              Ask Question
+            </Link>
           </div>
         </div>
         <div className="question-info">

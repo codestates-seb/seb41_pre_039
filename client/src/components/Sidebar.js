@@ -18,7 +18,7 @@ const Sidebar = () => {
                 : ''
             }
           >
-            <Link to="/">Questions</Link>
+            <Link to="/question">Questions</Link>
           </li>
           <li
             className={

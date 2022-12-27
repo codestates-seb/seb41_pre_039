@@ -24,7 +24,7 @@ export default function Header() {
           ) : (
             <>
               <Link
-                to="/signin"
+                to="/login"
                 className="header-login"
                 onClick={() => setIsLogin(!isLogin)}
               >

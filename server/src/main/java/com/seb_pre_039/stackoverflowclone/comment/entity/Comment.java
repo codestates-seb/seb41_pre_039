@@ -1,14 +1,14 @@
 package com.seb_pre_039.stackoverflowclone.comment.entity;
 
 import com.seb_pre_039.stackoverflowclone.audit.BaseTimeEntity;
+import com.seb_pre_039.stackoverflowclone.member.entity.Member;
+import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
 @Entity
@@ -17,13 +17,25 @@ public class Comment extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int commentId;
 
+    @Column(nullable = false)
     private String content;
 
     @Column(nullable = false)
     private int totalVote;
 
-    private int postId;
+    @Column(nullable = false)
+    private int adoption;
 
-    private int memberId;
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "QUESTION_ID")
+    private Question question;
+
+    public void addMember(Member member) {
+        this.member = member;
+    }
 
 }

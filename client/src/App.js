@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, BrowserRouter, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
@@ -7,6 +7,7 @@ import Post from './pages/Post';
 import Home from './pages/Home';
 import AddQuestion from './pages/AddQuestion';
 import Login from './pages/Login';
+import SignUp from './pages/SignUp';
 import UserProfile from './pages/UserProfile';
 import UserProfileSetting from './pages/UserProfileSetting';
 import DeleteProfile from './pages/DeleteProfile';
@@ -18,7 +19,7 @@ function App() {
   useEffect(() => {
     if (location.pathname.match(/login|signup/g)) setIsSidebar(false);
     else setIsSidebar(true);
-  });
+  }, [location]);
   return (
     <div className="App">
       <div className="header">
@@ -40,7 +41,7 @@ function App() {
             <Route path="/user/delete" element={<DeleteProfile />} />
             <Route path="/login" element={<Login />} />
             {/* SignUp 컴포넌트로 수정 필요 */}
-            <Route path="/signup" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </div>
       </div>

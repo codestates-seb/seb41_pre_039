@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import './SignUp.css';
+import Icon1 from '../assets/icon1.svg';
+import Icon2 from '../assets/icon2.svg';
+import Icon3 from '../assets/icon3.svg';
+import Icon4 from '../assets/icon4.svg';
 
 const Input = styled.input`
   width: 100%;
@@ -21,10 +25,22 @@ export default function Signup() {
       <div className="signupWrapper">
         <div className="signupInfo">
           <h1>Join the Stack Overflow community</h1>
-          <div>Get unstuck — ask a question</div>
-          <div>Unlock new privileges like voting and commenting</div>
-          <div>Save your favorite tags, filters, and jobs</div>
-          <div>Earn reputation and badges</div>
+          <li>
+            <img className="icon" src={Icon1} alt="Icon1"></img>
+            Get unstuck — ask a question
+          </li>
+          <li>
+            <img className="icon" src={Icon2} alt="Icon2"></img>
+            Unlock new privileges like voting and commenting
+          </li>
+          <li>
+            <img className="icon" src={Icon3} alt="Icon3"></img>Save your
+            favorite tags, filters, and jobs
+          </li>
+          <li>
+            <img className="icon" src={Icon4} alt="Icon4"></img>Earn reputation
+            and badges
+          </li>
           <div>
             <div className="signupInfoFooter">
               <div>
@@ -62,6 +78,7 @@ export default function Signup() {
                 <a href="https://stackoverflow.com/legal/privacy-policy">
                   terms of service, privacy policy&nbsp;
                 </a>
+                and&nbsp;
                 <a href="https://stackoverflow.com/legal/cookie-policy">
                   cookie policy
                 </a>

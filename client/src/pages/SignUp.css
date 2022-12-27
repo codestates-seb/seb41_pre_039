@@ -21,10 +21,18 @@
   font-weight: 400;
 }
 
-.signupInfo > div {
+.signupInfo > li {
+  display: flex;
+  align-items: center;
   margin-bottom: 24px;
   font-size: 15px;
   font-weight: 400;
+}
+
+.icon {
+  width: 26px;
+  height: 26px;
+  margin-right: 8px;
 }
 
 .signupInfoFooter {

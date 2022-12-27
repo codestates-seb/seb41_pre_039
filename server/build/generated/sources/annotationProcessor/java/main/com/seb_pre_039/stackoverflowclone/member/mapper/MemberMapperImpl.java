@@ -3,7 +3,8 @@ package com.seb_pre_039.stackoverflowclone.member.mapper;
 import com.seb_pre_039.stackoverflowclone.member.dto.MemberPatchDto;
 import com.seb_pre_039.stackoverflowclone.member.dto.MemberPostDto;
 import com.seb_pre_039.stackoverflowclone.member.dto.MemberResponseDto;
-import com.seb_pre_039.stackoverflowclone.member.entitiy.Member;
+import com.seb_pre_039.stackoverflowclone.member.entity.Member;
+import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-26T09:09:30+0900",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.16 (Azul Systems, Inc.)"
+    date = "2022-12-27T14:59:26+0900",
+    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.jar, environment: Java 11.0.16.1 (Azul Systems, Inc.)"
 )
 @Component
 public class MemberMapperImpl implements MemberMapper {
@@ -42,6 +43,10 @@ public class MemberMapperImpl implements MemberMapper {
 
         member.setMemberId( memberPatchDto.getMemberId() );
         member.setName( memberPatchDto.getName() );
+        member.setRegion( memberPatchDto.getRegion() );
+        member.setMyTitle( memberPatchDto.getMyTitle() );
+        member.setAboutMe( memberPatchDto.getAboutMe() );
+        member.setStatus( memberPatchDto.getStatus() );
 
         return member;
     }
@@ -59,6 +64,14 @@ public class MemberMapperImpl implements MemberMapper {
         }
         memberResponseDto.email( member.getEmail() );
         memberResponseDto.name( member.getName() );
+        List<Question> list = member.getQuestions();
+        if ( list != null ) {
+            memberResponseDto.questions( new ArrayList<Question>( list ) );
+        }
+        memberResponseDto.myTitle( member.getMyTitle() );
+        memberResponseDto.aboutMe( member.getAboutMe() );
+        memberResponseDto.region( member.getRegion() );
+        memberResponseDto.createdAt( member.getCreatedAt() );
 
         return memberResponseDto.build();
     }

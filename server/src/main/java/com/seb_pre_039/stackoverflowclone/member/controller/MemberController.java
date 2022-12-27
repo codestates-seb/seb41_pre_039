@@ -2,7 +2,7 @@ package com.seb_pre_039.stackoverflowclone.member.controller;
 
 import com.seb_pre_039.stackoverflowclone.member.dto.MemberPatchDto;
 import com.seb_pre_039.stackoverflowclone.member.dto.MemberPostDto;
-import com.seb_pre_039.stackoverflowclone.member.entitiy.Member;
+import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import com.seb_pre_039.stackoverflowclone.member.mapper.MemberMapper;
 
 
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
-import java.net.URI;
 import java.util.List;
 
 
@@ -43,7 +42,7 @@ public class MemberController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/{member-id}")
+    @PatchMapping("{member-id}")
     public ResponseEntity patchMember(
             @PathVariable("member-id") @Positive long memberId,
             @Valid @RequestBody MemberPatchDto memberPatchDto) {
@@ -55,10 +54,9 @@ public class MemberController {
     }
 
     @GetMapping("/{member-id}")
-    public ResponseEntity getMember(
-            @PathVariable("member-id") @Positive long memberId) {
-        Member member = memberService.findMember(memberId);
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)), HttpStatus.OK);
+    public ResponseEntity getMyPage(
+            @PathVariable("member-id") @Positive long memberId){
+        return new ResponseEntity<>(mapper.memberToMemberResponseDto(memberService.showMemberPage(memberId)),HttpStatus.OK);
     }
 
     @GetMapping

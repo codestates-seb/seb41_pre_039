@@ -6,7 +6,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
-// TODO 변경: Setter 없앰
 @Getter
 public class MemberPostDto {
     @NotBlank

@@ -47,6 +47,7 @@ export default function Login() {
   const [idValue, idSetValue] = useState('');
   const [pwValue, pwSetValue] = useState('');
   return (
+    /* connect */
     <div className="login-wrapper">
       <div className="login-container">
         <div className="login-logo-box">

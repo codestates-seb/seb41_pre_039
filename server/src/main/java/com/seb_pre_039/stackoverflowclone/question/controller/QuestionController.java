@@ -1,8 +1,8 @@
 package com.seb_pre_039.stackoverflowclone.question.controller;
 
-import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
+import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
 import com.seb_pre_039.stackoverflowclone.response.MultiResponseDto;
 import com.seb_pre_039.stackoverflowclone.tag.service.TagService;
@@ -42,6 +42,12 @@ public class QuestionController {
         return new ResponseEntity<>(mapper.questionToQuestionResponse(createdQuestion), HttpStatus.CREATED);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity searchQuestion(@RequestParam String title) {
+        List<Question> questions = questionService.searchQuestionByTitle(title);
+
+        return new ResponseEntity<>(mapper.questionsToQuestionResponseDtos(questions), HttpStatus.OK);
+    }
 
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") int questionId) {

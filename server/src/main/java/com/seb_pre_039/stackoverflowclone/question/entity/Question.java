@@ -26,8 +26,8 @@ public class Question extends BaseTimeEntity {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
-    private boolean isChosen;
+//    @Column(nullable = false)
+//    private boolean isChosen;
 
     @Column(nullable = false)
     private int totalVote;

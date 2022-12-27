@@ -4,9 +4,9 @@ package com.seb_pre_039.stackoverflowclone.question.service;
 import com.seb_pre_039.stackoverflowclone.exception.BusinessLogicException;
 import com.seb_pre_039.stackoverflowclone.exception.ExceptionCode;
 import com.seb_pre_039.stackoverflowclone.member.service.MemberService;
-import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.repository.QuestionRepository;
+import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
 import com.seb_pre_039.stackoverflowclone.tag.repository.TagRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -48,6 +48,11 @@ public class QuestionService {
     public Page<Question> findQuestions(int page, int size) {
 
         return questionRepository.findAll(PageRequest.of(page, size, Sort.by("createdAt").descending()));
+    }
+
+    public List<Question> searchQuestionByTitle(String title) {
+
+        return questionRepository.findByTitleContaining(title);
     }
 
 

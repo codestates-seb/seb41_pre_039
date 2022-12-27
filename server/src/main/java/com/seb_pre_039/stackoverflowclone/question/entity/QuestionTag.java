@@ -1,6 +1,5 @@
 package com.seb_pre_039.stackoverflowclone.question.entity;
 
-import com.seb_pre_039.stackoverflowclone.audit.BaseTimeEntity;
 import com.seb_pre_039.stackoverflowclone.tag.entity.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

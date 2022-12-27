@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class QuestionDto {
@@ -46,7 +45,7 @@ public class QuestionDto {
         private String content;
         private String createdAt;
         private String modifiedAt;
-        private boolean isChosen;
+//        private boolean isChosen;
         private int commentCount;
         private int viewCount;
         private List<String> tags;

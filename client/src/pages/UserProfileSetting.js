@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import './UserProfileSetting.css';
 import UserProfileHeader from '../components/UserProfileHeader';
 import { Link } from 'react-router-dom';
+import { ContentEditor } from '../components/Editor';
 
 const SideMenuBar = styled(Link)`
   display: flex;
@@ -142,11 +143,10 @@ const UserProfileSetting = () => {
               </div>
               <div className="edit-item">
                 <div className="edit-title">About me</div>
-                <textarea
-                  className="am-textarea"
+                <ContentEditor
                   value={inputAboutMe}
-                  onChange={(e) => setInputAboutMe(e.target.value)}
-                ></textarea>
+                  changeHandler={setInputAboutMe}
+                />
               </div>
             </div>
             <div className="save-container">

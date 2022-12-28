@@ -9,6 +9,7 @@ footer {
 
 footer a {
   color: #9199a1;
+  text-decoration: none;
 }
 
 footer a:hover{

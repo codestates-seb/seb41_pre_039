@@ -1,19 +1,16 @@
 import './Home.css';
 import dummy from '../db/data.json';
 import QuestionList from '../components/QuestionList';
-
-function clickMe() {
-  alert('You clicked me!');
-}
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
     <>
       <div className="homeContainer">
         <h1 className="homeTitle">Top Questions</h1>
-        <button className="askQuestion" onClick={clickMe}>
+        <Link className="askQuestion" to="/addquestion">
           Ask Question
-        </button>
+        </Link>
       </div>
       <div className="buttonContainer">
         <div className="buttonGroup">

@@ -94,6 +94,7 @@
   border-radius: 5px;
   font-size: 14px;
   border-top: 2px double rgb(191 191 191);
+  text-decoration: none;
 }
 
 .header-signup {
@@ -109,6 +110,7 @@
   font-size: 14px;
   font-weight: 500;
   border-top: 2px double hsl(206deg 100% 71%);
+  text-decoration: none;
 }
 
 .header-login:hover {

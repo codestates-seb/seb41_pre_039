@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 export default function Header() {
@@ -7,7 +8,7 @@ export default function Header() {
     <header className="header-container">
       <div className="header-box">
         <div className="header-logo">
-          <div className="logo"></div>
+          <Link to="/" className="logo" />
         </div>
         <div className="header-search">
           <div className="search-icon"></div>
@@ -22,13 +23,16 @@ export default function Header() {
             <IsLoginHeader />
           ) : (
             <>
-              <button
+              <Link
+                to="/login"
                 className="header-login"
                 onClick={() => setIsLogin(!isLogin)}
               >
                 Log in
-              </button>
-              <button className="header-signup">Sign up</button>
+              </Link>
+              <Link to="/signup" className="header-signup">
+                Sign up
+              </Link>
             </>
           )}
         </nav>

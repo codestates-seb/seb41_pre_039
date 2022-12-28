@@ -3,6 +3,7 @@ import UserProfileHeader from '../components/UserProfileHeader';
 import './DeleteProfile.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { user } from '../components/initialState';
 
 const SideMenuBar = styled(Link)`
   display: flex;
@@ -69,7 +70,7 @@ export default function DeleteProfile() {
   };
   return (
     <section className="userProfile-container">
-      <UserProfileHeader />
+      <UserProfileHeader user={user} />
       <section className="userProfile-contents">
         <div className="menubar-container">
           <div className="fortitle">

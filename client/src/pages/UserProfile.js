@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import './UserProfile.css';
 import UserProfileHeader from '../components/UserProfileHeader';
+import { user } from '../components/initialState';
+import { Link } from 'react-router-dom';
 
 const Stat = styled.div`
   display: flex;
@@ -59,7 +61,7 @@ const ListWrapper = styled.ul`
 const UserProfile = () => {
   return (
     <section className="userProfile-container">
-      <UserProfileHeader />
+      <UserProfileHeader user={user} />
       <section className="userProfile-contents">
         <div className="userProfile-contents--column-stats">
           <article className="userProfile-contents--stats">
@@ -74,11 +76,12 @@ const UserProfile = () => {
                 reached
               </Stat>
               <Stat>
-                <span>1</span>
+                <span>{user.answers.length}</span>
                 answers
               </Stat>
               <Stat>
-                <span>1</span>
+                {/* question 갯수 필요 */}
+                <span>{user.questions.length}</span>
                 questions
               </Stat>
             </div>
@@ -87,20 +90,15 @@ const UserProfile = () => {
         <div className="userProfile-contents--column-content">
           <article className="userProfile-contents--about">
             <h4>About</h4>
-            <p>
-              hello world hello world hello world hello world hello world hello
-              world hello world hello world hello world hello world hello world
-              hello world hello world hello world hello world hello world hello
-              world hello world hello world hello world
-            </p>
+            <p>{user.aboutMe}</p>
           </article>
           <article className="userProfile-contents--answers">
             <h4>Answers</h4>
-            <List />
+            <List data={user.answers} type="answer" />
           </article>
           <article className="userProfile-contents--questions">
             <h4>Questions</h4>
-            <List />
+            <List data={user.questions} type="question" />
           </article>
         </div>
       </section>
@@ -108,54 +106,35 @@ const UserProfile = () => {
   );
 };
 
-const List = () => {
+const List = ({ data, type }) => {
   return (
     <ListWrapper>
-      <li>
-        <span className="badge">
-          <div>1</div>
-        </span>
-        <a href="%PUBLIC_URI%">title</a>
-        <span className="date">
-          {new Date().toLocaleDateString('en-us', { dateStyle: 'medium' })}
-        </span>
-      </li>
-      <li>
-        <span className="badge">
-          <div>1</div>
-        </span>
-        <a href="%PUBLIC_URI%">title</a>
-        <span className="date">
-          {new Date().toLocaleDateString('en-us', { dateStyle: 'medium' })}
-        </span>
-      </li>
-      <li>
-        <span className="badge">
-          <div>1</div>
-        </span>
-        <a href="%PUBLIC_URI%">title</a>
-        <span className="date">
-          {new Date().toLocaleDateString('en-us', { dateStyle: 'medium' })}
-        </span>
-      </li>
-      <li>
-        <span className="badge">
-          <div>1</div>
-        </span>
-        <a href="%PUBLIC_URI%">title</a>
-        <span className="date">
-          {new Date().toLocaleDateString('en-us', { dateStyle: 'medium' })}
-        </span>
-      </li>
-      <li>
-        <span className="badge">
-          <div>1</div>
-        </span>
-        <a href="%PUBLIC_URI%">title</a>
-        <span className="date">
-          {new Date().toLocaleDateString('en-us', { dateStyle: 'medium' })}
-        </span>
-      </li>
+      {data.map((el, idx) => {
+        return (
+          <li key={idx}>
+            <span className="badge">
+              <div>{el.totalVote}</div>
+            </span>
+            <Link
+              to={`/question/${
+                type === 'question' ? el.questionId : el.commentId
+              }`}
+            >
+              {type === 'question'
+                ? el.title.length >= 40
+                  ? `${el.title.slice(0, 39)}...`
+                  : el.title
+                : `${el.content.slice(0, 39)}...`}
+            </Link>
+            <span className="date">
+              {/* parseTime 받아와서 수정해야 함 */}
+              {new Date(el.createdAt).toLocaleDateString('en-us', {
+                dateStyle: 'medium',
+              })}
+            </span>
+          </li>
+        );
+      })}
     </ListWrapper>
   );
 };

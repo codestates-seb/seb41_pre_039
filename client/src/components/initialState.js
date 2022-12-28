@@ -107,7 +107,8 @@ export const user = {
       modifiedAt: null,
       commentId: 2,
       image: null,
-      content: 'Spring 개발자에서 Winter 개발자 되는법',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet risus nullam eget felis eget. Id ornare arcu odio ut sem nulla pharetra diam. Leo a diam sollicitudin tempor id eu. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla. ',
       totalVote: 0,
       memberId: null,
       adoption: false,

@@ -35,14 +35,18 @@
 }
 
 .postTitle {
-  color: rgb(0, 116, 204);
-  text-align: left;
   padding-right: 24px;
   margin-bottom: 5px;
-  font-weight: 400;
 }
 
-.postTitle:hover {
+.postTitle > a {
+  color: rgb(0, 116, 204);
+  text-align: left;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.postTitle > a:hover {
   color: rgb(10, 149, 255);
   cursor: pointer;
 }

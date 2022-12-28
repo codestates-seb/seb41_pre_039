@@ -1,36 +1,39 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './QuestionList.css';
-import dummy from '../db/data.json';
 
-const QuestionList = ({ dummy }) => {
+const QuestionList = ({ question }) => {
   return (
     <div className="postContainer">
       <div className="postBox">
         <div className="postStats">
           <div className="postStatVotes">
             <div>
-              <span>0 </span>votes
+              {/* question vote 필요 */}
+              <span>{0} </span>votes
             </div>
           </div>
           <div className="postStatAnsers">
             <div>
-              <span>{dummy.commentCount} </span>answers
+              <span>{question.commentCount} </span>answers
             </div>
           </div>
           <div className="postStatViews">
             <div>
-              <span>{dummy.viewCount} </span>views
+              <span>{question.viewCount} </span>views
             </div>
           </div>
         </div>
         <div className="postContent">
-          <h3 className="postTitle">{dummy.title}</h3>
+          <h3 className="postTitle">
+            <Link to={`/question/${question.questionId}`}>
+              {question.title}
+            </Link>
+          </h3>
           <div className="postMeta">
             <ul className="postTag">
-              <li>tag</li>
-              <li>tag</li>
-              <li>tagtag</li>
-              <li>tagtag</li>
+              {question.tags.map((el, idx) => (
+                <li key={idx}>{el}</li>
+              ))}
             </ul>
             <div className="postCard">
               <div className="userImg">
@@ -41,7 +44,12 @@ const QuestionList = ({ dummy }) => {
               </div>
               <div className="userID">user ID</div>
               <div className="userRep">27k</div>
-              <div className="modified">modified 10secs ago</div>
+              <div className="modified">
+                modified {/* parseTime 가져와서 변환 필요 */}
+                {new Date(question.modifiedAt).toLocaleDateString('en-us', {
+                  dateStyle: 'medium',
+                })}
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import './Home.css';
-import dummy from '../db/data.json';
+import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
 
@@ -22,8 +22,8 @@ export default function Home() {
         </div>
       </div>
       <ul className="Questions">
-        {dummy.data.map((v) => (
-          <QuestionList dummy={v} key={v.questionId} />
+        {questions.data.map((question) => (
+          <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>
     </>

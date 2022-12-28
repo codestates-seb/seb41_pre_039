@@ -10,6 +10,10 @@ li {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 .header {
   position: fixed;
   width: 100%;
@@ -52,7 +56,7 @@ li {
   background-color: rgb(255, 255, 255);
 }
 
-.content.none-sidebar{
+.content.none-sidebar {
   padding-left: 0px;
 }
 

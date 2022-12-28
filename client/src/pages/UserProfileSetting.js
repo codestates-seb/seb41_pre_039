@@ -4,6 +4,7 @@ import './UserProfileSetting.css';
 import UserProfileHeader from '../components/UserProfileHeader';
 import { Link } from 'react-router-dom';
 import { user } from '../components/initialState';
+import { ContentEditor } from '../components/Editor';
 
 const SideMenuBar = styled(Link)`
   display: flex;
@@ -39,14 +40,16 @@ const Menu = styled.span`
 const EditInput = styled.input`
   width: 65%;
   height: 30px;
-  border: 1px solid hsl(207deg 7% 75%);
-  border-radius: 5px;
+  border: 1px solid rgb(193, 193, 193);
+  border-radius: 3px;
   padding-left: 10px;
-
+  outline: none;
   &:focus {
-    outline-color: hsl(206deg 90% 70%);
-    box-shadow: 0px 0px 6px rgb(128, 191, 215);
-    border-radius: 5px;
+    border-color: rgb(0 116 204);
+    box-shadow: 0 0 0 4px rgb(0 116 204 / 15%);
+  }
+  &::placeholder {
+    color: #ccc;
   }
 `;
 
@@ -143,11 +146,10 @@ const UserProfileSetting = () => {
               </div>
               <div className="edit-item">
                 <div className="edit-title">About me</div>
-                <textarea
-                  className="am-textarea"
+                <ContentEditor
                   value={inputAboutMe}
-                  onChange={(e) => setInputAboutMe(e.target.value)}
-                ></textarea>
+                  changeHandler={setInputAboutMe}
+                />
               </div>
             </div>
             <div className="save-container">

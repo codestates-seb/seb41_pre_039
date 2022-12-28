@@ -7,6 +7,7 @@ import com.seb_pre_039.stackoverflowclone.exception.ExceptionCode;
 import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import com.seb_pre_039.stackoverflowclone.member.repository.MemberRepository;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
+import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
 import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
 import org.springframework.data.domain.Page;
@@ -23,12 +24,20 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final QuestionService questionService;
     private final CommentService commentService;
+    private final QuestionMapper mapper;
 
-    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService) {
+    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService, QuestionMapper mapper) {
         this.memberRepository = memberRepository;
         this.questionService = questionService;
         this.commentService = commentService;
+        this.mapper = mapper;
     }
+
+//    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService) {
+//        this.memberRepository = memberRepository;
+//        this.questionService = questionService;
+//        this.commentService = commentService;
+//    }
 
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
@@ -57,9 +66,10 @@ public class MemberService {
 
     public Member showMemberPage(long memberId) {
        Member findMember = findVerifiedMember(memberId);
-        List<Question> questionList = findMember.getQuestions();
+        List<Question> questionList;
         //List<Comment> commentList = findMember.getComments();
-        questionList = questionService.findQuestions(memberId);
+        List<MyPageQuestionResponse> myPageQuestionResponses = questionService.findQuestions(memberId);
+        questionList = mapper.myPageQuestionResponseToQuestions(myPageQuestionResponses);
         findMember.setQuestions(questionList);
         return findMember;
     }

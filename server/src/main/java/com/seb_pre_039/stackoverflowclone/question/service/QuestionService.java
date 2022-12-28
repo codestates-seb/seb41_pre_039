@@ -10,6 +10,7 @@ import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
 import com.seb_pre_039.stackoverflowclone.tag.repository.TagRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,29 +50,52 @@ public class QuestionService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Question> findQuestions(int page, int size) {
+    public Page<Question> sortQuestions(int page, int size, String search, String sort) {
+        if(sort.equals("totalVote"))
+            return questionRepository.findByTitleContainingOrderByTotalVoteDesc(search, PageRequest.of(page, size));
 
-        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("createdAt").descending()));
+        return questionRepository.findByTitleContainingOrderByCreatedAtDesc(search, PageRequest.of(page, size));
     }
 
-    public List<Question> searchQuestionByTitle(String title) {
+    public Page<Question> findQuestions(int page, int size, String sort) {
+        if(sort.equals("totalVote"))
+            return questionRepository.findAll(PageRequest.of(page, size, Sort.by("createdAt").descending()));
 
-        return questionRepository.findByTitleContaining(title);
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("totalVote").descending()));
     }
 
 
 
-    public List<Question> findQuestions(Long memberId) {
+
+
+
+    public List<MyPageQuestionResponse> findQuestions(Long memberId) {
 
         return questionRepository.findByMemberId(memberId);
     }
 
-//    public List<>
+//    public List<Question> findQuestionsByTagName(String tagName) {
+//
+//
+//    }
+
+    public int updateViewCount(int questionId) {
+
+        return questionRepository.updateViewCount(questionId);
+    }
 
     public Question updateQuestion(Question question) {
         Question foundQuestion =findExistedQuestion(question.getQuestionId());
         Optional.ofNullable(question.getContent()).ifPresent(foundQuestion::setContent);
         Optional.ofNullable(question.getTitle()).ifPresent(foundQuestion::setTitle);
+        Optional.ofNullable(question.getTotalVote()).ifPresent(foundQuestion::setTotalVote);
+
+        return questionRepository.save(foundQuestion);
+    }
+
+    public Question updateTotalVote(Question question) {
+        Question foundQuestion = findExistedQuestion(question.getQuestionId());
+
 
         return questionRepository.save(foundQuestion);
     }
@@ -98,7 +122,7 @@ public class QuestionService {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
 
         return optionalQuestion.orElseThrow(
-                ()-> new RuntimeException("QUESTION_NOT_FOUND")
+                ()-> new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND)
         );
     }
 }

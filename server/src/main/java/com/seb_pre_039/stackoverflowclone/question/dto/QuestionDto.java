@@ -31,6 +31,8 @@ public class QuestionDto {
 
         private List<String> tags;
 
+        private int totalVote;
+
         public void setQuestionId(int questionId) {
             this.questionId = questionId;
         }
@@ -48,8 +50,18 @@ public class QuestionDto {
 //        private boolean isChosen;
         private int commentCount;
         private int viewCount;
+        private int totalVote;
         private List<String> tags;
 
     }
+
+//    @Getter
+//    @Setter
+//    @AllArgsConstructor
+//    public static class Vote {
+//        private int questionId;
+//        private int vote;
+//    }
+
 
 }

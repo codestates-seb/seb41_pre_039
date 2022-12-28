@@ -25,22 +25,22 @@ import java.util.List;
 public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
-    private final TagService tagService;
-
     private final MemberService memberService;
 
-    public QuestionController(QuestionService questionService, QuestionMapper mapper, TagService tagService, MemberService memberService) {
-        this.questionService = questionService;
-        this.mapper = mapper;
-        this.tagService = tagService;
-        this.memberService = memberService;
-    }
 
-//    public QuestionController(QuestionMapper mapper, QuestionService questionService, TagService tagService) {
+    //private final TagService tagService;
+//    public QuestionController(QuestionService questionService, QuestionMapper mapper, TagService tagService, MemberService memberService) {
 //        this.questionService = questionService;
 //        this.mapper = mapper;
 //        this.tagService = tagService;
+//        this.memberService = memberService;
 //    }
+
+    public QuestionController(QuestionService questionService, QuestionMapper mapper, MemberService memberService) {
+        this.questionService = questionService;
+        this.mapper = mapper;
+        this.memberService = memberService;
+    }
 
     @PostMapping
     public ResponseEntity<?> postQuestion(@Valid @RequestBody QuestionDto.Post post) {
@@ -58,23 +58,28 @@ public class QuestionController {
         return new ResponseEntity<>(mapper.questionToQuestionResponse(question), HttpStatus.CREATED);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity searchQuestion(@RequestParam String title) {
-        List<Question> questions = questionService.searchQuestionByTitle(title);
+//    @GetMapping("/search")
+//    public ResponseEntity searchQuestion(@RequestParam String title) {
+//        List<Question> questions = questionService.searchQuestionByTitle(title);
+//
+//        return new ResponseEntity<>(mapper.questionsToQuestionResponseDtos(questions), HttpStatus.OK);
+//    }
 
-        return new ResponseEntity<>(mapper.questionsToQuestionResponseDtos(questions), HttpStatus.OK);
-    }
 
     @GetMapping("/{question-id}")
     public ResponseEntity getQuestion(@PathVariable("question-id") int questionId) {
         Question findQuestion = questionService.findQuestion(questionId);
+
+        findQuestion.setViewCount(questionService.updateViewCount(questionId));
+
         return new ResponseEntity<>(mapper.questionToQuestionResponse(findQuestion), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/main")
     public ResponseEntity getQuestions(@RequestParam @Positive int page,
-                                       @RequestParam @Positive int size) {
-        Page<Question> questionPage = questionService.findQuestions(page-1, size);
+                                       @RequestParam @Positive int size,
+                                       @RequestParam String sort) {
+        Page<Question> questionPage = questionService.findQuestions(page-1, size, sort);
         List<Question> questionList = questionPage.getContent();
 
         return new ResponseEntity<>(
@@ -82,6 +87,22 @@ public class QuestionController {
                         mapper.questionsToQuestionResponseDtos(questionList), questionPage),
                 HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity sortQuestions(@RequestParam @Positive int page,
+                                       @RequestParam @Positive int size,
+                                       @RequestParam String search,
+                                       @RequestParam String sort) {
+        Page<Question> questionPage = questionService.sortQuestions(page-1, size, search, sort);
+        List<Question> questionList = questionPage.getContent();
+
+        return new ResponseEntity<>(
+                new MultiResponseDto<>(
+                        mapper.questionsToQuestionResponseDtos(questionList), questionPage),
+                HttpStatus.OK);
+    }
+
+
 
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@PathVariable("question-id") int questionId,
@@ -91,6 +112,17 @@ public class QuestionController {
 
         return new ResponseEntity<>(mapper.questionToQuestionResponse(updatedQuestion), HttpStatus.OK);
     }
+
+//    @PatchMapping({"/{question-id}"})
+//    public ResponseEntity patchVoteCount(@PathVariable("question-id") int questionId,
+//                                        @RequestParam int vote) {
+//        Question question = questionService.findQuestion(questionId);
+//        question.setTotalVote(vote);
+//        questionService.updateQuestion(question);
+//
+//        return new ResponseEntity<>(mapper.questionToQuestionResponse(question), HttpStatus.OK);
+//    }
+
 
     @DeleteMapping("/{question-id}")
     public ResponseEntity deleteQuestion(@PathVariable("question-id") int questionId) {

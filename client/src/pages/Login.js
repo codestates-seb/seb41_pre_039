@@ -37,6 +37,15 @@ const InputInner = styled.input`
   }
 `;
 
+const InputInnerAfter = styled(InputInner)`
+  border: 1px solid hsl(358deg 68% 59%);
+  &:focus {
+    outline-color: hsl(357deg 68% 59%);
+    box-shadow: 0px 0px 6px hsl(358deg 68% 59%);
+    border-radius: 3px;
+  }
+`;
+
 const FooterText = styled.div`
   display: flex;
   justify-content: center;
@@ -46,26 +55,28 @@ const FooterText = styled.div`
 export default function Login() {
   const [idValue, idSetValue] = useState('');
   const [pwValue, pwSetValue] = useState('');
+  const [failIdLogin, setfailIdLogin] = useState(false);
+  const [failpwLogin, setfailpwLogin] = useState(false);
   const emailInput = useRef();
   const pwInput = useRef();
-  const regex =
-    /^[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-  const vaildHandler = () => {
-    if (regex.test(idValue)) {
-      return '';
-    }
-    return '올바르지 않은 이메일 형식입니다.';
-  };
   const loginHandler = (e) => {
     if (idValue === '')
       e.preventDefault(),
-        alert('아이디를 확인해주십시오.'),
+        setfailIdLogin(true),
+        setfailpwLogin(false),
         emailInput.current.focus();
     if (pwValue === '')
       e.preventDefault(),
-        alert('비밀번호를 확인해주십시오.'),
+        setfailpwLogin(true),
+        setfailIdLogin(false),
         pwInput.current.focus();
+    if (idValue === '' && pwValue === '')
+      e.preventDefault(),
+        setfailIdLogin(true),
+        setfailpwLogin(true),
+        emailInput.current.focus();
   };
+
   return (
     /* connect */
     <div className="login-wrapper">
@@ -78,16 +89,36 @@ export default function Login() {
         <form className="login-form">
           <InputBox>
             <label htmlFor="email">Email</label>
-            <div>
-              <InputInner
-                className="login-input email"
-                type="text"
-                value={idValue}
-                onChange={(e) => idSetValue(e.target.value)}
-                ref={emailInput}
-              ></InputInner>
+            <div className="input-div">
+              {failIdLogin ? (
+                <InputInnerAfter
+                  className="login-input email"
+                  type="text"
+                  value={idValue}
+                  ref={emailInput}
+                  onChange={(e) => idSetValue(e.target.value)}
+                ></InputInnerAfter>
+              ) : (
+                <InputInner
+                  className="login-input email"
+                  type="text"
+                  value={idValue}
+                  onChange={(e) => idSetValue(e.target.value)}
+                  ref={emailInput}
+                ></InputInner>
+              )}
+              <svg
+                className={failIdLogin ? 's-input-icon hidden' : 's-input-icon'}
+                width="18px"
+                height="18px"
+                fill="hsl(358deg 68% 59%)"
+              >
+                <path d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8ZM8 4v6h2V4H8Zm0 8v2h2v-2H8Z" />
+              </svg>
             </div>
-            <p className="email-vaild">{idValue && vaildHandler()}</p>
+            <p className={failIdLogin ? 'email-vaild hidden' : 'email-vaild'}>
+              Email cannot be empty
+            </p>
           </InputBox>
           <InputBox>
             <div className="pw-wrapper">
@@ -96,15 +127,36 @@ export default function Login() {
                 Forgot password?
               </a>
             </div>
-            <div>
-              <InputInner
-                className="login-input pw"
-                type="password"
-                value={pwValue}
-                onChange={(e) => pwSetValue(e.target.value)}
-                ref={pwInput}
-              ></InputInner>
+            <div className="input-div">
+              {failpwLogin ? (
+                <InputInnerAfter
+                  className="login-input pw"
+                  type="password"
+                  value={pwValue}
+                  ref={pwInput}
+                  onChange={(e) => pwSetValue(e.target.value)}
+                ></InputInnerAfter>
+              ) : (
+                <InputInner
+                  className="login-input pw"
+                  type="password"
+                  value={pwValue}
+                  onChange={(e) => pwSetValue(e.target.value)}
+                  ref={pwInput}
+                ></InputInner>
+              )}
+              <svg
+                className={failpwLogin ? 's-input-icon hidden' : 's-input-icon'}
+                width="18px"
+                height="18px"
+                fill="hsl(358deg 68% 59%)"
+              >
+                <path d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8ZM8 4v6h2V4H8Zm0 8v2h2v-2H8Z" />
+              </svg>
             </div>
+            <p className={failpwLogin ? 'email-vaild hidden' : 'email-vaild'}>
+              Password cannot be empty.
+            </p>
           </InputBox>
           <div className="login-btn">
             <NextButton onClick={loginHandler}>Log in</NextButton>

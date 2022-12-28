@@ -28,8 +28,16 @@
   margin-top: 10px;
   color: hsl(210deg 8% 45%);
   font-size: 13px;
+  font-weight: 500;
 }
 
+.time-info {
+  color: hsl(216deg 5% 19%);
+}
+
+.time-info:visited {
+  color: hsl(216deg 5% 19%);
+}
 .info {
   margin-right: 20px;
 }
@@ -41,7 +49,7 @@
   background-color: hsl(206deg 100% 52%);
   color: #fff;
   height: 37px;
-  width: 103px;
+  min-width: 103px;
   box-shadow: inset 0 1px 0 0 hsl(206deg 100% 52%),
     inset 0 2px 0 0 hsla(0, 0%, 100%, 0.4);
   border-radius: 3px;

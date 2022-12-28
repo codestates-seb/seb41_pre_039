@@ -3,7 +3,7 @@ export const question = {
   title: '개발자는 힘들거나 지칠 때 개발개발개발하고 웁니다~~~~~~',
   content:
     '개발자는 힘들거나 지칠 때 개발개발개발ㅅ발개발개발하고 웁니다~~~~~~~~~',
-  createdAt: '2022-12-27 19:38:40',
+  createdAt: '2022-12-15 15:02:40',
   modifiedAt: '2022-12-27 19:38:40',
   commentCount: 0,
   viewCount: 0,
@@ -107,3 +107,22 @@ export const user = {
   region: null,
   createdAt: '2022-12-27 19:38:37',
 };
+
+export const answer = [
+  {
+    commentId: 1,
+    content: '답변입니다.',
+    createdAt: '2022-12-27 17:39:46',
+    totalVote: 0,
+    adoption: false,
+    memberId: 0,
+  },
+  {
+    commentId: 1,
+    content: '답변입니다.',
+    createdAt: '2022-12-27 17:39:46',
+    totalVote: 0,
+    adoption: true,
+    memberId: 1,
+  },
+];

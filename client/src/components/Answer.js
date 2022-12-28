@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import './Answer.css';
+import { AnswerEditor } from './Editor';
 
 const NextButton = styled.button`
   background-color: hsl(206deg 100% 52%);
@@ -111,18 +112,20 @@ export default function Answer() {
 function YourAnswer() {
   const [help, setHelp] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const inputClickHandler = () => {
+    setHelp(true);
+  };
   return (
     <>
       <form className="ya-box">
         <div className="ya-title">
           <h2>Your Answer</h2>
         </div>
-        <textarea
-          onClick={() => setHelp(true)}
-          className="ya-textarea"
+        <AnswerEditor
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        ></textarea>
+          changeHandler={setInputValue}
+          clickHandler={inputClickHandler}
+        />
         {help ? <YourAnswerModal /> : null}
         <NextButton>Post Your Answer</NextButton>
       </form>

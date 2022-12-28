@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
+import { ContentEditor } from '../components/Editor';
 import './AddQuestion.css';
 
 const InputBox = styled.div`
@@ -19,6 +20,7 @@ const InputBox = styled.div`
     background-color: rgba(235, 235, 235, 0.7);
     cursor: not-allowed;
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
   }
@@ -46,20 +48,6 @@ const InputBox = styled.div`
       color: #ccc;
     }
   }
-  textarea {
-    width: 100%;
-    height: 200px;
-    padding: 8px 9px;
-    outline: none;
-    border: 1px solid rgb(193, 193, 193);
-    border-radius: 3px;
-    resize: vertical;
-    &:focus {
-      border-color: rgb(0 116 204);
-      box-shadow: 0 0 0 4px rgb(0 116 204 / 15%);
-    }
-  }
-
   .validation {
     font-size: 12px;
     color: #ab262a;
@@ -223,11 +211,12 @@ const AddQuestion = () => {
     e.preventDefault();
     switch (name) {
       case 'titleNext':
-        problemRef.current.focus();
+        problemRef.current.textarea.focus();
+        // problemRef.current.focus();
         setInputStep(2);
         break;
       case 'problemNext':
-        tryForRef.current.focus();
+        tryForRef.current.textarea.focus();
         setInputStep(3);
         break;
       case 'tryForNext':
@@ -320,11 +309,11 @@ const AddQuestion = () => {
             Introduce the problem and expand on what you put in the title.
             Minimum 20 characters.
           </p>
-          <textarea
+          <ContentEditor
             id="problem"
             value={problem}
-            onChange={(e) => setProblem(e.target.value)}
-            ref={problemRef}
+            changeHandler={setProblem}
+            refer={problemRef}
           />
           {inputStep === 2 ? (
             <Button
@@ -345,11 +334,11 @@ const AddQuestion = () => {
             Describe what you tried, what you expected to happen, and what
             actually resulted. Minimum 20 characters.
           </p>
-          <textarea
+          <ContentEditor
             id="tryForProblem"
             value={tryFor}
-            onChange={(e) => setTryFor(e.target.value)}
-            ref={tryForRef}
+            changeHandler={setTryFor}
+            refer={tryForRef}
           />
           {inputStep === 3 ? (
             <Button

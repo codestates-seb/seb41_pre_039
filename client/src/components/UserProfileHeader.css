@@ -5,6 +5,7 @@
 
 .userProfile-userinfo {
   display: flex;
+  align-items: center;
   position: relative;
   margin-bottom: 16px;
 }
@@ -35,6 +36,13 @@
 
 .userProfile-userinfo--user > h3 {
   font-size: 36px;
+  font-weight: normal;
+  margin-bottom: 4px;
+}
+
+.userProfile-userinfo--user > p {
+  font-size: 21px;
+  color: #6A737C;
   font-weight: normal;
   margin-bottom: 4px;
 }

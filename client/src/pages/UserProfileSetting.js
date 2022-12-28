@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import './UserProfileSetting.css';
 import UserProfileHeader from '../components/UserProfileHeader';
 import { Link } from 'react-router-dom';
+import { user } from '../components/initialState';
 import { ContentEditor } from '../components/Editor';
 
 const SideMenuBar = styled(Link)`
@@ -82,14 +83,14 @@ const Cancel = styled.a`
   }
 `;
 const UserProfileSetting = () => {
-  const [nameValue, setNameValue] = useState('UserName');
-  const [locationValue, setLocationValue] = useState('');
-  const [titleValue, setTitleValue] = useState('');
-  const [inputAboutMe, setInputAboutMe] = useState('');
+  const [nameValue, setNameValue] = useState(user.name);
+  const [locationValue, setLocationValue] = useState(user.region);
+  const [titleValue, setTitleValue] = useState(user.myTitle);
+  const [inputAboutMe, setInputAboutMe] = useState(user.aboutMe);
 
   return (
     <section className="userProfile-container">
-      <UserProfileHeader />
+      <UserProfileHeader user={user} />
       <section className="userProfile-contents">
         <div className="menubar-container">
           <div className="fortitle">

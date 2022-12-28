@@ -75,7 +75,7 @@ export const user = {
     {
       createdAt: '2022-12-27 19:38:42',
       modifiedAt: null,
-      questionId: 0,
+      questionId: 1,
       image: null,
       title: 'Spring 개발자에서 Winter 개발자 되는법',
       content: null,
@@ -89,7 +89,7 @@ export const user = {
     {
       createdAt: '2022-12-27 19:38:44',
       modifiedAt: null,
-      questionId: 0,
+      questionId: 2,
       image: null,
       title: '왈와뢀왈왈왈으를르르릉캉캉캉깨개갱',
       content: null,
@@ -101,9 +101,23 @@ export const user = {
       member: null,
     },
   ],
+  answers: [
+    {
+      createdAt: '2022-12-27 19:38:44',
+      modifiedAt: null,
+      commentId: 2,
+      image: null,
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet risus nullam eget felis eget. Id ornare arcu odio ut sem nulla pharetra diam. Leo a diam sollicitudin tempor id eu. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla. ',
+      totalVote: 0,
+      memberId: null,
+      adoption: false,
+    },
+  ],
   comments: null,
-  myTitle: null,
-  aboutMe: null,
+  myTitle: 'Hello World!',
+  aboutMe:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet risus nullam eget felis eget. Id ornare arcu odio ut sem nulla pharetra diam. Leo a diam sollicitudin tempor id eu. Rutrum tellus pellentesque eu tincidunt tortor aliquam nulla. Ipsum suspendisse ultrices gravida dictum fusce. Amet massa vitae tortor condimentum. In ornare quam viverra orci sagittis eu volutpat odio. Ante metus dictum at tempor commodo. Nec ultrices dui sapien eget. Pharetra et ultrices neque ornare aenean euismod elementum nisi quis. Mi sit amet mauris commodo quis imperdiet massa. Vitae congue mauris rhoncus aenean vel elit. Laoreet suspendisse interdum consectetur libero id.',
   region: null,
   createdAt: '2022-12-27 19:38:37',
 };

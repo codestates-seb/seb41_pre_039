@@ -21,6 +21,7 @@ const TagList = styled.li`
   }
 `;
 export default function Question() {
+  console.log(user.name);
   return (
     <>
       <div className="content-header">
@@ -90,8 +91,8 @@ export default function Question() {
                       className="writer-avatar"
                     ></img>
                   </a>
-                  <a href="%PUBLIC_URL%" className="writer-name">
-                    {question.questionId}
+                  <a href="http://localhost:3000/user" className="writer-name">
+                    {user.name}
                   </a>
                 </div>
               </div>

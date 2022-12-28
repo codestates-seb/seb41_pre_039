@@ -140,18 +140,6 @@
   margin-top: 20px;
 }
 
-.ya-textarea {
-  border-color: hsl(207deg 7% 75%);
-  border-radius: 3px;
-  width: 100%;
-}
-
-.ya-textarea:focus {
-  outline-color: hsl(206deg 90% 70%);
-  box-shadow: 0px 0px 6px rgb(128, 191, 215);
-  border-radius: 3px;
-}
-
 /* YourAnswer Modal */
 
 .ya-modal-container {

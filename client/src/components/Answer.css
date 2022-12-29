@@ -1,3 +1,7 @@
+button {
+  background: none;
+}
+
 /* 본문 컨테이너 */
 .answer-container {
   display: flex;

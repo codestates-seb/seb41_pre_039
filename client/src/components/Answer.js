@@ -67,9 +67,9 @@ function Answer({ answer }) {
   return (
     <div className="answer-container">
       <div className="content-recommend">
-        <span className="content-up"></span>
+        <button className="content-up"></button>
         <span className="content-num">{totalVote}</span>
-        <span className="content-down"></span>
+        <button className="content-down"></button>
         <button className="content-chosen-button">
           <svg className="svg-icon" width="36" height="36" viewBox="0 0 36 36">
             <path d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"></path>

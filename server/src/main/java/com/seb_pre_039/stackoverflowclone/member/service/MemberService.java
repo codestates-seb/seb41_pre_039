@@ -84,6 +84,7 @@ public class MemberService {
         List<Question> questions = questionService.findQuestions(findMember);
         List<QuestionDto.Response> responses = mapper.questionsToQuestionResponseDtos(questions);
 
+        responseDto.setQuestions(responses);
         return responseDto;
     }
 

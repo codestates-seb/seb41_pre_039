@@ -33,7 +33,7 @@ const ContentUl = styled.ul`
   margin-left: 30px;
 `;
 
-export default function Answer() {
+export default function Answers() {
   return (
     <>
       <div className="answer-header">
@@ -51,43 +51,49 @@ export default function Answer() {
         </div>
       </div>
       <div className="content-layout">
-        <div className="answer-container">
-          <div className="content-recommend">
-            <span className="content-up"></span>
-            <span className="content-num">0</span>
-            <span className="content-down"></span>
-          </div>
-          <article className="content-question" data-color-mode="light">
-            <MarkdownPreview source={`hello`} className="answer-p" />
-            <div className="content-answerInfo">
-              <a href="%PUBLIC_URL%" className="content-edit">
-                Edit
-              </a>
-              <div className="answer-box">
-                <p className="asked-time">asked 58 mins ago</p>
-                <div className="userInfo">
-                  <a href="%PUBLIC_URL%">
-                    <img
-                      src="http://placeimg.com/24/24/any"
-                      alt="answer-avatar"
-                      className="answer-avatar"
-                    ></img>
-                  </a>
-                  <a href="%PUBLIC_URL%" className="answer-name">
-                    Answer
-                  </a>
-                </div>
-              </div>
-            </div>
-            <br />
-            <a href="%PUBLIC_URL%" className="add-comment">
-              Add a comment
-            </a>
-          </article>
-        </div>
+        <Answer />
       </div>
       <YourAnswer />
     </>
+  );
+}
+
+function Answer({ answer }) {
+  return (
+    <div className="answer-container">
+      <div className="content-recommend">
+        <span className="content-up"></span>
+        <span className="content-num">0</span>
+        <span className="content-down"></span>
+      </div>
+      <article className="content-question" data-color-mode="light">
+        <MarkdownPreview source={`hello`} className="answer-p" />
+        <div className="content-answerInfo">
+          <a href="%PUBLIC_URL%" className="content-edit">
+            Edit
+          </a>
+          <div className="answer-box">
+            <p className="asked-time">asked 58 mins ago</p>
+            <div className="userInfo">
+              <a href="%PUBLIC_URL%">
+                <img
+                  src="http://placeimg.com/24/24/any"
+                  alt="answer-avatar"
+                  className="answer-avatar"
+                ></img>
+              </a>
+              <a href="%PUBLIC_URL%" className="answer-name">
+                Answer
+              </a>
+            </div>
+          </div>
+        </div>
+        <br />
+        <a href="%PUBLIC_URL%" className="add-comment">
+          Add a comment
+        </a>
+      </article>
+    </div>
   );
 }
 

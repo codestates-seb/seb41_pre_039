@@ -9,7 +9,6 @@ public class QuestionTagResponseDto {
 
     private int questionId;
     private int tagId;
-
     private String name;
 
 

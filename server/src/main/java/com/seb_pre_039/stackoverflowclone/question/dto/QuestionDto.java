@@ -2,6 +2,7 @@ package com.seb_pre_039.stackoverflowclone.question.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Size;
@@ -40,6 +41,7 @@ public class QuestionDto {
 
     @Getter
     @Setter
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class Response {
         private int questionId;
@@ -47,21 +49,17 @@ public class QuestionDto {
         private String content;
         private String createdAt;
         private String modifiedAt;
-//        private boolean isChosen;
+
+        private boolean isChosen;
         private int commentCount;
         private int viewCount;
         private int totalVote;
+        private String username;
+        private Long memberId;
         private List<String> tags;
 
+        public void setUsername(String username) {
+            this.username = username;
+        }
     }
-
-//    @Getter
-//    @Setter
-//    @AllArgsConstructor
-//    public static class Vote {
-//        private int questionId;
-//        private int vote;
-//    }
-
-
 }

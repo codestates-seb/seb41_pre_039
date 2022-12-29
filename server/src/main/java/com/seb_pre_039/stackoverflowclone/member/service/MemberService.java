@@ -4,8 +4,11 @@ package com.seb_pre_039.stackoverflowclone.member.service;
 import com.seb_pre_039.stackoverflowclone.comment.service.CommentService;
 import com.seb_pre_039.stackoverflowclone.exception.BusinessLogicException;
 import com.seb_pre_039.stackoverflowclone.exception.ExceptionCode;
+import com.seb_pre_039.stackoverflowclone.member.dto.MemberResponseDto;
 import com.seb_pre_039.stackoverflowclone.member.entity.Member;
+import com.seb_pre_039.stackoverflowclone.member.mapper.MemberMapper;
 import com.seb_pre_039.stackoverflowclone.member.repository.MemberRepository;
+import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
@@ -26,12 +29,22 @@ public class MemberService {
     private final CommentService commentService;
     private final QuestionMapper mapper;
 
-    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService, QuestionMapper mapper) {
+    private final MemberMapper memberMapper;
+
+    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService, QuestionMapper mapper, MemberMapper memberMapper) {
         this.memberRepository = memberRepository;
         this.questionService = questionService;
         this.commentService = commentService;
         this.mapper = mapper;
+        this.memberMapper = memberMapper;
     }
+
+//    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService, QuestionMapper mapper) {
+//        this.memberRepository = memberRepository;
+//        this.questionService = questionService;
+//        this.commentService = commentService;
+//        this.mapper = mapper;
+//    }
 
 //    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService) {
 //        this.memberRepository = memberRepository;
@@ -64,14 +77,14 @@ public class MemberService {
     }
 
 
-    public Member showMemberPage(long memberId) {
-       Member findMember = findVerifiedMember(memberId);
-        List<Question> questionList;
-        //List<Comment> commentList = findMember.getComments();
-        List<MyPageQuestionResponse> myPageQuestionResponses = questionService.findQuestions(memberId);
-        questionList = mapper.myPageQuestionResponseToQuestions(myPageQuestionResponses);
-        findMember.setQuestions(questionList);
-        return findMember;
+    public MemberResponseDto showMemberPage(long memberId) {
+        Member findMember = findVerifiedMember(memberId);
+        MemberResponseDto responseDto = memberMapper.memberToMemberResponseDto(findMember);
+
+        List<Question> questions = questionService.findQuestions(findMember);
+        List<QuestionDto.Response> responses = mapper.questionsToQuestionResponseDtos(questions);
+
+        return responseDto;
     }
 
 

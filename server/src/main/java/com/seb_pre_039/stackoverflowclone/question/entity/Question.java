@@ -26,8 +26,8 @@ public class Question extends BaseTimeEntity {
     @Column(nullable = false)
     private String content;
 
-//    @Column(nullable = false)
-//    private boolean isChosen;
+    @Column(nullable = false)
+    private boolean isChosen;
 
     @Column(nullable = false)
     private int totalVote;
@@ -45,7 +45,7 @@ public class Question extends BaseTimeEntity {
     @ElementCollection
     @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "QUESTION_ID"))
     private List<String> tags;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 

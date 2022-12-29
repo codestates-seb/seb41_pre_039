@@ -13,28 +13,50 @@ import java.util.stream.Collectors;
 public interface QuestionMapper {
     Question questionPostToQuestion(QuestionDto.Post post);
     Question questionPatchToQuestion(QuestionDto.Patch patch);
-    QuestionDto.Response questionToQuestionResponse(Question question);
     List<QuestionDto.Response> questionsToQuestionResponseDtos(List<Question> questions);
-
-    default List<Question> myPageQuestionResponseToQuestions(List<MyPageQuestionResponse> myPageQuestionResponses) {
-        List<Question> questions;
-        if(myPageQuestionResponses == null) return null;
+    List<QuestionDto.Response> myPageQuestionResponseToQuestions(List<MyPageQuestionResponse> myPageQuestionResponses);
+    default QuestionDto.Response questionToQuestionResponse(Question question) {
+        if(question == null) return null;
         else {
-            questions =
-                myPageQuestionResponses.stream().map(
-                            myPageQuestionResponse -> {
-                                Question question  = new Question();
-                                question.setCreatedAt(myPageQuestionResponse.getCreatedAt());
-                                question.setTitle(myPageQuestionResponse.getTitle());
-                                question.setTotalVote(myPageQuestionResponse.getTotalVote());
-                                question.setQuestionId(myPageQuestionResponse.getQuestionId());
+            QuestionDto.Response response
+                    = new QuestionDto.Response(
+                    question.getQuestionId(),
+                    question.getTitle(),
+                    question.getContent(),
+                    question.getCreatedAt(),
+                    question.getModifiedAt(),
+                    question.isChosen(),
+                    question.getCommentCount(),
+                    question.getViewCount(),
+                    question.getTotalVote(),
+                    question.getMember().getName(),
+                    question.getMember().getMemberId(),
+                    question.getTags());
 
-                                return question;
-                            }
-                        ).collect(Collectors.toList());
-
+            return response;
         }
-
-        return questions;
     }
+
+//    default List<QuestionDto.Response> myPageQuestionResponseToQuestions(List<MyPageQuestionResponse> myPageQuestionResponses) {
+//        List<QuestionDto.Response> questions;
+//        if(myPageQuestionResponses == null) return null;
+//        else {
+//            questions =
+//                myPageQuestionResponses.stream().map(
+//                            myPageQuestionResponse -> {
+//                                QuestionDto.Response question  = new QuestionDto.Response();
+//                                question.setCreatedAt(myPageQuestionResponse.getCreatedAt());
+//                                question.setTitle(myPageQuestionResponse.getTitle());
+//                                question.setTotalVote(myPageQuestionResponse.getTotalVote());
+//                                question.setQuestionId(myPageQuestionResponse.getQuestionId());
+//                                question.setMemberId(myPageQuestionResponse.getMemberId());
+//
+//                                return question;
+//                            }
+//                        ).collect(Collectors.toList());
+//
+//        }
+//
+//        return questions;
+//    }
 }

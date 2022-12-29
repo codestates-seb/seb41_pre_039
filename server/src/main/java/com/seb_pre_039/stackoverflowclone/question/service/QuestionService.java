@@ -3,7 +3,9 @@ package com.seb_pre_039.stackoverflowclone.question.service;
 
 import com.seb_pre_039.stackoverflowclone.exception.BusinessLogicException;
 import com.seb_pre_039.stackoverflowclone.exception.ExceptionCode;
+import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import com.seb_pre_039.stackoverflowclone.member.service.MemberService;
+import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.repository.QuestionRepository;
 import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
@@ -69,9 +71,9 @@ public class QuestionService {
 
 
 
-    public List<MyPageQuestionResponse> findQuestions(Long memberId) {
+    public List<Question> findQuestions(Member member) {
 
-        return questionRepository.findByMemberId(memberId);
+        return questionRepository.findByMember(member);
     }
 
 //    public List<Question> findQuestionsByTagName(String tagName) {

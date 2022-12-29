@@ -70,7 +70,7 @@ export default function Question({ setIsKey }) {
               <Link
                 to="/edit"
                 className="content-edit"
-                onClick={setIsKey('Question')}
+                onClick={() => setIsKey('Question')}
               >
                 Edit
               </Link>

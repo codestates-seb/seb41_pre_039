@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import './Answer.css';
 import { AnswerEditor } from './Editor';
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import { answer } from './initialState';
+import timeParse from './time';
 
 const NextButton = styled.button`
   background-color: hsl(206deg 100% 52%);
@@ -37,7 +39,7 @@ export default function Answers() {
   return (
     <>
       <div className="answer-header">
-        <h2>1 Answer </h2>
+        <h2>{answer.length} Answer </h2>
         <div className="sorted-box">
           <div className="sorted-info">
             <span className="sorted-text">Sorted by:</span>
@@ -51,7 +53,9 @@ export default function Answers() {
         </div>
       </div>
       <div className="content-layout">
-        <Answer />
+        {answer.map((answer) => (
+          <Answer key={answer.commentId} answer={answer} />
+        ))}
       </div>
       <YourAnswer />
     </>
@@ -59,21 +63,22 @@ export default function Answers() {
 }
 
 function Answer({ answer }) {
+  const { content, createdAt, totalVote } = answer;
   return (
     <div className="answer-container">
       <div className="content-recommend">
         <span className="content-up"></span>
-        <span className="content-num">0</span>
+        <span className="content-num">{totalVote}</span>
         <span className="content-down"></span>
       </div>
       <article className="content-question" data-color-mode="light">
-        <MarkdownPreview source={`hello`} className="answer-p" />
+        <MarkdownPreview source={content} className="answer-p" />
         <div className="content-answerInfo">
           <a href="%PUBLIC_URL%" className="content-edit">
             Edit
           </a>
           <div className="answer-box">
-            <p className="asked-time">asked 58 mins ago</p>
+            <p className="asked-time">{timeParse(createdAt, 'time')}</p>
             <div className="userInfo">
               <a href="%PUBLIC_URL%">
                 <img
@@ -83,7 +88,7 @@ function Answer({ answer }) {
                 ></img>
               </a>
               <a href="%PUBLIC_URL%" className="answer-name">
-                Answer
+                Username
               </a>
             </div>
           </div>

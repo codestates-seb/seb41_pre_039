@@ -1,4 +1,4 @@
-import Answer from '../components/Answer';
+import Answers from '../components/Answer';
 import Question from '../components/Question';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ export default function Post() {
   return (
     <ContentContainer>
       <Question />
-      <Answer />
+      <Answers />
     </ContentContainer>
   );
 }

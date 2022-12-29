@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import './Question.css';
-import { question } from './initialState';
+import { question, user } from './initialState';
 import timeParse from './time';
-import { user } from './initialState';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 const TagList = styled.li`
   padding: 4.8px 6px;
@@ -21,7 +21,6 @@ const TagList = styled.li`
   }
 `;
 export default function Question() {
-  console.log(user.name);
   return (
     <>
       <div className="content-header">
@@ -60,16 +59,8 @@ export default function Question() {
             <span className="content-num">0</span>
             <span className="content-down"></span>
           </div>
-          <article className="content-question">
-            <p className="question-p">
-              Is there a way to change the color of the following slide of the
-              CRAN package shinyWidgets? Thanks in advance. I need to do it also
-              in within the update function.
-            </p>
-            <div className="question-codeBox">
-              <div className="question-code">{question.content}</div>
-            </div>
-            <br />
+          <article className="content-question" data-color-mode="light">
+            <MarkdownPreview source={question.content} className="question-p" />
             <ul className="content-tag">
               {question.tags.map((el, i) => {
                 return <TagList key={i}>{el}</TagList>;

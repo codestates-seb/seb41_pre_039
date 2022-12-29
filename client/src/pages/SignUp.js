@@ -1,9 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
 import './SignUp.css';
 import Icon1 from '../assets/icon1.svg';
 import Icon2 from '../assets/icon2.svg';
 import Icon3 from '../assets/icon3.svg';
 import Icon4 from '../assets/icon4.svg';
+import { appedErrors, useForm } from 'react-hook-form';
 
 const Input = styled.input`
   width: 100%;
@@ -20,6 +22,20 @@ const Input = styled.input`
 `;
 
 export default function Signup() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+    resetField,
+  } = useForm();
+
+  console.log(register('displayname'));
+
+  const onSubmit = (data) => {
+    console.log(data, errors);
+  };
+
   return (
     <>
       <div className="signupWrapper">
@@ -53,18 +69,49 @@ export default function Signup() {
           </div>
         </div>
         <div className="signupContatiner">
-          <form className="signupForm">
+          <form onSubmit={handleSubmit(onSubmit)} className="signupForm">
             <div className="displayName">
               Display name
-              <Input></Input>
+              <Input className="displayname" placeholder="Display name"></Input>
             </div>
-            <div className="Email">
+            <div className="email">
               Email
-              <Input></Input>
+              <Input
+                className="email"
+                {...register('email', {
+                  required: true,
+                  pattern: {
+                    value:
+                      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+                    message: 'is not a valid email address.',
+                  },
+                })}
+                placeholder="Email"
+              ></Input>
+              <div className="errorMessage">
+                {errors.email && errors.type !== 'required' && (
+                  <p>Email cannot be empty.</p>
+                )}
+                {errors.email?.message}
+              </div>
             </div>
             <div className="password">
               Password
-              <Input></Input>
+              <Input
+                className="password"
+                {...register('password', {
+                  required: true,
+                  minLength: { value: 8, message: '8자 이상' },
+                })}
+                type="password"
+                placeholder="Password"
+              ></Input>
+              <div className="errorMessage">
+                {errors.password && errors.type !== 'required' && (
+                  <p>Password cannot be empty.</p>
+                )}
+                {errors.password?.message}
+              </div>
             </div>
             <div className="signupFooter">
               <div className="passwordGiide">
@@ -72,7 +119,7 @@ export default function Signup() {
                 least 1 letter and 1 number.
               </div>
 
-              <button>Sign up</button>
+              <button type="submit">Sign up</button>
               <div className="signupAgree">
                 By clicking “Sign up”, you agree to our{' '}
                 <a href="https://stackoverflow.com/legal/privacy-policy">

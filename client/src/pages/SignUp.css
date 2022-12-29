@@ -82,6 +82,12 @@
   font-size: 12px;
 }
 
+.errorMessage {
+  color: rgb(208, 57, 62);
+  font-size: 12px;
+  font-weight: 400;
+}
+
 .signupFooter > button {
   width: 100%;
   margin: 6px;

@@ -54,6 +54,26 @@
   flex-direction: column;
 }
 
+.content-chosen-button{
+  width: 36px;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.content-chosen-button > .svg-icon {
+  fill: #babfc4;
+}
+
+.content-chosen-button > .svg-icon.chosen {
+  fill: #2f6f44;
+}
+
+.content-chosen-button:hover > .svg-icon {
+  fill: #2f6f44;
+}
+
 .answer-p {
   display: flex;
   margin-bottom: 16.5px;

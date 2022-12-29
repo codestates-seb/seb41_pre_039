@@ -1,0 +1,28 @@
+.edit--container {
+  padding: 20px;
+  padding-bottom: 60px;
+}
+
+.edit-container > h2 {
+  font-weight: 500;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.edit--advice {
+  width: 100%;
+  padding: 24px;
+  color: #3b4045;
+  border-radius: 3px;
+  background-color: #fdf7e2;
+  margin-bottom: 16px;
+}
+
+.edit--advice > p:last-of-type {
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.edit-container .submitButton {
+  margin-right: 10px;
+}

@@ -130,10 +130,7 @@ const List = ({ data, type }) => {
                   : el.title
                 : `${el.content.slice(0, 39)}...`}
             </Link>
-            <span className="date">
-              {/* parseTime 받아와서 수정해야 함 */}
-              {timeParse(el.createdAt, 'time')}
-            </span>
+            <span className="date">{timeParse(el.createdAt, 'time')}</span>
           </li>
         );
       })}

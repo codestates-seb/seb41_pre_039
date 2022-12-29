@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './QuestionList.css';
+import timeParse from './time';
 
 const QuestionList = ({ question }) => {
   return (
@@ -45,10 +46,7 @@ const QuestionList = ({ question }) => {
               <div className="userID">user ID</div>
               <div className="userRep">27k</div>
               <div className="modified">
-                modified {/* parseTime 가져와서 변환 필요 */}
-                {new Date(question.modifiedAt).toLocaleDateString('en-us', {
-                  dateStyle: 'medium',
-                })}
+                modified {timeParse(question.modifiedAt, 'time')}
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import './Answer.css';
 import { AnswerEditor } from './Editor';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 const NextButton = styled.button`
   background-color: hsl(206deg 100% 52%);
@@ -56,27 +57,8 @@ export default function Answer() {
             <span className="content-num">0</span>
             <span className="content-down"></span>
           </div>
-          <article className="content-question">
-            <p className="answer-p">
-              Is there a way to change the color of the following sContentLide
-              of the CRAN package shinyWidgets? Thanks in advance. I need to do
-              it also in within the update function.
-            </p>
-            <div className="answer-codeBox">
-              <div className="answer-code">
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-                sample sample sample sample sample sample sample sample sample
-              </div>
-            </div>
-            <br />
+          <article className="content-question" data-color-mode="light">
+            <MarkdownPreview source={`hello`} className="answer-p" />
             <div className="content-answerInfo">
               <a href="%PUBLIC_URL%" className="content-edit">
                 Edit

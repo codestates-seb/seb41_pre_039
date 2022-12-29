@@ -111,26 +111,14 @@
 /* 본문 질문 */
 .content-question {
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
 .question-p {
-  display: flex;
+  width: 100%;
   margin-bottom: 16.5px;
   text-align: left;
-}
-
-/* 본문 CODE 작성란 */
-.question-codeBox {
-  display: flex;
-  justify-content: center;
-  background-color: hsl(0deg 0% 96%);
-  border-radius: 3px;
-  text-align: left;
-}
-
-.question-code {
-  padding: 12px;
 }
 
 /* 태그 목록 */

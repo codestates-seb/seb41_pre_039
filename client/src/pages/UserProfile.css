@@ -50,7 +50,7 @@
   width: 100%;
 }
 
-.userProfile-contents--about > p {
+.userProfile-contents--about > div {
   margin-bottom: 32px;
 }
 

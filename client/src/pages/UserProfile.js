@@ -3,6 +3,7 @@ import './UserProfile.css';
 import UserProfileHeader from '../components/UserProfileHeader';
 import { user } from '../components/initialState';
 import { Link } from 'react-router-dom';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 const Stat = styled.div`
   display: flex;
@@ -88,9 +89,12 @@ const UserProfile = () => {
           </article>
         </div>
         <div className="userProfile-contents--column-content">
-          <article className="userProfile-contents--about">
+          <article
+            className="userProfile-contents--about"
+            data-color-mode="light"
+          >
             <h4>About</h4>
-            <p>{user.aboutMe}</p>
+            <MarkdownPreview source={user.aboutMe} />
           </article>
           <article className="userProfile-contents--answers">
             <h4>Answers</h4>

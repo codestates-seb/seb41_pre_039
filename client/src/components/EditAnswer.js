@@ -72,8 +72,8 @@ const CancelButton = styled(Button)`
   }
 `;
 
-export default function EditQuestion({ setIsKey }) {
-  const [body, setbody] = useState(answer[0].content);
+export default function EditAnswer() {
+  const [body, setBody] = useState(answer[0].content);
   const [summary, setSummary] = useState('');
 
   const bodyRef = useRef(null);
@@ -82,7 +82,7 @@ export default function EditQuestion({ setIsKey }) {
     if (localStorage.draft) {
       console.log(localStorage.draft);
       const draft = JSON.parse(localStorage.getItem('draft'));
-      setbody(draft.body || '');
+      setBody(draft.body || '');
     }
   }, []);
 
@@ -112,7 +112,7 @@ export default function EditQuestion({ setIsKey }) {
           <ContentEditor
             id="body"
             value={body}
-            changeHandler={setbody}
+            changeHandler={setBody}
             refer={bodyRef}
           />
         </InputBox>

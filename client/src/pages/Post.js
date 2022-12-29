@@ -11,11 +11,11 @@ const ContentContainer = styled.div`
   flex-direction: column;
 `;
 
-export default function Post() {
+export default function Post({ setIsKey }) {
   return (
     <ContentContainer>
-      <Question />
-      <Answers />
+      <Question setIsKey={setIsKey} />
+      <Answers setIsKey={setIsKey} />
     </ContentContainer>
   );
 }

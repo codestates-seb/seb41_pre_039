@@ -129,7 +129,7 @@ const TagEditor = styled.div`
 `;
 export default function EditQuestion() {
   const [title, setTitle] = useState(question.title);
-  const [body, setbody] = useState(question.content);
+  const [body, setBody] = useState(question.content);
   const [tags, setTags] = useState(question.tags);
   const [tag, setTag] = useState('');
   const [summary, setSummary] = useState('');
@@ -143,7 +143,7 @@ export default function EditQuestion() {
       console.log(localStorage.draft);
       const draft = JSON.parse(localStorage.getItem('draft'));
       setTitle(draft.title || '');
-      setbody(draft.body || '');
+      setBody(draft.body || '');
       setTags(draft.tags || []);
     }
   }, []);
@@ -215,7 +215,7 @@ export default function EditQuestion() {
           <ContentEditor
             id="body"
             value={body}
-            changeHandler={setbody}
+            changeHandler={setBody}
             refer={bodyRef}
           />
         </InputBox>

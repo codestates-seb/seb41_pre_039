@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import './QuestionList.css';
-import { question, answer } from './initialState';
 
-const QuestionList = () => {
+const QuestionList = ({ question }) => {
   return (
     <div className="postContainer">
       <div className="postBox">

@@ -1,5 +1,5 @@
 import './Home.css';
-import { questions, answer } from '../components/initialState';
+import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
 import Pagination from '../components/Pagination';
@@ -24,7 +24,7 @@ export default function Home() {
       </div>
       <ul className="Questions">
         {questions.data.map((question) => (
-          <QuestionList key={question.questionId} />
+          <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>
       <Pagination />

@@ -5,6 +5,7 @@ import { AnswerEditor } from './Editor';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { answer } from './initialState';
 import timeParse from './time';
+import { Link } from 'react-router-dom';
 
 const NextButton = styled.button`
   background-color: hsl(206deg 100% 52%);
@@ -35,7 +36,7 @@ const ContentUl = styled.ul`
   margin-left: 30px;
 `;
 
-export default function Answers() {
+export default function Answers({ setIsKey }) {
   return (
     <>
       <div className="answer-header">
@@ -54,7 +55,7 @@ export default function Answers() {
       </div>
       <div className="content-layout">
         {answer.map((answer) => (
-          <Answer key={answer.commentId} answer={answer} />
+          <Answer key={answer.commentId} answer={answer} setIsKey={setIsKey} />
         ))}
       </div>
       <YourAnswer />
@@ -62,7 +63,7 @@ export default function Answers() {
   );
 }
 
-function Answer({ answer }) {
+function Answer({ answer, setIsKey }) {
   const { content, createdAt, totalVote } = answer;
   return (
     <div className="answer-container">
@@ -79,9 +80,13 @@ function Answer({ answer }) {
       <article className="content-question" data-color-mode="light">
         <MarkdownPreview source={content} className="answer-p" />
         <div className="content-answerInfo">
-          <a href="%PUBLIC_URL%" className="content-edit">
+          <Link
+            to="/edit"
+            className="content-edit"
+            onClick={() => setIsKey('Answer')}
+          >
             Edit
-          </a>
+          </Link>
           <div className="answer-box">
             <p className="asked-time">{timeParse(createdAt, 'time')}</p>
             <div className="userInfo">

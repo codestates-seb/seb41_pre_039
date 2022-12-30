@@ -132,7 +132,7 @@ export const answer = [
     memberId: 0,
   },
   {
-    commentId: 1,
+    commentId: 2,
     content: '답변입니다.',
     createdAt: '2022-12-27 17:39:46',
     totalVote: 0,

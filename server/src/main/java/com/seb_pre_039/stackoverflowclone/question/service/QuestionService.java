@@ -76,7 +76,7 @@ public class QuestionService {
 
     public List<Question> findQuestions() {
 
-        return questionRepository.findTop300ByOrderByCreatedAtDesc();
+        return questionRepository.findTop10ByOrderByCreatedAtDesc();
     }
 
 

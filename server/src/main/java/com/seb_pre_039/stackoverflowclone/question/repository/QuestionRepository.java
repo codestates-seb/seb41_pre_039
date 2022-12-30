@@ -29,7 +29,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     Page<Question> findByTitleContainingOrderByTotalVoteDesc(String title, Pageable pageable);
 
-    List<Question> findTop300ByOrderByCreatedAtDesc();
+    List<Question> findTop10ByOrderByCreatedAtDesc();
 
     Optional<Question> findById(int questionId);
 }

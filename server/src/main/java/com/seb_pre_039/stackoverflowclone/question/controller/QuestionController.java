@@ -68,8 +68,8 @@ public class QuestionController {
 
     @GetMapping
     public ResponseEntity getQuestions() {
-
-        return new ResponseEntity<>(questionService.findQuestions(), HttpStatus.OK);
+        List<QuestionDto.Response> responses = mapper.questionsToQuestionResponseDtos(questionService.findQuestions());
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
     @GetMapping("/sort")

@@ -13,7 +13,7 @@ const QuestionList = () => {
               <span>{0} </span>votes
             </div>
           </div>
-          <div className={answer.length > 1 ? 'haveAnswer' : ''}>
+          <div>
             <div>
               <span>{question.commentCount} </span>answers
             </div>

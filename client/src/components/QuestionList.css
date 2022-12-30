@@ -26,15 +26,6 @@
   font-weight: 500;
 }
 
-.haveAnswer {
-  font-weight: 700;
-  padding: 4px;
-  color: white;
-  background-color: hsl(140deg 41% 31%);
-  border-color: hsl(140deg 41% 31%);
-  border-radius: 3px;
-}
-
 .postStatVotes {
   color: black;
 }

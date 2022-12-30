@@ -1,9 +1,19 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 export default function Header() {
   const [isLogin, setIsLogin] = useState(false);
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+
+  const searchHandler = (e) => {
+    const { value } = e.target;
+    if (e.key === 'Enter') {
+      navigate(`/search/${value}`);
+    }
+  };
+
   return (
     <header className="header-container">
       <div className="header-box">
@@ -14,9 +24,12 @@ export default function Header() {
           <div className="search-icon"></div>
           <input
             className="search-input"
+            onKeyUp={searchHandler}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
             placeholder="Search..."
-          ></input>
+          />
         </div>
         <nav className={isLogin ? 'login-box isLogin' : 'login-box'}>
           {isLogin ? (

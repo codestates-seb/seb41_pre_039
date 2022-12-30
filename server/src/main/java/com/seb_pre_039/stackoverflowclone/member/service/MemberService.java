@@ -88,7 +88,7 @@ public class MemberService {
         List<Question> questions = questionService.findQuestions(findMember);
         List<QuestionDto.Response> responses = mapper.questionsToQuestionResponseDtos(questions);
 
-        List<Comment> comments = commentService.findComments(findMember);
+        List<Comment> comments = commentService.findCommentsByMember(findMember);
         List<CommentResponseDto> responses2 = Commentmapper.commentsToCommentResponseDtos(comments);
 
         responseDto.setQuestions(responses);

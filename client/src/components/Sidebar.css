@@ -1,0 +1,36 @@
+.sidebar--container {
+  width: 100%;
+  max-width: 164px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+aside {
+  width: 164px;
+}
+
+.sidebar-nav > li {
+  width: 100%;
+  text-align: left;
+  padding: 10px 0 10px 10px;
+  background-color: #fff;
+  color: #525960;
+  font-size: 14px;
+  position: relative;
+}
+
+.sidebar-nav > li > a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.sidebar-nav > li:hover > a {
+  color: #000;
+}
+
+.sidebar-nav > li.active {
+  font-weight: bold;
+  background-color: #f1f2f3;
+  border-right: #f48225 3px solid;
+}

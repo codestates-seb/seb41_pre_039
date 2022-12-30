@@ -1,0 +1,61 @@
+.svg-icon {
+  fill: #6a737c;
+  vertical-align: bottom;
+}
+
+.userProfile-container {
+  width: 100%;
+  padding: 24px;
+}
+
+.userProfile-contents {
+  display: flex;
+  margin-top: 20px;
+}
+
+.userProfile-contents h4 {
+  width: 100%;
+  font-size: 20px;
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
+.userProfile-contents--column-stats {
+  flex: 1 0 190px;
+}
+
+.userProfile-contents--stats {
+  margin-right: 24px;
+}
+
+.userProfile-contents--stats > div {
+  padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 1px solid #d6d9dc;
+  color: #6a737c;
+}
+
+.userProfile-contents--column-content {
+  flex: 8 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.userProfile-contents--about {
+  width: 100%;
+}
+
+.userProfile-contents--about > div {
+  margin-bottom: 32px;
+}
+
+.userProfile-contents--answers,
+.userProfile-contents--questions {
+  flex: 1 0 0;
+  margin-right: 10px;
+}

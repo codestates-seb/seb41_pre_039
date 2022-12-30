@@ -1,0 +1,94 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: hsl(210deg 8% 95%);
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  min-width: 288px;
+  height: 570px;
+}
+
+/* 로고 */
+.login-logo-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-logo {
+  width: 50px;
+}
+
+/* 로그인 폼 */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 50%;
+  background-color: white;
+  font-weight: 700;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+/* email/pw 인풋창 */
+.input-div {
+  height: 36px;
+}
+
+.login-input {
+  width: 100%;
+}
+
+.email-vaild {
+  display: none;
+  font-size: 11px;
+  color: hsl(358deg 61% 52%);
+  margin-top: 8px;
+  font-weight: 450;
+}
+
+.s-input-icon {
+  display: none;
+  position: relative;
+  bottom: 25px;
+  left: 12.5em;
+  pointer-events: none;
+}
+
+.hidden {
+  display: block;
+}
+
+.login-btn {
+  width: 80%;
+}
+
+.pw-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.find-pw {
+  font-size: 12px;
+  font-weight: 500;
+  color: hsl(206deg 100% 40%);
+}
+
+/* 로그인 푸터 */
+.login-footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 10%;
+}

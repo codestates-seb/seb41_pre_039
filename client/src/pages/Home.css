@@ -1,0 +1,132 @@
+.homeContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.homeTitle {
+  color: rgb(35, 38, 41);
+  font-size: 27px;
+  font-weight: 500;
+  margin-block-end: 27px;
+}
+
+.askQuestion {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  height: 37.8px;
+  background-color: rgb(10, 149, 255);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-size: 13px;
+  border-radius: 3px;
+  border-style: solid;
+  border-color: rgb(10, 149, 255);
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;
+  margin: 0px -0.5px;
+  cursor: pointer;
+  transition: ease background-color 250ms;
+  box-shadow: rgba(255, 255, 255, 0.4) 0px 1px 0px 0px inset;
+  text-decoration: none;
+}
+
+.askQuestion:hover {
+  background-color: rgb(0, 116, 203);
+}
+
+.askQuestion:focus {
+  background-color: rgb(0, 98, 190);
+}
+
+.askQuestion:active {
+  outline-color: transparent;
+  outline-style: solid;
+  box-shadow: 0 0 0 4px rgb(221, 234, 247);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 16px;
+}
+
+.buttonGroup > button {
+  display: table-cell;
+  height: 37.8px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(106, 115, 124);
+  font-size: 13px;
+  border-style: solid;
+  border-color: rgb(159, 166, 173);
+  border-width: 1px;
+  border-collapse: collapse;
+  padding: 10px;
+  cursor: pointer;
+  transition: ease background-color 250ms;
+  float: left;
+}
+
+.buttonGroup > button:not(:last-child) {
+  border-right: none;
+}
+
+.buttonGroup > button:hover {
+  background-color: rgb(248, 249, 249);
+}
+
+.buttonGroup > button:focus {
+  background-color: rgb(227, 230, 232);
+  color: rgb(59, 64, 69);
+  border-color: rgb(131, 140, 149);
+}
+
+.buttonGroup > button:active {
+  background-color: rgb(248, 249, 249);
+  color: rgb(82, 88, 97);
+  outline-color: transparent;
+  outline-style: solid;
+  box-shadow: 0 0 0 4px rgb(233, 233, 233);
+}
+
+.btn1 {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-block-start-color: rgb(159, 166, 173);
+  border-block-end-color: rgb(159, 166, 173);
+  border-left-color: rgb(159, 166, 173);
+  border-right-color: rgb(159, 166, 173);
+}
+
+.btn5 {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.bottomNotice {
+  margin: 17px;
+  padding-right: 10px;
+  color: rgb(35, 38, 41);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.question-footer-container {
+  min-width: 63%;
+  padding: 20px;
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.question-footer-text {
+  margin-bottom: 10px;
+}
+.question-footer-text > a {
+  color: hsl(206deg 100% 40%);
+}
+
+.question-footer-text > a:hover {
+  color: hsl(206deg 100% 52%);
+}

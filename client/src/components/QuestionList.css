@@ -1,0 +1,147 @@
+.postContainer {
+  border-top: 1px solid rgb(227, 230, 232);
+  padding: 16px;
+}
+
+.postBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.postStats {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 400;
+  width: 108px;
+  margin-right: 16px;
+  margin-bottom: 4px;
+  line-height: 17px;
+  vertical-align: baseline;
+  color: rgb(106, 115, 124);
+  row-gap: 6px;
+  font-weight: 500;
+}
+
+.postStatVotes {
+  color: black;
+}
+
+.postStatViews.oneKUpper {
+  color: #83690b;
+}
+
+.postCommentCount {
+  background-color: white;
+  border: 1px solid rgb(47, 111, 68);
+  color: rgb(47, 111, 68);
+  border-radius: 3px;
+  padding: 4px;
+  font-size: 13px;
+}
+
+.adoption {
+  background-color: rgb(47, 111, 68);
+  color: rgb(255, 255, 255);
+}
+
+.comment-count-svg {
+  padding-top: 2px;
+  margin-right: 3px;
+}
+
+.postContent {
+  width: 100%;
+}
+
+.postTitle {
+  padding-right: 24px;
+  margin-bottom: 5px;
+}
+
+.postTitle > a {
+  color: rgb(0, 116, 204);
+  text-align: left;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.postTitle > a:hover {
+  color: rgb(10, 149, 255);
+  cursor: pointer;
+}
+
+.postTag {
+  display: flex;
+  margin-bottom: 13px;
+}
+
+.postTag > li {
+  height: 25px;
+  font-size: 12px;
+  background-color: rgb(225, 236, 244);
+  color: rgb(57, 115, 157);
+  cursor: pointer;
+  border-radius: 3px;
+  margin-right: 5px;
+  padding: 5px;
+}
+
+.postTag > li:hover {
+  cursor: pointer;
+  background-color: rgb(209, 226, 239);
+}
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+
+.postCard {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 13px;
+}
+
+.postCard > div {
+  margin-right: 4px;
+}
+
+.userImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: '16px';
+  height: '16px';
+  cursor: pointer;
+}
+
+.userImg > img {
+  border-radius: 20%;
+}
+
+.userID {
+  color: rgb(0, 116, 204);
+  cursor: pointer;
+}
+
+.userID:hover {
+  color: rgb(10, 149, 255);
+}
+
+.userRep {
+  font-size: 12px;
+  font-weight: 800;
+  color: rgb(82, 89, 96);
+}
+
+.postTime {
+  font-size: 12px;
+  color: rgb(106, 115, 124);
+  cursor: pointer;
+}

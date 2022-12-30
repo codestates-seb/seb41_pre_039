@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import './SignUp.css';
 import Icon1 from '../assets/icon1.svg';
 import Icon2 from '../assets/icon2.svg';
@@ -12,12 +11,17 @@ const Input = styled.input`
   height: 32px;
   margin-top: 5px;
   padding-left: 5px;
-  border: 1px solid rgb(193, 193, 193);
+  border: 1px solid;
+  border-color: ${(props) => (props.error ? '#de4f54' : 'rgb(193, 193, 193)')};
   border-radius: 3px;
+  outline: none;
   &:focus {
-    outline-color: hsl(206deg 90% 70%);
-    box-shadow: 0px 0px 6px rgb(128, 191, 215);
-    border-radius: 3px;
+    box-shadow: 0px 0px 0px 4px
+      ${(props) =>
+        props.error ? 'rgb(194 46 50 / 15%)' : 'rgb(0 116 204 / 15%)'};
+  }
+  &::placeholder {
+    color: #aaa;
   }
 `;
 
@@ -28,12 +32,28 @@ export default function Signup() {
     handleSubmit,
   } = useForm();
 
-  console.log(register('displayname'));
-
   const onSubmit = (data) => {
     console.log(data, errors);
   };
-  
+
+  const validation = (v = '') => {
+    if (v.match(/^[A-Za-z]+$/i))
+      return (
+        <p>
+          Please add one of the following things to make your password stronger.
+          <li>numbers</li>
+        </p>
+      );
+    else if (v.match(/^[0-9]+$/i))
+      return (
+        <p>
+          Please add one of the following things to make your password stronger.
+          <li>letters</li>
+        </p>
+      );
+    else return;
+  };
+
   return (
     <>
       <div className="signupWrapper">
@@ -69,23 +89,42 @@ export default function Signup() {
         <div className="signupContatiner">
           <form onSubmit={handleSubmit(onSubmit)} className="signupForm">
             <div className="displayName">
-              Display name
-              <Input className="displayname" placeholder="Display name"></Input>
+              <label htmlFor="name">Display name</label>
+              <Input
+                id="name"
+                className="displayname"
+                placeholder="Display name"
+              />
             </div>
             <div className="email">
-              Email
-              <Input
-                className="email"
-                {...register('email', {
-                  required: true,
-                  pattern: {
-                    value:
-                      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
-                    message: 'This is not a valid email address.',
-                  },
-                })}
-                placeholder="Email"
-              ></Input>
+              <label htmlFor="email">Email</label>
+              <div className="input-container">
+                <Input
+                  id="email"
+                  className="email"
+                  error={errors.email}
+                  {...register('email', {
+                    required: true,
+                    pattern: {
+                      value:
+                        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+                      message: 'This is not a valid email address.',
+                    },
+                  })}
+                  placeholder="Email"
+                />
+                {errors.email ? (
+                  <svg
+                    aria-hidden="true"
+                    className="svg-icon iconAlertCircle"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                  >
+                    <path d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8ZM8 4v6h2V4H8Zm0 8v2h2v-2H8Z"></path>
+                  </svg>
+                ) : undefined}
+              </div>
               <div className="errorMessage">
                 {errors.email && errors.email.type === 'required' && (
                   <p>Email cannot be empty.</p>
@@ -94,16 +133,34 @@ export default function Signup() {
               </div>
             </div>
             <div className="password">
-              Password
-              <Input
-                className="password"
-                {...register('password', {
-                  required: true,
-                  minLength: { value: 8 },
-                })}
-                type="password"
-                placeholder="Password"
-              ></Input>
+              <label htmlFor="password">Password</label>
+              <div className="input-container">
+                <Input
+                  id="password"
+                  className="password"
+                  error={errors.password}
+                  {...register('password', {
+                    required: true,
+                    minLength: { value: 8 },
+                    validate: {
+                      letter: (v) => validation(v),
+                    },
+                  })}
+                  type="password"
+                  placeholder="Password"
+                />
+                {errors.password ? (
+                  <svg
+                    aria-hidden="true"
+                    className="svg-icon iconAlertCircle"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                  >
+                    <path d="M9 17c-4.36 0-8-3.64-8-8 0-4.36 3.64-8 8-8 4.36 0 8 3.64 8 8 0 4.36-3.64 8-8 8ZM8 4v6h2V4H8Zm0 8v2h2v-2H8Z"></path>
+                  </svg>
+                ) : undefined}
+              </div>
               <div className="errorMessage">
                 {errors.password && errors.password.type === 'required' && (
                   <p>Password cannot be empty.</p>
@@ -111,6 +168,7 @@ export default function Signup() {
                 {errors.password && errors.password.type === 'minLength' && (
                   <p>Must contain at least 8 characters.</p>
                 )}
+                {errors.password?.message}
               </div>
             </div>
             <div className="signupFooter">

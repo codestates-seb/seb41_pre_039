@@ -72,8 +72,23 @@
   display: flex;
   flex-direction: column;
   margin: 6px;
+}
+
+.signupForm label {
   font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container > svg {
+  position: absolute;
+  top: 12px;
+  right: 6px;
+  fill: #de4f54;
 }
 
 .passwordGuide {
@@ -86,6 +101,12 @@
   color: rgb(208, 57, 62);
   font-size: 12px;
   font-weight: 400;
+}
+
+.errorMessage li{
+  margin-top: 10px;
+  margin-left: 10px;
+  list-style-type: disc;
 }
 
 .signupFooter > button {

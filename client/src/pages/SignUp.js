@@ -1,11 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import './SignUp.css';
 import Icon1 from '../assets/icon1.svg';
 import Icon2 from '../assets/icon2.svg';
 import Icon3 from '../assets/icon3.svg';
 import Icon4 from '../assets/icon4.svg';
-import { appedErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 const Input = styled.input`
   width: 100%;
@@ -26,8 +26,6 @@ export default function Signup() {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
-    resetField,
   } = useForm();
 
   console.log(register('displayname'));
@@ -83,13 +81,13 @@ export default function Signup() {
                   pattern: {
                     value:
                       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
-                    message: 'is not a valid email address.',
+                    message: 'This is not a valid email address.',
                   },
                 })}
                 placeholder="Email"
               ></Input>
               <div className="errorMessage">
-                {errors.email && errors.type !== 'required' && (
+                {errors.email && errors.email.type === 'required' && (
                   <p>Email cannot be empty.</p>
                 )}
                 {errors.email?.message}
@@ -101,16 +99,18 @@ export default function Signup() {
                 className="password"
                 {...register('password', {
                   required: true,
-                  minLength: { value: 8, message: '8자 이상' },
+                  minLength: { value: 8 },
                 })}
                 type="password"
                 placeholder="Password"
               ></Input>
               <div className="errorMessage">
-                {errors.password && errors.type !== 'required' && (
+                {errors.password && errors.password.type === 'required' && (
                   <p>Password cannot be empty.</p>
                 )}
-                {errors.password?.message}
+                {errors.password && errors.password.type === 'minLength' && (
+                  <p>Must contain at least 8 characters.</p>
+                )}
               </div>
             </div>
             <div className="signupFooter">

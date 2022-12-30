@@ -3,6 +3,7 @@ import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
 import './SearchPage.css';
 import { useState } from 'react';
+import Pagination from '../components/Pagination';
 
 export default function SerachPage() {
   const [tip, setTip] = useState(false);
@@ -36,6 +37,7 @@ export default function SerachPage() {
           <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>
+      <Pagination />
     </>
   );
 }

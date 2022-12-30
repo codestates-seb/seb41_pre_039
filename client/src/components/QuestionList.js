@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import './QuestionList.css';
+import { question, answer } from './initialState';
 
-const QuestionList = ({ question }) => {
+const QuestionList = () => {
   return (
     <div className="postContainer">
       <div className="postBox">
@@ -12,7 +13,7 @@ const QuestionList = ({ question }) => {
               <span>{0} </span>votes
             </div>
           </div>
-          <div className="postStatAnsers">
+          <div className={answer.length > 1 ? 'haveAnswer' : ''}>
             <div>
               <span>{question.commentCount} </span>answers
             </div>

@@ -20,7 +20,7 @@ const TagList = styled.li`
     cursor: pointer;
   }
 `;
-export default function Question() {
+export default function Question({ setIsKey }) {
   return (
     <>
       <div className="content-header">
@@ -55,9 +55,9 @@ export default function Question() {
       <div className="content-layout">
         <div className="question-container">
           <div className="content-recommend">
-            <span className="content-up"></span>
+            <button className="content-up"></button>
             <span className="content-num">0</span>
-            <span className="content-down"></span>
+            <button className="content-down"></button>
           </div>
           <article className="content-question" data-color-mode="light">
             <MarkdownPreview source={question.content} className="question-p" />
@@ -67,9 +67,13 @@ export default function Question() {
               })}
             </ul>
             <div className="content-writerInfo">
-              <a href="%PUBLIC_URL%" className="content-edit">
+              <Link
+                to="/edit"
+                className="content-edit"
+                onClick={() => setIsKey('Question')}
+              >
                 Edit
-              </a>
+              </Link>
               <div className="writer-box">
                 <p className="asked-time">
                   {timeParse(question.createdAt, 'time')}

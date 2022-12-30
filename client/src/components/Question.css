@@ -80,6 +80,7 @@
   height: 36px;
   background-image: url('https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27');
   background-position: -2px -165px;
+  background-color: transparent;
 }
 
 .content-up:hover {
@@ -92,6 +93,7 @@
   height: 36px;
   background-image: url('https://cdn.sstatic.net/Img/unified/sprites.svg?v=fcc0ea44ba27');
   background-position: -2px -215px;
+  background-color: transparent;
 }
 
 .content-down:hover {

@@ -12,9 +12,11 @@ import UserProfile from './pages/UserProfile';
 import UserProfileSetting from './pages/UserProfileSetting';
 import DeleteProfile from './pages/DeleteProfile';
 import { useEffect, useState } from 'react';
+import Edit from './pages/Edit';
 
 function App() {
   const [isSidebar, setIsSidebar] = useState(true);
+  const [isKey, setIsKey] = useState('');
   const location = useLocation();
   useEffect(() => {
     if (location.pathname.match(/login|signup/g)) setIsSidebar(false);
@@ -34,7 +36,10 @@ function App() {
         <div className={`content ${isSidebar ? '' : 'none-sidebar'}`}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/question" element={<Post />} />
+            <Route
+              path="/question"
+              element={<Post isKey={isKey} setIsKey={setIsKey} />}
+            />
             <Route path="/addquestion" element={<AddQuestion />} />
             <Route path="/user" element={<UserProfile />} />
             <Route path="/user/setting" element={<UserProfileSetting />} />
@@ -42,6 +47,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             {/* SignUp 컴포넌트로 수정 필요 */}
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/edit" element={<Edit isKey={isKey} />} />
           </Routes>
         </div>
       </div>

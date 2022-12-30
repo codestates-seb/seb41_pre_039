@@ -1,19 +1,16 @@
 import './Home.css';
-import dummy from '../db/data.json';
+import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
-
-function clickMe() {
-  alert('You clicked me!');
-}
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
     <>
       <div className="homeContainer">
         <h1 className="homeTitle">Top Questions</h1>
-        <button className="askQuestion" onClick={clickMe}>
+        <Link className="askQuestion" to="/addquestion">
           Ask Question
-        </button>
+        </Link>
       </div>
       <div className="buttonContainer">
         <div className="buttonGroup">
@@ -25,8 +22,8 @@ export default function Home() {
         </div>
       </div>
       <ul className="Questions">
-        {dummy.data.map((v) => (
-          <QuestionList dummy={v} key={v.questionId} />
+        {questions.data.map((question) => (
+          <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>
     </>

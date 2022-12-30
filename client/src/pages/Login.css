@@ -41,8 +41,32 @@
 }
 
 /* email/pw 인풋창 */
+.input-div {
+  height: 36px;
+}
+
 .login-input {
   width: 100%;
+}
+
+.email-vaild {
+  display: none;
+  font-size: 11px;
+  color: hsl(358deg 61% 52%);
+  margin-top: 8px;
+  font-weight: 450;
+}
+
+.s-input-icon {
+  display: none;
+  position: relative;
+  bottom: 25px;
+  left: 12.5em;
+  pointer-events: none;
+}
+
+.hidden {
+  display: block;
 }
 
 .login-btn {

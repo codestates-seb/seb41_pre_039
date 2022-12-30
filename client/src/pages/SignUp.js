@@ -33,7 +33,7 @@ export default function Signup() {
   const onSubmit = (data) => {
     console.log(data, errors);
   };
-
+  
   return (
     <>
       <div className="signupWrapper">
@@ -118,7 +118,6 @@ export default function Signup() {
                 Passwords must contain at least eight characters, including at
                 least 1 letter and 1 number.
               </div>
-
               <button type="submit">Sign up</button>
               <div className="signupAgree">
                 By clicking “Sign up”, you agree to our{' '}

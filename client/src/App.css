@@ -10,6 +10,10 @@ li {
   list-style-type: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 .header {
   position: fixed;
   width: 100%;
@@ -31,6 +35,10 @@ li {
   position: relative;
 }
 
+.container.none-sidebar {
+  max-width: none;
+}
+
 .sidebar {
   width: 164px;
   height: 100vh;
@@ -46,7 +54,10 @@ li {
   padding-top: 50px;
   padding-left: 164px;
   background-color: rgb(255, 255, 255);
-  padding: 24px;
+}
+
+.content.none-sidebar {
+  padding-left: 0px;
 }
 
 .footer {

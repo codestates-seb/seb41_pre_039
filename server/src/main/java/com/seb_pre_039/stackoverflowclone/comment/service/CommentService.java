@@ -69,13 +69,13 @@ public class CommentService {
         return commentRepository.findAll(PageRequest.of(page, size, Sort.by("createdAt").descending()));
     }
 
-//    public List<Comment> findComments(Long memberId) {
-//
-//        return commentRepository.findByMemberId(memberId);
-//    }
 
-    public List<Comment> findComments(Member member) {
+    public List<Comment> findCommentsByMember(Member member) {
         return commentRepository.findByMember(member);
+    }
+
+    public List<Comment> findCommentsByQuestion(Question question) {
+        return commentRepository.findByQuestion(question);
     }
 
     private void verifyExistComment(int commentId) {

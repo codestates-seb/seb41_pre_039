@@ -7,7 +7,9 @@ import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
 import com.seb_pre_039.stackoverflowclone.comment.mapper.CommentMapper;
 import com.seb_pre_039.stackoverflowclone.comment.service.CommentService;
 import com.seb_pre_039.stackoverflowclone.member.service.MemberService;
+import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
+import com.seb_pre_039.stackoverflowclone.question.repository.QuestionRepository;
 import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
 import com.seb_pre_039.stackoverflowclone.response.MultiResponseDto;
 import lombok.extern.slf4j.Slf4j;
@@ -31,14 +33,16 @@ public class CommentController {
     private final MemberService memberService;
 
     private final QuestionService questionService;
-
+    private final QuestionRepository questionRepository;
     private final CommentMapper mapper;
-
-    public CommentController(CommentMapper mapper, CommentService commentService, MemberService memberService, QuestionService questionService) {
+    public CommentController(CommentService commentService, MemberService memberService,
+                             QuestionService questionService, QuestionRepository questionRepository,
+                             CommentMapper mapper) {
         this.commentService = commentService;
         this.memberService = memberService;
-        this.mapper = mapper;
         this.questionService = questionService;
+        this.questionRepository = questionRepository;
+        this.mapper = mapper;
     }
 
     @PostMapping("/{question-id}")

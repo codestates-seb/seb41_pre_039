@@ -16,24 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
-//    @Query(value = "select q from Question q where q.member.memberId = :#{#memberId}")
-//    List<Question> findByMemberId(@Param(value = "memberId") Long memberId);
 
-
-//    @Query(value = "select q.questionId as questionId, q.title as title, q.content as content," +
-//            "q.createdAt as createdAt, q.modifiedAt as modifiedAt, " +
-//            "q.isChosen as chosen, q.commentCount as commentCount," +
-//            "q.viewCount as viewCount, q.totalVote as totalVote, q.member as member, q.tags as tags " +
-//            "from Question q where q.member.memberId = :#{#memberId}")
-
-
-//    @Query(value = "select new com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto.Response" +
-//            "(q.questionId, q.title, q.content, q.createdAt, q.modifiedAt," +
-//            " q.isChosen, q.commentCount, q.viewCount, q.totalVote, q.member.name," +
-//            " q.member.memberId, q.tags)" +
-//            " from Question q " +
-//            "where q.questionId = #{#memberId}")
-//    List<QuestionDto.Response> findByMemberId(@Param(value = "memberId") Long memberId);
 
     List<Question> findByMember(Member member);
 
@@ -45,6 +28,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     Page<Question> findByTitleContainingOrderByCreatedAtDesc(String title, Pageable pageable);
 
     Page<Question> findByTitleContainingOrderByTotalVoteDesc(String title, Pageable pageable);
+
+    List<Question> findTop300ByOrderByCreatedAtDesc();
 
     Optional<Question> findById(int questionId);
 }

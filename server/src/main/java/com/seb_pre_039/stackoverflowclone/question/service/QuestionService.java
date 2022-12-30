@@ -1,12 +1,15 @@
 package com.seb_pre_039.stackoverflowclone.question.service;
 
 
+import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
+import com.seb_pre_039.stackoverflowclone.comment.service.CommentService;
 import com.seb_pre_039.stackoverflowclone.exception.BusinessLogicException;
 import com.seb_pre_039.stackoverflowclone.exception.ExceptionCode;
 import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import com.seb_pre_039.stackoverflowclone.member.service.MemberService;
 import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
+import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.repository.QuestionRepository;
 import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
 import com.seb_pre_039.stackoverflowclone.tag.repository.TagRepository;
@@ -25,17 +28,16 @@ import java.util.Optional;
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final TagRepository tagRepository;
-//    private final MemberService memberService;
+    private final QuestionMapper questionMapper;
 
-//    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository, MemberService memberService) {
-//        this.questionRepository = questionRepository;
-//        this.tagRepository = tagRepository;
-//        this.memberService = memberService;
-//    }
+    private final CommentService commentService;
 
-    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository) {
+    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository,
+                           QuestionMapper questionMapper, CommentService commentService) {
         this.questionRepository = questionRepository;
         this.tagRepository = tagRepository;
+        this.questionMapper = questionMapper;
+        this.commentService = commentService;
     }
 
     public Question createQuestion(Question question) {
@@ -67,19 +69,16 @@ public class QuestionService {
     }
 
 
-
-
-
-
     public List<Question> findQuestions(Member member) {
 
         return questionRepository.findByMember(member);
     }
 
-//    public List<Question> findQuestionsByTagName(String tagName) {
-//
-//
-//    }
+    public List<Question> findQuestions() {
+
+        return questionRepository.findTop300ByOrderByCreatedAtDesc();
+    }
+
 
     public int updateViewCount(int questionId) {
 

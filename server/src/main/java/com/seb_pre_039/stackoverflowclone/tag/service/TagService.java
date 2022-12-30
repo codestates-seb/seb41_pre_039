@@ -26,7 +26,7 @@ public class TagService {
     }
 
     public List<QuestionTag> findQuestionTags(int questionId) {
-        Question question = questionService.findQuestion(questionId);
+//        Question question = questionService.findQuestion(questionId);
 
         return null;
     }

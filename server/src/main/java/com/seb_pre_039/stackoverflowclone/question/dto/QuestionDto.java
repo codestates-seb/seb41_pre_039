@@ -1,5 +1,7 @@
 package com.seb_pre_039.stackoverflowclone.question.dto;
 
+import com.seb_pre_039.stackoverflowclone.comment.dto.CommentResponseDto;
+import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -57,6 +59,8 @@ public class QuestionDto {
         private String username;
         private Long memberId;
         private List<String> tags;
+
+//        private List<CommentResponseDto> comments;
 
         public void setUsername(String username) {
             this.username = username;

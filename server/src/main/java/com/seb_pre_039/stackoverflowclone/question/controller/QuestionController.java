@@ -6,7 +6,6 @@ import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
 import com.seb_pre_039.stackoverflowclone.response.MultiResponseDto;
-import com.seb_pre_039.stackoverflowclone.tag.service.TagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -28,14 +27,6 @@ public class QuestionController {
     private final MemberService memberService;
 
 
-    //private final TagService tagService;
-//    public QuestionController(QuestionService questionService, QuestionMapper mapper, TagService tagService, MemberService memberService) {
-//        this.questionService = questionService;
-//        this.mapper = mapper;
-//        this.tagService = tagService;
-//        this.memberService = memberService;
-//    }
-
     public QuestionController(QuestionService questionService, QuestionMapper mapper, MemberService memberService) {
         this.questionService = questionService;
         this.mapper = mapper;
@@ -43,27 +34,13 @@ public class QuestionController {
     }
 
     @PostMapping
-    public ResponseEntity<?> postQuestion(@Valid @RequestBody QuestionDto.Post post) {
+    public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
         Question question = mapper.questionPostToQuestion(post);
         question.setMember(memberService.findMember(1));
         questionService.createQuestion(question);
 
-        /*
-        Question createdQuestion
-                = questionService.createQuestion(mapper.questionPostToQuestion(post));
-
-        createdQuestion.setMember(memberService.findMember(1));
-        */
-
         return new ResponseEntity<>(mapper.questionToQuestionResponse(question), HttpStatus.CREATED);
     }
-
-//    @GetMapping("/search")
-//    public ResponseEntity searchQuestion(@RequestParam String title) {
-//        List<Question> questions = questionService.searchQuestionByTitle(title);
-//
-//        return new ResponseEntity<>(mapper.questionsToQuestionResponseDtos(questions), HttpStatus.OK);
-//    }
 
 
     @GetMapping("/{question-id}")
@@ -74,6 +51,7 @@ public class QuestionController {
 
         return new ResponseEntity<>(mapper.questionToQuestionResponse(findQuestion), HttpStatus.OK);
     }
+
 
     @GetMapping("/main")
     public ResponseEntity getQuestions(@RequestParam @Positive int page,
@@ -86,6 +64,12 @@ public class QuestionController {
                 new MultiResponseDto<>(
                         mapper.questionsToQuestionResponseDtos(questionList), questionPage),
                 HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity getQuestions() {
+
+        return new ResponseEntity<>(questionService.findQuestions(), HttpStatus.OK);
     }
 
     @GetMapping
@@ -103,7 +87,6 @@ public class QuestionController {
     }
 
 
-
     @PatchMapping("/{question-id}")
     public ResponseEntity patchQuestion(@PathVariable("question-id") int questionId,
                                         @Valid @RequestBody QuestionDto.Patch patch) {
@@ -113,16 +96,6 @@ public class QuestionController {
         return new ResponseEntity<>(mapper.questionToQuestionResponse(updatedQuestion), HttpStatus.OK);
     }
 
-//    @PatchMapping({"/{question-id}"})
-//    public ResponseEntity patchVoteCount(@PathVariable("question-id") int questionId,
-//                                        @RequestParam int vote) {
-//        Question question = questionService.findQuestion(questionId);
-//        question.setTotalVote(vote);
-//        questionService.updateQuestion(question);
-//
-//        return new ResponseEntity<>(mapper.questionToQuestionResponse(question), HttpStatus.OK);
-//    }
-
 
     @DeleteMapping("/{question-id}")
     public ResponseEntity deleteQuestion(@PathVariable("question-id") int questionId) {
@@ -131,13 +104,11 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+
     @DeleteMapping
     public ResponseEntity deleteQuestions() {
         questionService.deleteQuestions();
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
 }

@@ -72,7 +72,7 @@ public class QuestionController {
         return new ResponseEntity<>(questionService.findQuestions(), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/sort")
     public ResponseEntity sortQuestions(@RequestParam @Positive int page,
                                        @RequestParam @Positive int size,
                                        @RequestParam String search,

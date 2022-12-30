@@ -3,13 +3,13 @@ package com.seb_pre_039.stackoverflowclone.comment.entity;
 import com.seb_pre_039.stackoverflowclone.audit.BaseTimeEntity;
 import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -25,18 +25,21 @@ public class Comment extends BaseTimeEntity {
     private int totalVote;
 
     @Column(nullable = false)
-    private int adoption;
+    private boolean adoption;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
-    public void addMember(Member member) {
+    public void setMember(Member member) {
         this.member = member;
     }
 
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 }

@@ -2,11 +2,15 @@ package com.seb_pre_039.stackoverflowclone.comment.controller;
 
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentPatchDto;
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentPostDto;
+import com.seb_pre_039.stackoverflowclone.comment.dto.CommentResponseDto;
 import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
 import com.seb_pre_039.stackoverflowclone.comment.mapper.CommentMapper;
 import com.seb_pre_039.stackoverflowclone.comment.service.CommentService;
 import com.seb_pre_039.stackoverflowclone.member.service.MemberService;
+import com.seb_pre_039.stackoverflowclone.question.entity.Question;
+import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
 import com.seb_pre_039.stackoverflowclone.response.MultiResponseDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +21,36 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
-    private final static String MEMBER_DEFAULT_URL = "/members";
     private final CommentService commentService;
+
     private final MemberService memberService;
+
+    private final QuestionService questionService;
+
     private final CommentMapper mapper;
 
-    public CommentController(CommentMapper mapper, CommentService commentService, MemberService memberService) {
+    public CommentController(CommentMapper mapper, CommentService commentService, MemberService memberService, QuestionService questionService) {
         this.commentService = commentService;
         this.memberService = memberService;
         this.mapper = mapper;
+        this.questionService = questionService;
     }
 
-    @PostMapping
-    public ResponseEntity postComment(@Valid @RequestBody CommentPostDto post){
-        Comment comment = commentService.createComment(mapper.commentPostToComment(post));
+    @PostMapping("/{question-id}")
+    public ResponseEntity postComment(@Valid @RequestBody CommentPostDto post,
+                                      @PathVariable("question-id") int question_id){
+        Comment comment = mapper.commentPostToComment(post);
+        comment.setMember(memberService.findMember(1));
+        Question question = questionService.findQuestion(question_id);
+        comment.setQuestion(question);
+        commentService.createComment(comment);
+
+        CommentResponseDto commentResponseDto = mapper.commentToCommentResponse(comment);
 
         return new ResponseEntity<>(mapper.commentToCommentResponse(comment), HttpStatus.CREATED);
     }
@@ -44,7 +60,8 @@ public class CommentController {
                                        @Valid @RequestBody CommentPatchDto patch) {
         patch.setCommentId(commentId);
         Comment comment = commentService.updateComment(mapper.commentPatchToComment(patch));
-
+        System.out.println(comment.getContent());
+        System.out.println(comment.getMember().getName());
         return new ResponseEntity<>(mapper.commentToCommentResponse(comment), HttpStatus.OK);
     }
 

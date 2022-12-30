@@ -13,7 +13,7 @@ const QuestionList = ({ question }) => {
               <span>{0} </span>votes
             </div>
           </div>
-          <div className="postStatAnsers">
+          <div>
             <div>
               <span>{question.commentCount} </span>answers
             </div>

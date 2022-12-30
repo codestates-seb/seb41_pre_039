@@ -13,6 +13,7 @@ import UserProfileSetting from './pages/UserProfileSetting';
 import DeleteProfile from './pages/DeleteProfile';
 import { useEffect, useState } from 'react';
 import Edit from './pages/Edit';
+import SerachPage from './pages/SearchPage';
 
 function App() {
   const [isSidebar, setIsSidebar] = useState(true);
@@ -48,6 +49,7 @@ function App() {
             {/* SignUp 컴포넌트로 수정 필요 */}
             <Route path="/signup" element={<SignUp />} />
             <Route path="/edit" element={<Edit isKey={isKey} />} />
+            <Route path="/search" element={<SerachPage />} />
           </Routes>
         </div>
       </div>

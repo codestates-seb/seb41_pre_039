@@ -2,6 +2,7 @@ import './Home.css';
 import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
+import Pagination from '../components/Pagination';
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
           <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>
+      <Pagination />
     </>
   );
 }

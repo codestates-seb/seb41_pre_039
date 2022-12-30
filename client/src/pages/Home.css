@@ -104,3 +104,29 @@
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+
+.bottomNotice {
+  margin: 17px;
+  padding-right: 10px;
+  color: rgb(35, 38, 41);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.question-footer-container {
+  min-width: 63%;
+  padding: 20px;
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.question-footer-text {
+  margin-bottom: 10px;
+}
+.question-footer-text > a {
+  color: hsl(206deg 100% 40%);
+}
+
+.question-footer-text > a:hover {
+  color: hsl(206deg 100% 52%);
+}

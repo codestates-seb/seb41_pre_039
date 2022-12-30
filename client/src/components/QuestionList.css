@@ -30,6 +30,29 @@
   color: black;
 }
 
+.postStatViews.oneKUpper {
+  color: #83690b;
+}
+
+.postCommentCount {
+  background-color: white;
+  border: 1px solid rgb(47, 111, 68);
+  color: rgb(47, 111, 68);
+  border-radius: 3px;
+  padding: 4px;
+  font-size: 13px;
+}
+
+.adoption {
+  background-color: rgb(47, 111, 68);
+  color: rgb(255, 255, 255);
+}
+
+.comment-count-svg {
+  padding-top: 2px;
+  margin-right: 3px;
+}
+
 .postContent {
   width: 100%;
 }

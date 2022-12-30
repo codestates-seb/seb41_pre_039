@@ -5,7 +5,7 @@ export const question = {
     '개발자는 힘들거나 지칠 때 개발개발개발ㅅ발개발개발하고 웁니다~~~~~~~~~',
   createdAt: '2022-12-15 15:02:40',
   modifiedAt: '2022-12-27 19:38:40',
-  commentCount: 0,
+  commentCount: 1,
   viewCount: 0,
   tags: ['Java', 'Spring'],
 };
@@ -19,9 +19,10 @@ export const questions = {
         '왈와뢀왈왈왈으를르르릉캉캉캉깨개갱왈와뢀왈왈왈으를르르릉캉캉캉깨개갱',
       createdAt: '2022-12-27 17:39:51',
       modifiedAt: '2022-12-27 17:39:51',
-      commentCount: 0,
+      commentCount: 1,
       viewCount: 0,
       tags: ['DOG Scrpit', 'Doggy'],
+      chosen: true,
     },
     {
       questionId: 2,
@@ -29,9 +30,10 @@ export const questions = {
       content: '엌ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ',
       createdAt: '2022-12-27 17:39:48',
       modifiedAt: '2022-12-27 17:39:48',
-      commentCount: 0,
-      viewCount: 0,
+      commentCount: 1,
+      viewCount: 1000,
       tags: ['JavaScrpit', 'CSS'],
+      chosen: false,
     },
     {
       questionId: 1,
@@ -43,6 +45,7 @@ export const questions = {
       commentCount: 0,
       viewCount: 0,
       tags: ['Java', 'Spring'],
+      chosen: false,
     },
   ],
   pageInfo: {
@@ -128,7 +131,7 @@ export const answer = [
     content: '답변입니다.',
     createdAt: '2022-12-27 17:39:46',
     totalVote: 0,
-    adoption: false,
+    adoption: true,
     memberId: 0,
   },
   {

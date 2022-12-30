@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import './SignUp.css';
 import Icon1 from '../assets/icon1.svg';
@@ -33,7 +32,7 @@ export default function Signup() {
   const onSubmit = (data) => {
     console.log(data, errors);
   };
-  
+
   return (
     <>
       <div className="signupWrapper">

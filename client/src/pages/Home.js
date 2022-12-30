@@ -2,7 +2,6 @@ import './Home.css';
 import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
-import Pagination from '../components/Pagination';
 
 export default function Home() {
   return (
@@ -27,7 +26,17 @@ export default function Home() {
           <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>
-      <Pagination />
+      <div className="question-footer-container">
+        <p className="question-footer-text">
+          Looking for more? Browse the{' '}
+          <a href="http://localhost:3000/">complete list of questions</a>, or{' '}
+          <a href="https://stackoverflow.com/tags">popular tags</a>.
+        </p>{' '}
+        <p className="question-footer-text">
+          Help us answer{' '}
+          <a href="http://localhost:3000/">unanswered questions</a>.
+        </p>
+      </div>
     </>
   );
 }

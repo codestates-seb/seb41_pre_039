@@ -1,6 +1,9 @@
 package com.seb_pre_039.stackoverflowclone.member.service;
 
 
+import com.seb_pre_039.stackoverflowclone.comment.dto.CommentResponseDto;
+import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
+import com.seb_pre_039.stackoverflowclone.comment.mapper.CommentMapper;
 import com.seb_pre_039.stackoverflowclone.comment.service.CommentService;
 import com.seb_pre_039.stackoverflowclone.exception.BusinessLogicException;
 import com.seb_pre_039.stackoverflowclone.exception.ExceptionCode;
@@ -12,13 +15,11 @@ import com.seb_pre_039.stackoverflowclone.question.dto.QuestionDto;
 import com.seb_pre_039.stackoverflowclone.question.entity.Question;
 import com.seb_pre_039.stackoverflowclone.question.mapper.QuestionMapper;
 import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
-import com.seb_pre_039.stackoverflowclone.response.MyPageQuestionResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,14 +29,16 @@ public class MemberService {
     private final QuestionService questionService;
     private final CommentService commentService;
     private final QuestionMapper mapper;
+    private final CommentMapper Commentmapper;
 
     private final MemberMapper memberMapper;
 
-    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService, QuestionMapper mapper, MemberMapper memberMapper) {
+    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService, QuestionMapper mapper, CommentMapper commentmapper, MemberMapper memberMapper) {
         this.memberRepository = memberRepository;
         this.questionService = questionService;
         this.commentService = commentService;
         this.mapper = mapper;
+        this.Commentmapper = commentmapper;
         this.memberMapper = memberMapper;
     }
 
@@ -70,8 +73,6 @@ public class MemberService {
                 .ifPresent(myTitle -> findMember.setMyTitle(myTitle));
         Optional.ofNullable(member.getAboutMe())
                 .ifPresent(aboutMe -> findMember.setAboutMe(aboutMe));
-        Optional.ofNullable(member.getStatus())
-                .ifPresent(memberStatus -> findMember.setStatus(memberStatus));
 
         return memberRepository.save(findMember);
     }
@@ -81,10 +82,17 @@ public class MemberService {
         Member findMember = findVerifiedMember(memberId);
         MemberResponseDto responseDto = memberMapper.memberToMemberResponseDto(findMember);
 
+        //List<Comment> commentList = commentService.findComments(memberId);
+        //findMember.setComments(commentList);
+
         List<Question> questions = questionService.findQuestions(findMember);
         List<QuestionDto.Response> responses = mapper.questionsToQuestionResponseDtos(questions);
 
+        List<Comment> comments = commentService.findComments(findMember);
+        List<CommentResponseDto> responses2 = Commentmapper.commentsToCommentResponseDtos(comments);
+
         responseDto.setQuestions(responses);
+        responseDto.setComments(responses2);
         return responseDto;
     }
 

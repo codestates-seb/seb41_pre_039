@@ -4,11 +4,8 @@ import com.seb_pre_039.stackoverflowclone.member.dto.MemberPatchDto;
 import com.seb_pre_039.stackoverflowclone.member.dto.MemberPostDto;
 import com.seb_pre_039.stackoverflowclone.member.entity.Member;
 import com.seb_pre_039.stackoverflowclone.member.mapper.MemberMapper;
-
-
 import com.seb_pre_039.stackoverflowclone.member.service.MemberService;
 import com.seb_pre_039.stackoverflowclone.response.MultiResponseDto;
-import com.seb_pre_039.stackoverflowclone.response.SingleResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -50,8 +47,7 @@ public class MemberController {
         memberPatchDto.setMemberId(memberId);
         Member member = memberService.updateMember(mapper.memberPatchDtoToMember(memberPatchDto));
 
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.memberToMemberResponseDto(member)), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.memberToMemberPatchResponseDto(member),HttpStatus.OK);
     }
 
     @GetMapping("/{member-id}")

@@ -35,16 +35,13 @@ public class Member extends BaseTimeEntity {
     @Column(length = 100, nullable = true, updatable = true)
     private String aboutMe;
 
-    @Enumerated(EnumType.STRING)
-    private MemberStatus Status = MemberStatus.MEMBER_ACTIVE;
-
     @OneToMany(mappedBy = "member")
     private List<Question> questions = new ArrayList<>();
 
-    /*
+
     @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
-    */
+
     public enum MemberStatus {
         MEMBER_ACTIVE(1, "활동중"),
         MEMBER_WITHDRAW(2, "탈퇴");

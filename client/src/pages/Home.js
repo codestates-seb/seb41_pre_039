@@ -2,8 +2,16 @@ import './Home.css';
 import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 export default function Home() {
+  useEffect(() => {
+    const questions = axios
+      .get('/questions/main?page=1&size=50&sort=createdAt')
+      .then((res) => console.log(res.data.data));
+  });
+  console.log(questions);
   return (
     <>
       <div className="homeContainer">

@@ -37,8 +37,9 @@ function App() {
         <div className={`content ${isSidebar ? '' : 'none-sidebar'}`}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/question" element={<Home />} />
             <Route
-              path="/question"
+              path="/question/:questionId"
               element={<Post isKey={isKey} setIsKey={setIsKey} />}
             />
             <Route path="/addquestion" element={<AddQuestion />} />
@@ -46,10 +47,9 @@ function App() {
             <Route path="/user/setting" element={<UserProfileSetting />} />
             <Route path="/user/delete" element={<DeleteProfile />} />
             <Route path="/login" element={<Login />} />
-            {/* SignUp 컴포넌트로 수정 필요 */}
             <Route path="/signup" element={<SignUp />} />
             <Route path="/edit" element={<Edit isKey={isKey} />} />
-            <Route path="/search" element={<SerachPage />} />
+            <Route path="/search/:word" element={<SerachPage />} />
           </Routes>
         </div>
       </div>

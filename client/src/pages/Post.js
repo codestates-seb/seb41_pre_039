@@ -1,6 +1,7 @@
 import Answers from '../components/Answer';
 import Question from '../components/Question';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
 /* content 컨테이너 */
 const ContentContainer = styled.div`
@@ -12,6 +13,8 @@ const ContentContainer = styled.div`
 `;
 
 export default function Post({ setIsKey }) {
+  const { questionId } = useParams();
+  console.log(questionId);
   return (
     <ContentContainer>
       <Question setIsKey={setIsKey} />

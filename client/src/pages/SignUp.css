@@ -90,7 +90,6 @@
 
 .signupFooter > button {
   width: 100%;
-  margin: 6px;
   background-color: hsl(206deg 100% 52%);
   color: #fff;
   cursor: pointer;
@@ -112,4 +111,12 @@
 .signupAgree > a {
   color: rgb(0, 116, 204);
   text-decoration-line: none;
+}
+
+input:invalid[focused='true'] {
+  border: 1px solid red;
+}
+
+input:invalid[focused='true'] ~ p {
+  display: block;
 }

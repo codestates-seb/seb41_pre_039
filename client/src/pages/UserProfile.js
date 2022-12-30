@@ -4,6 +4,7 @@ import UserProfileHeader from '../components/UserProfileHeader';
 import { user } from '../components/initialState';
 import { Link } from 'react-router-dom';
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import timeParse from '../components/time';
 
 const Stat = styled.div`
   display: flex;
@@ -81,7 +82,6 @@ const UserProfile = () => {
                 answers
               </Stat>
               <Stat>
-                {/* question 갯수 필요 */}
                 <span>{user.questions.length}</span>
                 questions
               </Stat>
@@ -130,12 +130,7 @@ const List = ({ data, type }) => {
                   : el.title
                 : `${el.content.slice(0, 39)}...`}
             </Link>
-            <span className="date">
-              {/* parseTime 받아와서 수정해야 함 */}
-              {new Date(el.createdAt).toLocaleDateString('en-us', {
-                dateStyle: 'medium',
-              })}
-            </span>
+            <span className="date">{timeParse(el.createdAt, 'time')}</span>
           </li>
         );
       })}

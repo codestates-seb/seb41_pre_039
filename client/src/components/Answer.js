@@ -71,6 +71,11 @@ function Answer({ answer, setIsKey }) {
         <button className="content-up"></button>
         <span className="content-num">{totalVote}</span>
         <button className="content-down"></button>
+        <button className="content-chosen-button">
+          <svg className="svg-icon" width="36" height="36" viewBox="0 0 36 36">
+            <path d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"></path>
+          </svg>
+        </button>
       </div>
       <article className="content-question" data-color-mode="light">
         <MarkdownPreview source={content} className="answer-p" />

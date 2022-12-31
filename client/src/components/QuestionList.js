@@ -11,19 +11,30 @@ const QuestionList = ({ question }) => {
       return '';
     }
   };
-  // question에 commentCount 1 이상일 때 css 변경
-  // answer adoption(boolean) true면 체크 활성화
+  const {
+    questionId,
+    title,
+    createdAt,
+    modifiedAt,
+    commentCount,
+    username,
+    totalVote,
+    viewCount,
+    tags,
+    chosen,
+  } = question;
+  console.log(new Date(createdAt));
+  console.log(new Date(modifiedAt));
   return (
     <div className="postContainer">
       <div className="postBox">
         <div className="postStats">
           <div className="postStatVotes">
-            {/* question vote 필요 */}
-            <span>{0} </span>votes
+            <span>{totalVote} </span>votes
           </div>
           <div className={answerClassMaker()}>
             <span>
-              {question.chosen ? (
+              {chosen ? (
                 <svg
                   width="14"
                   height="14"
@@ -33,41 +44,35 @@ const QuestionList = ({ question }) => {
                   <path d="M13 3.41 11.59 2 5 8.59 2.41 6 1 7.41l4 4 8-8Z"></path>
                 </svg>
               ) : null}
-              {question.commentCount}{' '}
+              {commentCount}{' '}
             </span>
             answers
           </div>
           <div
-            className={`postStatViews ${
-              question.viewCount >= 1000 ? 'oneKUpper' : ''
-            }`}
+            className={`postStatViews ${viewCount >= 1000 ? 'oneKUpper' : ''}`}
           >
-            <span>{question.viewCount} </span>views
+            <span>{viewCount} </span>views
           </div>
         </div>
         <div className="postContent">
           <h3 className="postTitle">
-            <Link to={`/question/${question.questionId}`}>
-              {question.title}
-            </Link>
+            <Link to={`/question/${questionId}`}>{title}</Link>
           </h3>
           <div className="postMeta">
             <ul className="postTag">
-              {question.tags.map((el, idx) => (
+              {tags.map((el, idx) => (
                 <li key={idx}>{el}</li>
               ))}
             </ul>
             <div className="postCard">
               <div className="userImg">
-                <img
-                  src="http://placeimg.com/24/24/any"
-                  alt="user avatar"
-                ></img>
+                <img src="http://placeimg.com/24/24/any" alt="user avatar" />
               </div>
-              <div className="userID">user ID</div>
-              <div className="userRep">27k</div>
+              <div className="userID">{username}</div>
               <div className="modified">
-                modified {timeParse(question.modifiedAt, 'time')}
+                {new Date(modifiedAt) <= new Date(createdAt)
+                  ? `asked ${timeParse(createdAt, 'time')}`
+                  : `modified ${timeParse(modifiedAt, 'time')}`}
               </div>
             </div>
           </div>

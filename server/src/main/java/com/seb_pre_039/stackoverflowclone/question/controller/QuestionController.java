@@ -36,7 +36,8 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post post) {
         Question question = mapper.questionPostToQuestion(post);
-        question.setMember(memberService.findMember(1));
+
+        question.setMember(memberService.findMember(memberService.getAuthMember().getMemberId()));
         questionService.createQuestion(question);
 
         return new ResponseEntity<>(mapper.questionToQuestionResponse(question), HttpStatus.CREATED);

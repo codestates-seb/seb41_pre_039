@@ -4,16 +4,15 @@ import lombok.Getter;
 
 public enum ExceptionCode {
     MEMBER_NOT_FOUND(404, "Member not found"),
-    
     MEMBER_EXISTS(409, "Member exists"),
     
     QUESTION_NOT_FOUND(404, "Question Not Found"),
-
     QUESTION_EXISTS(409, "Question Exists"),
 
     TAG_NOT_FOUND(404, "Tag Not Found"),
+    TAG_EXISTS(409, "Tag Exists"),
 
-    TAG_EXISTS(409, "Tag Exists");
+    UNAUTHORIZED(401, "User Unauthorized");
 
     @Getter
     private int status;

@@ -2,6 +2,7 @@ package com.seb_pre_039.stackoverflowclone.comment.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -9,6 +10,7 @@ public class CommentDto {
 
     @Getter
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class Post {
         private String content;
     }

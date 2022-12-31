@@ -42,6 +42,10 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
 
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
     public enum MemberStatus {
         MEMBER_ACTIVE(1, "활동중"),
         MEMBER_WITHDRAW(2, "탈퇴");

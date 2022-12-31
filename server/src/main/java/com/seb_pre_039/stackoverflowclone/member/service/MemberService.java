@@ -1,6 +1,7 @@
 package com.seb_pre_039.stackoverflowclone.member.service;
 
 
+import com.seb_pre_039.stackoverflowclone.auth.utils.CustomAuthorityUtils;
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentResponseDto;
 import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
 import com.seb_pre_039.stackoverflowclone.comment.mapper.CommentMapper;
@@ -18,12 +19,15 @@ import com.seb_pre_039.stackoverflowclone.question.service.QuestionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
     private final QuestionService questionService;
@@ -32,31 +36,34 @@ public class MemberService {
     private final CommentMapper Commentmapper;
 
     private final MemberMapper memberMapper;
+    private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
 
-    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService, QuestionMapper mapper, CommentMapper commentmapper, MemberMapper memberMapper) {
+    public MemberService(MemberRepository memberRepository, QuestionService questionService,
+                         CommentService commentService, QuestionMapper mapper, CommentMapper commentmapper,
+                         MemberMapper memberMapper, PasswordEncoder passwordEncoder, CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.questionService = questionService;
         this.commentService = commentService;
         this.mapper = mapper;
-        this.Commentmapper = commentmapper;
+        Commentmapper = commentmapper;
         this.memberMapper = memberMapper;
+        this.passwordEncoder = passwordEncoder;
+        this.authorityUtils = authorityUtils;
     }
 
-//    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService, QuestionMapper mapper) {
-//        this.memberRepository = memberRepository;
-//        this.questionService = questionService;
-//        this.commentService = commentService;
-//        this.mapper = mapper;
-//    }
-
-//    public MemberService(MemberRepository memberRepository, QuestionService questionService, CommentService commentService) {
-//        this.memberRepository = memberRepository;
-//        this.questionService = questionService;
-//        this.commentService = commentService;
-//    }
 
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
+
+        // 추가: Password 암호화
+        String encryptedPassword = passwordEncoder.encode(member.getPassword());
+        member.setPassword(encryptedPassword);
+
+        // 추가: DB에 User Role 저장
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles);
+
         return memberRepository.save(member);
     }
 

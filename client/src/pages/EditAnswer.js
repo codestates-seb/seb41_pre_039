@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
 import { ContentEditor } from '../components/Editor';
 import './Edit.css';
-import { answer } from './initialState';
+import axios from 'axios';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 const InputBox = styled.div`
   width: 100%;
@@ -73,25 +74,37 @@ const CancelButton = styled(Button)`
 `;
 
 export default function EditAnswer() {
-  const [body, setBody] = useState(answer[0].content);
+  const { questionId } = useParams();
+  const [body, setBody] = useState([]);
   const [summary, setSummary] = useState('');
-
   const bodyRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.draft) {
-      console.log(localStorage.draft);
-      const draft = JSON.parse(localStorage.getItem('draft'));
-      setBody(draft.body || '');
-    }
+    const axiosData = async () => {
+      await axios
+        .get(`/comments/1`)
+        .then((res) => {
+          setBody(res.data.content);
+        })
+        .catch((err) => console.error(err));
+    };
+    axiosData();
   }, []);
 
-  const deleteDraftHandler = (e) => {
+  const editAnswerHandler = (e) => {
     e.preventDefault();
-    localStorage.removeItem('draft');
-    location.reload();
+    axios
+      .patch(`/comments/1`, {
+        content: body,
+      })
+      .then((res) => {
+        setBody(res.data);
+        navigate(`/question/${questionId}`);
+      })
+      .catch((err) => console.error(err));
   };
-
+  console.log(questionId);
   return (
     <section className="edit--container">
       <article className="edit--advice">
@@ -130,13 +143,11 @@ export default function EditAnswer() {
           type="form"
           form="edit--form"
           className="edit--submit submitButton"
+          onClick={editAnswerHandler}
         >
           Save edits
         </Button>
-        <CancelButton
-          className="edit--draft-discard submitButton"
-          onClick={(e) => deleteDraftHandler(e)}
-        >
+        <CancelButton className="edit--draft-discard submitButton">
           Cancel
         </CancelButton>
       </form>

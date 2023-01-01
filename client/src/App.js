@@ -12,13 +12,13 @@ import UserProfile from './pages/UserProfile';
 import UserProfileSetting from './pages/UserProfileSetting';
 import DeleteProfile from './pages/DeleteProfile';
 import { useEffect, useState } from 'react';
-import Edit from './pages/Edit';
 import SerachPage from './pages/SearchPage';
 import NotFound from './pages/NotFound';
+import EditQuestion from './pages/EditQuestion';
+import EditAnswer from './pages/EditAnswer';
 
 function App() {
   const [isSidebar, setIsSidebar] = useState(true);
-  const [isKey, setIsKey] = useState('');
   const location = useLocation();
   useEffect(() => {
     if (
@@ -44,17 +44,18 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             <Route path="/question" element={<Home />} />
-            <Route
-              path="/question/:questionId"
-              element={<Post isKey={isKey} setIsKey={setIsKey} />}
-            />
+            <Route path="/question/:questionId" element={<Post />} />
             <Route path="/addquestion" element={<AddQuestion />} />
             <Route path="/user" element={<UserProfile />} />
             <Route path="/user/setting" element={<UserProfileSetting />} />
             <Route path="/user/delete" element={<DeleteProfile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/edit" element={<Edit isKey={isKey} />} />
+            <Route
+              path="/edit/question/:questionId"
+              element={<EditQuestion />}
+            />
+            <Route path="/edit/answer/:questionId" element={<EditAnswer />} />
             <Route path="/search/:word" element={<SerachPage />} />
           </Routes>
         </div>

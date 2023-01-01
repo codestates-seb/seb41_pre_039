@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import './Question.css';
-import { question, user } from './initialState';
 import timeParse from './time';
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const TagList = styled.li`
   padding: 4.8px 6px;
@@ -20,7 +21,14 @@ const TagList = styled.li`
     cursor: pointer;
   }
 `;
-export default function Question({ setIsKey }) {
+export default function Question({ setIsKey, questionId }) {
+  const [question, setQuestion] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`/questions/${questionId}`)
+      .then((res) => setQuestion(res.data))
+      .catch((err) => console.error(err));
+  }, []);
   return (
     <>
       <div className="content-header">
@@ -56,19 +64,20 @@ export default function Question({ setIsKey }) {
         <div className="question-container">
           <div className="content-recommend">
             <button className="content-up"></button>
-            <span className="content-num">0</span>
+            <span className="content-num">{question.totalVote}</span>
             <button className="content-down"></button>
           </div>
           <article className="content-question" data-color-mode="light">
             <MarkdownPreview source={question.content} className="question-p" />
             <ul className="content-tag">
-              {question.tags.map((el, i) => {
-                return <TagList key={i}>{el}</TagList>;
-              })}
+              {question.tags &&
+                question.tags.map((el, i) => {
+                  return <TagList key={i}>{el}</TagList>;
+                })}
             </ul>
             <div className="content-writerInfo">
               <Link
-                to="/edit"
+                to={`/edit/question/${questionId}`}
                 className="content-edit"
                 onClick={() => setIsKey('Question')}
               >
@@ -87,7 +96,7 @@ export default function Question({ setIsKey }) {
                     ></img>
                   </a>
                   <a href="http://localhost:3000/user" className="writer-name">
-                    {user.name}
+                    {question.username}
                   </a>
                 </div>
               </div>

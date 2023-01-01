@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
 import { ContentEditor } from '../components/Editor';
 import './Edit.css';
-import { question } from './initialState';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const InputBox = styled.div`
   width: 100%;
@@ -128,25 +129,31 @@ const TagEditor = styled.div`
   }
 `;
 export default function EditQuestion() {
-  const [title, setTitle] = useState(question.title);
-  const [body, setBody] = useState(question.content);
-  const [tags, setTags] = useState(question.tags);
+  const [title, setTitle] = useState([]);
+  const [body, setBody] = useState([]);
+  const [tags, setTags] = useState([]);
   const [tag, setTag] = useState('');
   const [summary, setSummary] = useState('');
+  const { questionId } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const axiosData = async () => {
+      await axios
+        .get(`/questions/${questionId}`)
+        .then((res) => {
+          setTitle(res.data.title);
+          setBody(res.data.content);
+          setTags(res.data.tags);
+        })
+        .catch((err) => console.error(err));
+    };
+    axiosData();
+  }, []);
 
   const titleRef = useRef(null);
   const bodyRef = useRef(null);
   const tagsRef = useRef(null);
-
-  useEffect(() => {
-    if (localStorage.draft) {
-      console.log(localStorage.draft);
-      const draft = JSON.parse(localStorage.getItem('draft'));
-      setTitle(draft.title || '');
-      setBody(draft.body || '');
-      setTags(draft.tags || []);
-    }
-  }, []);
 
   const addTagHandler = (e) => {
     e.preventDefault();
@@ -180,12 +187,20 @@ export default function EditQuestion() {
     );
   };
 
-  const deleteDraftHandler = (e) => {
+  const editSubmitHandler = (e) => {
     e.preventDefault();
-    localStorage.removeItem('draft');
-    location.reload();
+    axios
+      .patch(`/questions/${questionId}`, {
+        title: title,
+        content: body,
+        tags: tags,
+      })
+      .then((res) => {
+        console.log(res);
+        navigate(`/question/${questionId}`);
+      })
+      .catch((err) => console.error(err));
   };
-
   return (
     <section className="edit--container">
       <article className="edit--advice">
@@ -270,13 +285,11 @@ export default function EditQuestion() {
           type="form"
           form="edit--form"
           className="edit--submit submitButton"
+          onClick={editSubmitHandler}
         >
           Save edits
         </Button>
-        <CancelButton
-          className="edit--draft-discard submitButton"
-          onClick={(e) => deleteDraftHandler(e)}
-        >
+        <CancelButton className="edit--draft-discard submitButton">
           Cancel
         </CancelButton>
       </form>

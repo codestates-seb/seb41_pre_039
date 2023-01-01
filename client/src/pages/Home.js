@@ -2,16 +2,15 @@ import './Home.css';
 import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Home() {
+  const [questionData, setQuestionData] = useState(questions.data);
   useEffect(() => {
-    const questions = axios
-      .get('/questions/main?page=1&size=50&sort=createdAt')
-      .then((res) => console.log(res.data.data));
-  });
-  console.log(questions);
+    axios.get('/questions').then((res) => setQuestionData(res.data));
+  }, []);
+
   return (
     <>
       <div className="homeContainer">
@@ -22,15 +21,15 @@ export default function Home() {
       </div>
       <div className="buttonContainer">
         <div className="buttonGroup">
-          <button className="btn1">Interesting</button>
+          <button className="active">Interesting</button>
           <button>Bountied</button>
           <button>Hot</button>
           <button>Week</button>
-          <button className="btn5">Month</button>
+          <button>Month</button>
         </div>
       </div>
       <ul className="Questions">
-        {questions.data.map((question) => (
+        {questionData.map((question) => (
           <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>

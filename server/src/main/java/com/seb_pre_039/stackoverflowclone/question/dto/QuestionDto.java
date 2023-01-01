@@ -2,10 +2,7 @@ package com.seb_pre_039.stackoverflowclone.question.dto;
 
 import com.seb_pre_039.stackoverflowclone.comment.dto.CommentResponseDto;
 import com.seb_pre_039.stackoverflowclone.comment.entity.Comment;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -14,6 +11,7 @@ public class QuestionDto {
 
     @Getter
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class Post {
         @Size(min = 15, max = 150, message = "15자 이상 150자 이하 입력 가능")
         private String title;

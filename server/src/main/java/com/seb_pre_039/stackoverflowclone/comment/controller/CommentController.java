@@ -69,7 +69,13 @@ public class CommentController {
         return new ResponseEntity<>(mapper.commentToCommentResponse(comment), HttpStatus.OK);
     }
 
+    @GetMapping("/questions/{question-id}")
+    public ResponseEntity getComments(@PathVariable("question-id") int questionId) {
+        Question question = questionService.findQuestion(questionId);
+        List<Comment> comments = commentService.findCommentsByQuestion(question);
 
+        return new ResponseEntity<>(mapper.commentsToCommentResponseDtos(comments), HttpStatus.OK);
+    }
 
     @GetMapping("/{comment-id}")
     public ResponseEntity getComment(@PathVariable("comment-id") int commentId) {

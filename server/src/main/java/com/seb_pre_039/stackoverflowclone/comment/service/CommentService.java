@@ -21,6 +21,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
     private final QuestionRepository questionRepository;
+
     public CommentService(CommentRepository commentRepository, MemberRepository memberRepository, QuestionRepository questionRepository) {
         this.commentRepository = commentRepository;
         this.memberRepository = memberRepository;
@@ -59,6 +60,14 @@ public class CommentService {
         commentRepository.deleteAll();
     }
 
+//    public List<Comment> findCommentByQuestionBy(int questionId) {
+//
+//        Question question = verifyExistQuestionBy(questionId);
+//        List<Comment> comments = commentRepository.findByQuestion(question);
+//
+//        return comments;
+//    }
+
     public Comment findComment(int commentId) {
 
         return findExistedComment(commentId);
@@ -87,13 +96,16 @@ public class CommentService {
     }
 
 
-    private void verifyExistQuestion(int questionId) {
+    private Question verifyExistQuestionBy(int questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
 
-        if(optionalQuestion.isPresent()){
-            throw new BusinessLogicException(ExceptionCode.QUESTION_EXISTS);
-        }
+        Question findQuestion =
+                optionalQuestion.orElseThrow(() ->
+                        new BusinessLogicException(ExceptionCode.QUESTION_NOT_FOUND));
+
+        return findQuestion;
     }
+
 //
     private Comment findExistedComment(int commentId) {
         Optional<Comment> optionalComment = commentRepository.findById(commentId);

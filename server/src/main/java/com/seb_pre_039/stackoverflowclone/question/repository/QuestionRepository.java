@@ -23,7 +23,7 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     @Modifying
     @Query("update Question q set q.viewCount = q.viewCount+1 where q.questionId = :id")
-    int updateViewCount(int id);
+    int updateViewCount(@Param("id") int id);
 
     Page<Question> findByTitleContainingIgnoreCaseOrderByCreatedAtDesc(String title, Pageable pageable);
 

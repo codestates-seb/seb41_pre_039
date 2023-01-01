@@ -38,9 +38,7 @@ public class Question extends BaseTimeEntity {
     @Column(nullable = false)
     private int viewCount;
 
-
     private int questionVoteId;
-
 
     @ElementCollection
     @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "QUESTION_ID"))

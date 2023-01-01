@@ -56,9 +56,9 @@ public class QuestionService {
     @Transactional(readOnly = true)
     public Page<Question> sortQuestions(int page, int size, String search, String sort) {
         if(sort.equals("totalVote"))
-            return questionRepository.findByTitleContainingOrderByTotalVoteDesc(search, PageRequest.of(page, size));
+            return questionRepository.findByTitleContainingIgnoreCaseOrderByTotalVoteDesc(search, PageRequest.of(page, size));
 
-        return questionRepository.findByTitleContainingOrderByCreatedAtDesc(search, PageRequest.of(page, size));
+        return questionRepository.findByTitleContainingIgnoreCaseOrderByCreatedAtDesc(search, PageRequest.of(page, size));
     }
 
     public Page<Question> findQuestions(int page, int size, String sort) {
@@ -90,6 +90,8 @@ public class QuestionService {
         Optional.ofNullable(question.getContent()).ifPresent(foundQuestion::setContent);
         Optional.ofNullable(question.getTitle()).ifPresent(foundQuestion::setTitle);
         Optional.ofNullable(question.getTotalVote()).ifPresent(foundQuestion::setTotalVote);
+        Optional.ofNullable(question.getTags()).ifPresent(foundQuestion::setTags);
+        Optional.ofNullable(question.getCommentCount()).ifPresent(foundQuestion::setCommentCount);
 
         return questionRepository.save(foundQuestion);
     }

@@ -25,9 +25,9 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     @Query("update Question q set q.viewCount = q.viewCount+1 where q.questionId = :id")
     int updateViewCount(int id);
 
-    Page<Question> findByTitleContainingOrderByCreatedAtDesc(String title, Pageable pageable);
+    Page<Question> findByTitleContainingIgnoreCaseOrderByCreatedAtDesc(String title, Pageable pageable);
 
-    Page<Question> findByTitleContainingOrderByTotalVoteDesc(String title, Pageable pageable);
+    Page<Question> findByTitleContainingIgnoreCaseOrderByTotalVoteDesc(String title, Pageable pageable);
 
     List<Question> findTop10ByOrderByCreatedAtDesc();
 

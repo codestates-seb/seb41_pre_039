@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { ContentEditor } from '../components/Editor';
 import './Edit.css';
 import axios from 'axios';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const InputBox = styled.div`
   width: 100%;

@@ -23,16 +23,16 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false, updatable = false, unique = true)
     private String email;
 
-    @Column(length = 100, nullable = false, updatable = true)
+    @Column(length = 1000, nullable = false, updatable = true)
     private String name;
     @Column(nullable = false, updatable = true, unique = false)
     private String password;
     private String region;
     //private object image; //우선 생략
 
-    @Column(length = 20, nullable = true, updatable = true)
+    @Column(length = 1000, nullable = true, updatable = true)
     private String myTitle;
-    @Column(length = 100, nullable = true, updatable = true)
+    @Column(length = 1000, nullable = true, updatable = true)
     private String aboutMe;
 
     @OneToMany(mappedBy = "member")

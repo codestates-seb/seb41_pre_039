@@ -14,14 +14,19 @@ import DeleteProfile from './pages/DeleteProfile';
 import { useEffect, useState } from 'react';
 import Edit from './pages/Edit';
 import SerachPage from './pages/SearchPage';
+import NotFound from './pages/NotFound';
 
 function App() {
   const [isSidebar, setIsSidebar] = useState(true);
   const [isKey, setIsKey] = useState('');
   const location = useLocation();
   useEffect(() => {
-    if (location.pathname.match(/login|signup/g)) setIsSidebar(false);
-    else setIsSidebar(true);
+    if (
+      location.pathname.match(/question|user|edit|search/g) ||
+      location.pathname.slice(1).length === 0
+    )
+      setIsSidebar(true);
+    else setIsSidebar(false);
   }, [location]);
   return (
     <div className="App">
@@ -36,6 +41,7 @@ function App() {
         ) : undefined}
         <div className={`content ${isSidebar ? '' : 'none-sidebar'}`}>
           <Routes>
+            <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             <Route path="/question" element={<Home />} />
             <Route

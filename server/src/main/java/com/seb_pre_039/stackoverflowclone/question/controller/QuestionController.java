@@ -67,12 +67,6 @@ public class QuestionController {
                 HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity getQuestions() {
-        List<QuestionDto.Response> responses = mapper.questionsToQuestionResponseDtos(questionService.findQuestions());
-        return new ResponseEntity<>(responses, HttpStatus.OK);
-    }
-
     @GetMapping("/sort")
     public ResponseEntity sortQuestions(@RequestParam @Positive int page,
                                        @RequestParam @Positive int size,
@@ -85,6 +79,12 @@ public class QuestionController {
                 new MultiResponseDto<>(
                         mapper.questionsToQuestionResponseDtos(questionList), questionPage),
                 HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity getQuestions() {
+        List<QuestionDto.Response> responses = mapper.questionsToQuestionResponseDtos(questionService.findQuestions());
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
 

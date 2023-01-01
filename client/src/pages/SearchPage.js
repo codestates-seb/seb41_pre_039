@@ -19,9 +19,10 @@ export default function SerachPage() {
     setIsLoading(false);
     axios
       .get(
-        `/questions/main?page=${page}&size=${size}&sort=${sort}&search=${word}`
+        `/questions/sort?page=${page}&size=${size}&sort=${sort}&search=${word}`
       )
       .then((res) => {
+        console.log(res.headers);
         setSearchData(res.data.data);
         setSearchPageInfo(res.data.pageInfo);
         setIsLoading(true);

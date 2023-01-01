@@ -1,12 +1,33 @@
 import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './SearchPage.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
+import axios from 'axios';
 
 export default function SerachPage() {
   const [tip, setTip] = useState(false);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(15);
+  const [sort, setSort] = useState('totalVote');
+  const [searchData, setSearchData] = useState(questions.data);
+  const [searchPageInfo, setSearchPageInfo] = useState(questions.pageInfo);
+  const { word } = useParams();
+  useEffect(() => {
+    axios
+      .get(
+        `/questions/main?page=${page}&size=${size}&sort=${sort}&search=${word}`
+      )
+      .then((res) => {
+        console.log(res);
+        setSearchData(res.data.data);
+        setSearchPageInfo(res.data.pageInfo);
+        console.log(searchData);
+        console.log(searchPageInfo);
+      })
+      .catch((err) => console.error(err));
+  }, [page, size, word, sort]);
   return (
     <>
       <div className="search-container">
@@ -21,23 +42,37 @@ export default function SerachPage() {
         </div>
       </div>
       {tip ? <SerachTips /> : null}
-      <div className="search-info">Results for jsx</div>
+      <div className="search-info">Results for {word}</div>
       <div className="search-info">
         Search options <span>not deleted</span>
       </div>
       <div className="result-button-container">
-        <div>61,730 results</div>
+        <div>{searchPageInfo.totalElements} results</div>
         <div className="buttonGroup">
-          <button className="btn1">Relevance</button>
-          <button>Newest</button>
+          <button
+            className={sort === 'totalVote' ? 'active' : ''}
+            onClick={() => setSort('totalVote')}
+          >
+            Relevance
+          </button>
+          <button
+            className={sort === 'createdAt' ? 'active' : ''}
+            onClick={() => setSort('createdAt')}
+          >
+            Newest
+          </button>
         </div>
       </div>
       <ul className="Questions">
-        {questions.data.map((question) => (
+        {searchData.map((question) => (
           <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>
-      <Pagination />
+      <Pagination
+        searchPageInfo={searchPageInfo}
+        setPage={setPage}
+        setSize={setSize}
+      />
     </>
   );
 }

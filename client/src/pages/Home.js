@@ -1,19 +1,24 @@
 import './Home.css';
-import { questions } from '../components/initialState';
+import Loading from '../components/Loading';
 import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function Home() {
-  const [questionData, setQuestionData] = useState(questions.data);
+  const [questionData, setQuestionData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    axios.get('/questions').then((res) => setQuestionData(res.data));
-    console.log(questionData);
+    setIsLoading(false);
+    axios.get('/questions').then((res) => {
+      setQuestionData(res.data);
+      setIsLoading(true);
+    });
   }, []);
 
   return (
     <>
+      {isLoading ? undefined : <Loading />}
       <div className="homeContainer">
         <h1 className="homeTitle">Top Questions</h1>
         <Link className="askQuestion" to="/addquestion">

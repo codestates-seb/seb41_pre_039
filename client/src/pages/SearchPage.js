@@ -1,35 +1,36 @@
-import { questions } from '../components/initialState';
 import QuestionList from '../components/QuestionList';
 import { Link, useParams } from 'react-router-dom';
 import './SearchPage.css';
 import { useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
+import Loading from '../components/Loading';
 
 export default function SerachPage() {
   const [tip, setTip] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(15);
   const [sort, setSort] = useState('totalVote');
-  const [searchData, setSearchData] = useState(questions.data);
-  const [searchPageInfo, setSearchPageInfo] = useState(questions.pageInfo);
   const { word } = useParams();
+  const [searchData, setSearchData] = useState([]);
+  const [searchPageInfo, setSearchPageInfo] = useState({});
   useEffect(() => {
+    setIsLoading(false);
     axios
       .get(
         `/questions/main?page=${page}&size=${size}&sort=${sort}&search=${word}`
       )
       .then((res) => {
-        console.log(res);
         setSearchData(res.data.data);
         setSearchPageInfo(res.data.pageInfo);
-        console.log(searchData);
-        console.log(searchPageInfo);
+        setIsLoading(true);
       })
       .catch((err) => console.error(err));
   }, [page, size, word, sort]);
   return (
     <>
+      {isLoading ? undefined : <Loading />}
       <div className="search-container">
         <h1 className="search-title">Search Results</h1>
         <div>
@@ -64,7 +65,7 @@ export default function SerachPage() {
         </div>
       </div>
       <ul className="Questions">
-        {searchData.map((question) => (
+        {searchData?.map((question) => (
           <QuestionList question={question} key={question.questionId} />
         ))}
       </ul>

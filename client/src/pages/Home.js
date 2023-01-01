@@ -22,7 +22,7 @@ export default function Home() {
       </div>
       <div className="buttonContainer">
         <div className="buttonGroup">
-          <button>Interesting</button>
+          <button className="active">Interesting</button>
           <button>Bountied</button>
           <button>Hot</button>
           <button>Week</button>

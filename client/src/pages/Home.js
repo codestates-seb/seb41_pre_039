@@ -22,11 +22,11 @@ export default function Home() {
       </div>
       <div className="buttonContainer">
         <div className="buttonGroup">
-          <button className="btn1">Interesting</button>
+          <button>Interesting</button>
           <button>Bountied</button>
           <button>Hot</button>
           <button>Week</button>
-          <button className="btn5">Month</button>
+          <button>Month</button>
         </div>
       </div>
       <ul className="Questions">

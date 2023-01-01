@@ -23,8 +23,6 @@ const QuestionList = ({ question }) => {
     tags,
     chosen,
   } = question;
-  console.log(new Date(createdAt));
-  console.log(new Date(modifiedAt));
   return (
     <div className="postContainer">
       <div className="postBox">

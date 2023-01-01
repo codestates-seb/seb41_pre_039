@@ -82,7 +82,7 @@ export default function Login() {
     <div className="login-wrapper">
       <div className="login-container">
         <div className="login-logo-box">
-          <a href="%PUBLIC_URL%">
+          <a href={process.env.PUBLIC_URL}>
             <img className="login-logo" src={logo} alt="logo"></img>
           </a>
         </div>
@@ -123,7 +123,7 @@ export default function Login() {
           <InputBox>
             <div className="pw-wrapper">
               <label htmlFor="password">Password</label>
-              <a href="%PUBLIC_URL%" className="find-pw">
+              <a href={process.env.PUBLIC_URL} className="find-pw">
                 Forgot password?
               </a>
             </div>
@@ -164,11 +164,12 @@ export default function Login() {
         </form>
         <div className="login-footer-container">
           <FooterText>
-            Don’t have an account?&nbsp; <a href="%PUBLIC_URL%">Sign up</a>
+            Don’t have an account?&nbsp;{' '}
+            <a href={process.env.PUBLIC_URL}>Sign up</a>
           </FooterText>
           <FooterText>
             Are you an employer?&nbsp;
-            <a href="%PUBLIC_URL%">Sign up on Talent</a>
+            <a href={process.env.PUBLIC_URL}>Sign up on Talent</a>
           </FooterText>
         </div>
       </div>

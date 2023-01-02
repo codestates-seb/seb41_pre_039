@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import './Question.css';
 import timeParse from './time';
 import MarkdownPreview from '@uiw/react-markdown-preview';
+import { useSelector } from 'react-redux';
 
 const TagList = styled.li`
   padding: 4.8px 6px;
@@ -20,6 +21,7 @@ const TagList = styled.li`
   }
 `;
 export default function Question({ question, questionId }) {
+  const { isLogin } = useSelector((state) => state);
   return (
     <>
       <div className="content-header">
@@ -28,7 +30,10 @@ export default function Question({ question, questionId }) {
             <h1>{question.title}</h1>
           </span>
           <div className="question-ask">
-            <Link className="ask-button" to="/addquestion">
+            <Link
+              className="ask-button"
+              to={isLogin ? '/addquestion' : '/login'}
+            >
               Ask Question
             </Link>
           </div>

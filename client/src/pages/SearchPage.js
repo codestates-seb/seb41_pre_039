@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
 import Loading from '../components/Loading';
+import { useSelector } from 'react-redux';
 
 export default function SerachPage() {
   const [tip, setTip] = useState(false);
@@ -15,6 +16,7 @@ export default function SerachPage() {
   const { word } = useParams();
   const [searchData, setSearchData] = useState([]);
   const [searchPageInfo, setSearchPageInfo] = useState({});
+  const { isLogin } = useSelector((state) => state);
   useEffect(() => {
     setIsLoading(false);
     axios
@@ -38,7 +40,10 @@ export default function SerachPage() {
           <button className="search-tips" onClick={() => setTip(!tip)}>
             Advanced Search Tips
           </button>
-          <Link className="askQuestion" to="/addquestion">
+          <Link
+            className="askQuestion"
+            to={isLogin ? '/addquestion' : '/login'}
+          >
             Ask Question
           </Link>
         </div>

@@ -4,8 +4,10 @@ import QuestionList from '../components/QuestionList';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
+  const { isLogin } = useSelector((state) => state);
   const [questionData, setQuestionData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function Home() {
       {isLoading ? undefined : <Loading />}
       <div className="homeContainer">
         <h1 className="homeTitle">Top Questions</h1>
-        <Link className="askQuestion" to="/addquestion">
+        <Link to={isLogin ? '/addquestion' : '/login'} className="askQuestion">
           Ask Question
         </Link>
       </div>

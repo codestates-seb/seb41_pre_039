@@ -33,7 +33,7 @@ export default function Header() {
         </div>
         <nav className={isLogin ? 'login-box isLogin' : 'login-box'}>
           {isLogin ? (
-            <IsLoginHeader />
+            <IsLoginHeader setIsLogin={setIsLogin} />
           ) : (
             <>
               <Link
@@ -54,20 +54,42 @@ export default function Header() {
   );
 }
 
-function IsLoginHeader() {
+function IsLoginHeader({ setIsLogin }) {
+  const [isProfile, setIsProfile] = useState(false);
   return (
     <>
       <ul className="isLogin-ul">
         <li className="isLogin-profile">
-          <img
-            src="http://placeimg.com/24/24/any"
-            alt="user avatar"
-            width="24px"
-            height="24px"
-          ></img>
-          <ul className="score-ul">
-            <li className="scrore-li">1</li>
-          </ul>
+          <button
+            onClick={() => {
+              setIsProfile(true);
+            }}
+            onBlur={(e) => {
+              console.log(e);
+              setTimeout(() => setIsProfile(false), 50);
+            }}
+            className="isLogin-profile-button"
+          >
+            <img
+              src="http://placeimg.com/24/24/any"
+              alt="user avatar"
+              width="24px"
+              height="24px"
+            ></img>
+            <span className="score">1</span>
+          </button>
+          {isProfile ? (
+            <ul className="isLogin-profile-menu">
+              <li>
+                <Link to="/user/setting">Setting</Link>
+              </li>
+              <li>
+                <Link to="" onClick={() => setIsLogin(false)}>
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          ) : undefined}
         </li>
 
         <li className="isLogin-icon">

@@ -94,15 +94,15 @@ function Answer({ answer }) {
           <div className="answer-box">
             <p className="asked-time">{timeParse(answer.createdAt, 'time')}</p>
             <div className="userInfo">
-              <a href="%PUBLIC_URL%">
+              <a href={process.env.PUBLIC_URL}>
                 <img
                   src="http://placeimg.com/24/24/any"
                   alt="answer-avatar"
                   className="answer-avatar"
                 ></img>
               </a>
-              <a href="%PUBLIC_URL%" className="answer-name">
-                {answer.username}
+              <a href={process.env.PUBLIC_URL} className="answer-name">
+                Username
               </a>
             </div>
           </div>

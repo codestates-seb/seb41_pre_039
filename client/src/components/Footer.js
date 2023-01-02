@@ -12,98 +12,98 @@ const Footer = () => {
           <div className="footer-sitemap">
             <div className="footer-sitemap-submenu">
               <h5 className="footer-sitemap-submenu--title">
-                <a href="%PUBLIC_URL%">Stack Overflow</a>
+                <a href={process.env.PUBLIC_URL}>Stack Overflow</a>
               </h5>
               <ul className="footer-sitemap-submenu--container">
                 <li>
-                  <a href="%PUBLIC_URL%">Questions</a>
+                  <a href={process.env.PUBLIC_URL}>Questions</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Help</a>
+                  <a href={process.env.PUBLIC_URL}>Help</a>
                 </li>
               </ul>
             </div>
             <div className="footer-sitemap-submenu">
               <h5 className="footer-sitemap-submenu--title">
-                <a href="%PUBLIC_URL%">Products</a>
+                <a href={process.env.PUBLIC_URL}>Products</a>
               </h5>
               <ul className="footer-sitemap-submenu--container">
                 <li>
-                  <a href="%PUBLIC_URL%">Teams</a>
+                  <a href={process.env.PUBLIC_URL}>Teams</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Advertising</a>
+                  <a href={process.env.PUBLIC_URL}>Advertising</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Collectives</a>
+                  <a href={process.env.PUBLIC_URL}>Collectives</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Talent</a>
+                  <a href={process.env.PUBLIC_URL}>Talent</a>
                 </li>
               </ul>
             </div>
             <div className="footer-sitemap-submenu">
               <h5 className="footer-sitemap-submenu--title">
-                <a href="%PUBLIC_URL%">Company</a>
+                <a href={process.env.PUBLIC_URL}>Company</a>
               </h5>
               <ul className="footer-sitemap-submenu--container">
                 <li>
-                  <a href="%PUBLIC_URL%">About</a>
+                  <a href={process.env.PUBLIC_URL}>About</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Press</a>
+                  <a href={process.env.PUBLIC_URL}>Press</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Work Here</a>
+                  <a href={process.env.PUBLIC_URL}>Work Here</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Legal</a>
+                  <a href={process.env.PUBLIC_URL}>Legal</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Privacy Policy</a>
+                  <a href={process.env.PUBLIC_URL}>Privacy Policy</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Terms of Service</a>
+                  <a href={process.env.PUBLIC_URL}>Terms of Service</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Contect Us</a>
+                  <a href={process.env.PUBLIC_URL}>Contect Us</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Cookie Settings</a>
+                  <a href={process.env.PUBLIC_URL}>Cookie Settings</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Cookie Policy</a>
+                  <a href={process.env.PUBLIC_URL}>Cookie Policy</a>
                 </li>
               </ul>
             </div>
             <div className="footer-sitemap-submenu">
               <h5 className="footer-sitemap-submenu--title">
-                <a href="%PUBLIC_URL%">Stack Exchange Network</a>
+                <a href={process.env.PUBLIC_URL}>Stack Exchange Network</a>
               </h5>
               <ul className="footer-sitemap-submenu--container">
                 <li>
-                  <a href="%PUBLIC_URL%">Technology</a>
+                  <a href={process.env.PUBLIC_URL}>Technology</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Culture & recreation</a>
+                  <a href={process.env.PUBLIC_URL}>Culture & recreation</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Life & arts</a>
+                  <a href={process.env.PUBLIC_URL}>Life & arts</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Science</a>
+                  <a href={process.env.PUBLIC_URL}>Science</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Professional</a>
+                  <a href={process.env.PUBLIC_URL}>Professional</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Business</a>
+                  <a href={process.env.PUBLIC_URL}>Business</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">API</a>
+                  <a href={process.env.PUBLIC_URL}>API</a>
                 </li>
                 <li>
-                  <a href="%PUBLIC_URL%">Data</a>
+                  <a href={process.env.PUBLIC_URL}>Data</a>
                 </li>
               </ul>
             </div>

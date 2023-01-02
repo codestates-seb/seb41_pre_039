@@ -149,28 +149,53 @@
   cursor: pointer;
 }
 
-.score-ul {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.score {
+  padding-left: 10px;
 }
 
 .isLogin-profile {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  list-style: none;
-  width: 120%;
-  height: 100%;
   margin-right: 30px;
-  list-style: none;
+  position: relative;
 }
 
-.isLogin-profile:hover {
+.isLogin-profile-button {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 100%;
+}
+
+.isLogin-profile-button:hover {
   background-color: rgba(170, 170, 170, 0.2);
   cursor: pointer;
+}
+
+.isLogin-profile-menu {
+  position: absolute;
+  bottom: -80px;
+  left: 0px;
+  background-color: #f7f8f8;
+  padding: 8px 10px;
+  border-radius: 3px;
+  border: 1px solid rgb(0 0 0 / 7%);
+  box-shadow: 0 0 6px 1px rgb(0 0 0 / 7%);
+}
+
+.isLogin-profile-menu > li > a {
+  display: block;
+  padding: 5px 20px;
+  font-size: 14px;
+  color: #000;
+}
+
+.isLogin-profile-menu > li:last-child > a {
+  color: hsl(358deg 61% 52%);
+}
+
+.isLogin-profile-menu > li > a:hover {
+  background-color: rgba(170, 170, 170, 0.2);
 }
 
 button {

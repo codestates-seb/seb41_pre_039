@@ -1,3 +1,16 @@
 .pagination-container {
-  padding: 40px;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination-container > ul{
+  display: flex;
+}
+
+.pagination--size > li:last-child{
+  margin: 0 10px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
 }

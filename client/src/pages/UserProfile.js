@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import './UserProfile.css';
 import UserProfileHeader from '../components/UserProfileHeader';
-import { user } from '../components/initialState';
 import { Link } from 'react-router-dom';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import timeParse from '../components/time';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const Stat = styled.div`
   display: flex;
@@ -61,9 +62,20 @@ const ListWrapper = styled.ul`
 `;
 
 const UserProfile = () => {
+  const [users, setUsers] = useState({});
+  useEffect(() => {
+    axios
+      .get('/members/1')
+      .then((response) => {
+        console.log(response);
+        setUsers(response.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+  console.log(users);
   return (
     <section className="userProfile-container">
-      <UserProfileHeader user={user} />
+      <UserProfileHeader users={users} />
       <section className="userProfile-contents">
         <div className="userProfile-contents--column-stats">
           <article className="userProfile-contents--stats">
@@ -78,11 +90,11 @@ const UserProfile = () => {
                 reached
               </Stat>
               <Stat>
-                <span>{user.answers.length}</span>
+                <span>{users.comments && users.comments.length}</span>
                 answers
               </Stat>
               <Stat>
-                <span>{user.questions.length}</span>
+                <span>{users.questions && users.questions.length}</span>
                 questions
               </Stat>
             </div>
@@ -94,15 +106,15 @@ const UserProfile = () => {
             data-color-mode="light"
           >
             <h4>About</h4>
-            <MarkdownPreview source={user.aboutMe} />
+            <MarkdownPreview source={users && users.aboutMe} />
           </article>
           <article className="userProfile-contents--answers">
             <h4>Answers</h4>
-            <List data={user.answers} type="answer" />
+            <List data={users && users.comments} type="answer" />
           </article>
           <article className="userProfile-contents--questions">
             <h4>Questions</h4>
-            <List data={user.questions} type="question" />
+            <List data={users && users.questions} type="question" />
           </article>
         </div>
       </section>
@@ -113,27 +125,28 @@ const UserProfile = () => {
 const List = ({ data, type }) => {
   return (
     <ListWrapper>
-      {data.map((el, idx) => {
-        return (
-          <li key={idx}>
-            <span className="badge">
-              <div>{el.totalVote}</div>
-            </span>
-            <Link
-              to={`/question/${
-                type === 'question' ? el.questionId : el.commentId
-              }`}
-            >
-              {type === 'question'
-                ? el.title.length >= 40
-                  ? `${el.title.slice(0, 39)}...`
-                  : el.title
-                : `${el.content.slice(0, 39)}...`}
-            </Link>
-            <span className="date">{timeParse(el.createdAt, 'time')}</span>
-          </li>
-        );
-      })}
+      {data &&
+        data.map((el, idx) => {
+          return (
+            <li key={idx}>
+              <span className="badge">
+                <div>{el.totalVote}</div>
+              </span>
+              <Link
+                to={`/question/${
+                  type === 'question' ? el.questionId : el.commentId
+                }`}
+              >
+                {type === 'question'
+                  ? el.title.length >= 40
+                    ? `${el.title.slice(0, 39)}...`
+                    : el.title
+                  : `${el.content.slice(0, 39)}...`}
+              </Link>
+              <span className="date">{timeParse(el.createdAt, 'time')}</span>
+            </li>
+          );
+        })}
     </ListWrapper>
   );
 };

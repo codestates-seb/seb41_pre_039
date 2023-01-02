@@ -5,6 +5,7 @@ import Icon2 from '../assets/icon2.svg';
 import Icon3 from '../assets/icon3.svg';
 import Icon4 from '../assets/icon4.svg';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const Input = styled.input`
   width: 100%;
@@ -32,10 +33,6 @@ export default function Signup() {
     handleSubmit,
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data, errors);
-  };
-
   const validation = (v = '') => {
     if (v.match(/^[A-Za-z]+$/i))
       return (
@@ -52,6 +49,29 @@ export default function Signup() {
         </p>
       );
     else return;
+  };
+
+  const signUp = (data) => {
+    const { name, email, password } = data;
+    axios
+      .post(
+        'http://ec2-54-180-132-90.ap-northeast-2.compute.amazonaws.com:8080/members',
+        {
+          name: { name },
+          email: { email },
+          password: { password },
+        }
+      )
+      .then((response) => {
+        // Handle success.
+        console.log('Well done!');
+        console.log('User profile', response.data.user);
+        console.log('User token', response.data.jwt);
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log('An error occurred:', error.response);
+      });
   };
 
   return (
@@ -87,13 +107,19 @@ export default function Signup() {
           </div>
         </div>
         <div className="signupContatiner">
-          <form onSubmit={handleSubmit(onSubmit)} className="signupForm">
+          <form
+            onSubmit={handleSubmit((data) => {
+              signUp(data);
+            })}
+            className="signupForm"
+          >
             <div className="displayName">
               <label htmlFor="name">Display name</label>
               <Input
                 id="name"
                 className="displayname"
                 placeholder="Display name"
+                {...register('name')}
               />
             </div>
             <div className="email">

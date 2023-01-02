@@ -5,6 +5,8 @@ import { user } from '../components/initialState';
 import { Link } from 'react-router-dom';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import timeParse from '../components/time';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const Stat = styled.div`
   display: flex;
@@ -61,6 +63,17 @@ const ListWrapper = styled.ul`
 `;
 
 const UserProfile = () => {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    axios
+      .get('/members/1')
+      .then((response) => {
+        console.log(response);
+        setUsers(response.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+  console.log(users);
   return (
     <section className="userProfile-container">
       <UserProfileHeader user={user} />
@@ -78,11 +91,11 @@ const UserProfile = () => {
                 reached
               </Stat>
               <Stat>
-                <span>{user.answers.length}</span>
+                <span>{users.comments.length}</span>
                 answers
               </Stat>
               <Stat>
-                <span>{user.questions.length}</span>
+                <span>{users.questions.length}</span>
                 questions
               </Stat>
             </div>
@@ -94,15 +107,15 @@ const UserProfile = () => {
             data-color-mode="light"
           >
             <h4>About</h4>
-            <MarkdownPreview source={user.aboutMe} />
+            <MarkdownPreview source={users.aboutMe} />
           </article>
           <article className="userProfile-contents--answers">
             <h4>Answers</h4>
-            <List data={user.answers} type="answer" />
+            <List data={users.comments} type="answer" />
           </article>
           <article className="userProfile-contents--questions">
             <h4>Questions</h4>
-            <List data={user.questions} type="question" />
+            <List data={users.questions} type="question" />
           </article>
         </div>
       </section>

@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import './Login.css';
 import logo from '../assets/icon.svg';
 import { useRef, useState } from 'react';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../action';
 
 const NextButton = styled.button`
   width: 100%;
@@ -59,22 +62,29 @@ export default function Login() {
   const [failpwLogin, setfailpwLogin] = useState(false);
   const emailInput = useRef();
   const pwInput = useRef();
+  const dispatch = useDispatch();
+  const isLogin = useSelector((state) => state);
+
   const loginHandler = (e) => {
+    e.preventDefault();
     if (idValue === '')
-      e.preventDefault(),
-        setfailIdLogin(true),
-        setfailpwLogin(false),
-        emailInput.current.focus();
+      setfailIdLogin(true), setfailpwLogin(false), emailInput.current.focus();
     if (pwValue === '')
-      e.preventDefault(),
-        setfailpwLogin(true),
-        setfailIdLogin(false),
-        pwInput.current.focus();
+      setfailpwLogin(true), setfailIdLogin(false), pwInput.current.focus();
     if (idValue === '' && pwValue === '')
-      e.preventDefault(),
-        setfailIdLogin(true),
-        setfailpwLogin(true),
-        emailInput.current.focus();
+      setfailIdLogin(true), setfailpwLogin(true), emailInput.current.focus();
+
+    axios
+      .post('/auth/login', { email: idValue, password: pwValue })
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('authorization', res.headers.authorization);
+        localStorage.setItem('refresh', res.headers.refresh);
+        localStorage.setItem('expires', res.headers.expires);
+        dispatch(login(1)); // ! memberId 들어오는 response 변경 시 수정 필요
+        console.log(isLogin);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

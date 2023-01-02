@@ -40,7 +40,7 @@ export default function Answers({ questionId }) {
   const [answer, setAnswer] = useState([]);
   useEffect(() => {
     axios
-      .get(`/comments/1`)
+      .get(`/comments/questions/${questionId}`)
       .then((res) => setAnswer(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -61,18 +61,18 @@ export default function Answers({ questionId }) {
         </div>
       </div>
       <div className="content-layout">
-        <Answer
-          key={answer.commentId}
-          answer={answer}
-          questionId={questionId}
-        />
+        {answer &&
+          answer.map((answer) => (
+            <Answer key={answer.commentId} answer={answer} />
+          ))}
       </div>
       <YourAnswer />
     </>
   );
 }
 
-function Answer({ answer, questionId }) {
+function Answer({ answer }) {
+  const commentId = answer.commentId;
   return (
     <div className="answer-container">
       <div className="content-recommend">
@@ -88,7 +88,7 @@ function Answer({ answer, questionId }) {
       <article className="content-question" data-color-mode="light">
         <MarkdownPreview source={answer.content} className="answer-p" />
         <div className="content-answerInfo">
-          <Link to={`/edit/answer/${questionId}`} className="content-edit">
+          <Link to={`/edit/answer/${commentId}`} className="content-edit">
             Edit
           </Link>
           <div className="answer-box">
@@ -107,10 +107,6 @@ function Answer({ answer, questionId }) {
             </div>
           </div>
         </div>
-        <br />
-        <a href="%PUBLIC_URL%" className="add-comment">
-          Add a comment
-        </a>
       </article>
     </div>
   );

@@ -74,22 +74,19 @@ const CancelButton = styled(Button)`
 `;
 
 export default function EditAnswer() {
-  const { questionId } = useParams();
+  const { commentId } = useParams();
   const [body, setBody] = useState([]);
   const [summary, setSummary] = useState('');
   const bodyRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const axiosData = async () => {
-      await axios
-        .get(`/comments/1`)
-        .then((res) => {
-          setBody(res.data.content);
-        })
-        .catch((err) => console.error(err));
-    };
-    axiosData();
+    axios
+      .get(`/comments/${commentId}`)
+      .then((res) => {
+        setBody(res.data.content);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   const editAnswerHandler = (e) => {
@@ -100,11 +97,11 @@ export default function EditAnswer() {
       })
       .then((res) => {
         setBody(res.data);
-        navigate(`/question/${questionId}`);
+        navigate(`/question/${commentId}`);
       })
       .catch((err) => console.error(err));
   };
-  console.log(questionId);
+
   return (
     <section className="edit--container">
       <article className="edit--advice">

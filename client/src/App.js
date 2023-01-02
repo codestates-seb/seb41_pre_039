@@ -55,7 +55,7 @@ function App() {
               path="/edit/question/:questionId"
               element={<EditQuestion />}
             />
-            <Route path="/edit/answer/:questionId" element={<EditAnswer />} />
+            <Route path="/edit/answer/:commentId" element={<EditAnswer />} />
             <Route path="/search/:word" element={<SerachPage />} />
           </Routes>
         </div>

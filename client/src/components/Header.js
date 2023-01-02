@@ -9,7 +9,6 @@ export default function Header() {
   const navigate = useNavigate();
   const { isLogin } = useSelector((state) => state);
 
-  console.log(isLogin);
   const searchHandler = (e) => {
     const { value } = e.target;
     if (e.key === 'Enter') {

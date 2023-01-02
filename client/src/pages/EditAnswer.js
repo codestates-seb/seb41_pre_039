@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
 import { ContentEditor } from '../components/Editor';
 import './Edit.css';
-import { answer } from './initialState';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const InputBox = styled.div`
   width: 100%;
@@ -73,23 +74,31 @@ const CancelButton = styled(Button)`
 `;
 
 export default function EditAnswer() {
-  const [body, setBody] = useState(answer[0].content);
+  const { commentId } = useParams();
+  const [body, setBody] = useState([]);
   const [summary, setSummary] = useState('');
-
   const bodyRef = useRef(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.draft) {
-      console.log(localStorage.draft);
-      const draft = JSON.parse(localStorage.getItem('draft'));
-      setBody(draft.body || '');
-    }
+    axios
+      .get(`/comments/${commentId}`)
+      .then((res) => {
+        setBody(res.data.content);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
-  const deleteDraftHandler = (e) => {
+  const editAnswerHandler = (e) => {
     e.preventDefault();
-    localStorage.removeItem('draft');
-    location.reload();
+    axios
+      .patch(`/comments/${commentId}`, {
+        content: body,
+      })
+      .then((res) => {
+        setBody(res.data);
+        navigate(-1);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -130,13 +139,11 @@ export default function EditAnswer() {
           type="form"
           form="edit--form"
           className="edit--submit submitButton"
+          onClick={editAnswerHandler}
         >
           Save edits
         </Button>
-        <CancelButton
-          className="edit--draft-discard submitButton"
-          onClick={(e) => deleteDraftHandler(e)}
-        >
+        <CancelButton className="edit--draft-discard submitButton">
           Cancel
         </CancelButton>
       </form>

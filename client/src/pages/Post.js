@@ -14,11 +14,10 @@ const ContentContainer = styled.div`
 
 export default function Post({ setIsKey }) {
   const { questionId } = useParams();
-  console.log(questionId);
   return (
     <ContentContainer>
-      <Question setIsKey={setIsKey} />
-      <Answers setIsKey={setIsKey} />
+      <Question setIsKey={setIsKey} questionId={questionId} />
+      <Answers setIsKey={setIsKey} questionId={questionId} />
     </ContentContainer>
   );
 }

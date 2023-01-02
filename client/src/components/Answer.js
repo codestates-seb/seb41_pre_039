@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import './Answer.css';
 import { AnswerEditor } from './Editor';
 import MarkdownPreview from '@uiw/react-markdown-preview';
-import { answer } from './initialState';
 import timeParse from './time';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const NextButton = styled.button`
   background-color: hsl(206deg 100% 52%);
@@ -36,7 +36,14 @@ const ContentUl = styled.ul`
   margin-left: 30px;
 `;
 
-export default function Answers({ setIsKey }) {
+export default function Answers({ questionId }) {
+  const [answer, setAnswer] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`/comments/questions/${questionId}`)
+      .then((res) => setAnswer(res.data))
+      .catch((err) => console.error(err));
+  }, []);
   return (
     <>
       <div className="answer-header">
@@ -54,22 +61,23 @@ export default function Answers({ setIsKey }) {
         </div>
       </div>
       <div className="content-layout">
-        {answer.map((answer) => (
-          <Answer key={answer.commentId} answer={answer} setIsKey={setIsKey} />
-        ))}
+        {answer &&
+          answer.map((answer) => (
+            <Answer key={answer.commentId} answer={answer} />
+          ))}
       </div>
       <YourAnswer />
     </>
   );
 }
 
-function Answer({ answer, setIsKey }) {
-  const { content, createdAt, totalVote } = answer;
+function Answer({ answer }) {
+  const commentId = answer.commentId;
   return (
     <div className="answer-container">
       <div className="content-recommend">
         <button className="content-up"></button>
-        <span className="content-num">{totalVote}</span>
+        <span className="content-num">{answer.totalVote}</span>
         <button className="content-down"></button>
         <button className="content-chosen-button">
           <svg className="svg-icon" width="36" height="36" viewBox="0 0 36 36">
@@ -78,17 +86,13 @@ function Answer({ answer, setIsKey }) {
         </button>
       </div>
       <article className="content-question" data-color-mode="light">
-        <MarkdownPreview source={content} className="answer-p" />
+        <MarkdownPreview source={answer.content} className="answer-p" />
         <div className="content-answerInfo">
-          <Link
-            to="/edit"
-            className="content-edit"
-            onClick={() => setIsKey('Answer')}
-          >
+          <Link to={`/edit/answer/${commentId}`} className="content-edit">
             Edit
           </Link>
           <div className="answer-box">
-            <p className="asked-time">{timeParse(createdAt, 'time')}</p>
+            <p className="asked-time">{timeParse(answer.createdAt, 'time')}</p>
             <div className="userInfo">
               <a href={process.env.PUBLIC_URL}>
                 <img
@@ -103,10 +107,6 @@ function Answer({ answer, setIsKey }) {
             </div>
           </div>
         </div>
-        <br />
-        <a href={process.env.PUBLIC_URL} className="add-comment">
-          Add a comment
-        </a>
       </article>
     </div>
   );

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
 import { ContentEditor } from '../components/Editor';
 import './AddQuestion.css';
+import axios from 'axios';
 
 const InputBox = styled.div`
   width: 100%;
@@ -257,6 +258,17 @@ const AddQuestion = () => {
     }
   };
 
+  const askSubmitHandler = () => {
+    axios
+      .post(`questions/`, {
+        title: title,
+        content: problem + tryFor,
+        tags: tags,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.errer(err));
+  };
+
   return (
     <section className="addQuestion-container">
       <h2>Ask a public question</h2>
@@ -406,6 +418,7 @@ const AddQuestion = () => {
           form="addQuestion--form"
           className="addQuestion--submit submitButton"
           disabled={inputStep < 5}
+          onClick={askSubmitHandler}
         >
           Review your question
         </Button>

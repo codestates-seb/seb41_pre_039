@@ -8,5 +8,5 @@ export const login = (memberId) => {
 };
 
 export const logout = () => {
-  return { type: 'LOG_IN' };
+  return { type: 'LOG_OUT' };
 };

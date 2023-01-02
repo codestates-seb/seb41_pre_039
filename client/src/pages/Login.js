@@ -3,8 +3,9 @@ import './Login.css';
 import logo from '../assets/icon.svg';
 import { useRef, useState } from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../action';
+import { useNavigate } from 'react-router-dom';
 
 const NextButton = styled.button`
   width: 100%;
@@ -63,7 +64,7 @@ export default function Login() {
   const emailInput = useRef();
   const pwInput = useRef();
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state);
+  const navigate = useNavigate();
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -82,7 +83,7 @@ export default function Login() {
         localStorage.setItem('refresh', res.headers.refresh);
         localStorage.setItem('expires', res.headers.expires);
         dispatch(login(1)); // ! memberId 들어오는 response 변경 시 수정 필요
-        console.log(isLogin);
+        navigate('/');
       })
       .catch((err) => console.error(err));
   };

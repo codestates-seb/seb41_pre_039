@@ -38,7 +38,7 @@ export default function Post() {
     <ContentContainer>
       {isLoading ? undefined : <Loading />}
       <Question question={question} questionId={questionId} />
-      <Answers answer={answer} questionId={questionId} />
+      <Answers answer={answer} question={question} questionId={questionId} />
     </ContentContainer>
   );
 }

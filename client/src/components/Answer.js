@@ -37,7 +37,7 @@ const ContentUl = styled.ul`
   margin-left: 30px;
 `;
 
-export default function Answers({ answer, questionId }) {
+export default function Answers({ answer, questionId, question }) {
   const { memberId } = useSelector((state) => state);
 
   return (
@@ -65,6 +65,7 @@ export default function Answers({ answer, questionId }) {
               key={answer.commentId}
               answer={answer}
               memberId={memberId}
+              question={question}
             />
           ))}
       </div>
@@ -74,7 +75,7 @@ export default function Answers({ answer, questionId }) {
   );
 }
 
-function Answer({ answer, memberId }) {
+function Answer({ answer, memberId, question }) {
   const commentId = answer.commentId;
   const { totalVote, content, createdAt } = answer;
   const deleteHandler = (e) => {
@@ -94,17 +95,43 @@ function Answer({ answer, memberId }) {
         });
     }
   };
+  const adoptionHandler = (e) => {
+    e.preventDefault();
+    axios.defaults.headers.common['Authorization'] =
+      localStorage.getItem('authorization');
+    axios
+      .patch(`/comments/${commentId}`, {
+        adoption: true,
+      })
+      .then((res) => {
+        console.log(res);
+        location.reload();
+      })
+      .catch((err) => console.error(err));
+  };
   return (
     <div className="answer-container">
       <div className="content-recommend">
         <button className="content-up"></button>
         <span className="content-num">{totalVote}</span>
         <button className="content-down"></button>
-        <button className="content-chosen-button">
-          <svg className="svg-icon" width="36" height="36" viewBox="0 0 36 36">
-            <path d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"></path>
-          </svg>
-        </button>
+        {question.memberId === memberId ? (
+          <button
+            className={`content-chosen-button ${
+              answer.adoption ? 'chosen' : ''
+            }`}
+            onClick={adoptionHandler}
+          >
+            <svg
+              className="svg-icon"
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+            >
+              <path d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"></path>
+            </svg>
+          </button>
+        ) : null}
       </div>
       <article className="content-question" data-color-mode="light">
         <MarkdownPreview source={content} className="answer-p" />

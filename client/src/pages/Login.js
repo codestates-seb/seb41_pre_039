@@ -82,6 +82,8 @@ export default function Login() {
         localStorage.setItem('authorization', res.headers.authorization);
         localStorage.setItem('refresh', res.headers.refresh);
         localStorage.setItem('expires', res.headers.expires);
+        axios.defaults.headers.common['Authorization'] =
+          res.headers.authorization;
         dispatch(login(1)); // ! memberId 들어오는 response 변경 시 수정 필요
         navigate('/');
       })

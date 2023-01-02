@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import './UserProfileSetting.css';
 import UserProfileHeader from '../components/UserProfileHeader';
-import { Link } from 'react-router-dom';
-import { user } from '../components/initialState';
+import { Link, useNavigate } from 'react-router-dom';
 import { ContentEditor } from '../components/Editor';
+import axios from 'axios';
 
 const SideMenuBar = styled(Link)`
   display: flex;
@@ -83,14 +83,43 @@ const Cancel = styled.a`
   }
 `;
 const UserProfileSetting = () => {
-  const [nameValue, setNameValue] = useState(user.name);
-  const [locationValue, setLocationValue] = useState(user.region);
-  const [titleValue, setTitleValue] = useState(user.myTitle);
-  const [inputAboutMe, setInputAboutMe] = useState(user.aboutMe);
+  const [nameValue, setNameValue] = useState('');
+  const [locationValue, setLocationValue] = useState('');
+  const [titleValue, setTitleValue] = useState('');
+  const [inputAboutMe, setInputAboutMe] = useState('');
+  const [users, setUsers] = useState({});
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get('/members/1')
+      .then((response) => {
+        setUsers(response.data);
+        setNameValue(response.data.name);
+        setLocationValue(response.data.region);
+        setTitleValue(response.data.myTitle);
+        setInputAboutMe(response.data.aboutMe);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axios
+      .patch('/members/1', {
+        name: nameValue,
+        myTitle: titleValue,
+        aboutMe: inputAboutMe,
+        region: locationValue,
+      })
+      .then(() => {
+        console.log('Submit Complete!');
+        navigate('/user');
+      });
+  };
 
   return (
     <section className="userProfile-container">
-      <UserProfileHeader user={user} />
+      <UserProfileHeader users={users} />
       <section className="userProfile-contents">
         <div className="menubar-container">
           <div className="fortitle">
@@ -153,7 +182,7 @@ const UserProfileSetting = () => {
               </div>
             </div>
             <div className="save-container">
-              <SaveButton>Save profile</SaveButton>
+              <SaveButton onClick={submitHandler}>Save profile</SaveButton>
               <Cancel>Cancel</Cancel>
             </div>
           </div>

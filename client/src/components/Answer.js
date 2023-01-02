@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import './Answer.css';
 import { AnswerEditor } from './Editor';
@@ -36,14 +36,7 @@ const ContentUl = styled.ul`
   margin-left: 30px;
 `;
 
-export default function Answers({ questionId }) {
-  const [answer, setAnswer] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`/comments/questions/${questionId}`)
-      .then((res) => setAnswer(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function Answers({ answer, questionId }) {
   return (
     <>
       <div className="answer-header">
@@ -66,7 +59,7 @@ export default function Answers({ questionId }) {
             <Answer key={answer.commentId} answer={answer} />
           ))}
       </div>
-      <YourAnswer />
+      <YourAnswer questionId={questionId} />
     </>
   );
 }
@@ -102,7 +95,7 @@ function Answer({ answer }) {
                 ></img>
               </a>
               <a href={process.env.PUBLIC_URL} className="answer-name">
-                Username
+                {answer.username}
               </a>
             </div>
           </div>
@@ -112,11 +105,24 @@ function Answer({ answer }) {
   );
 }
 
-function YourAnswer() {
+function YourAnswer({ questionId }) {
   const [help, setHelp] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputClickHandler = () => {
     setHelp(true);
+  };
+
+  const submitAnswerHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(`/comments/${questionId}`, {
+        content: inputValue,
+      })
+      .then((res) => {
+        console.log(res);
+        location.reload();
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <>
@@ -130,7 +136,7 @@ function YourAnswer() {
           clickHandler={inputClickHandler}
         />
         {help ? <YourAnswerModal /> : null}
-        <NextButton>Post Your Answer</NextButton>
+        <NextButton onClick={submitAnswerHandler}>Post Your Answer</NextButton>
       </form>
     </>
   );

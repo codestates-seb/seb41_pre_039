@@ -72,7 +72,6 @@ const UserProfile = () => {
       })
       .catch((err) => console.error(err));
   }, []);
-  console.log(users);
   return (
     <section className="userProfile-container">
       <UserProfileHeader users={users} />

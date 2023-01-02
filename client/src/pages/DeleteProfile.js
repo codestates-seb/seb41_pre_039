@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import UserProfileHeader from '../components/UserProfileHeader';
 import './DeleteProfile.css';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { user } from '../components/initialState';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SideMenuBar = styled(Link)`
   display: flex;
@@ -59,6 +59,8 @@ const DeleteButton = styled.button`
 export default function DeleteProfile() {
   const [checkBtn, setCheckBtn] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [users, setUsers] = useState({});
+  const navigate = useNavigate();
   const deleteHandler = () => {
     setCheckBtn(!checkBtn);
     setDisabled(!disabled);
@@ -68,9 +70,25 @@ export default function DeleteProfile() {
       console.log('hi');
     }
   };
+  useEffect(() => {
+    axios
+      .get('/members/1')
+      .then((response) => {
+        console.log(response);
+        setUsers(response.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+  const deleteSubmitHandler = (e) => {
+    e.preventDefault();
+    axios.delete('/members/1').then(() => {
+      console.log('Delete Complete!');
+      navigate('/');
+    });
+  };
   return (
     <section className="userProfile-container">
-      <UserProfileHeader user={user} />
+      <UserProfileHeader users={users} />
       <section className="userProfile-contents">
         <div className="menubar-container">
           <div className="fortitle">
@@ -132,6 +150,7 @@ export default function DeleteProfile() {
               <DeleteButton
                 className={disabled ? 'disable' : ''}
                 disabled={disabled}
+                onClick={deleteSubmitHandler}
               >
                 Delete profile
               </DeleteButton>

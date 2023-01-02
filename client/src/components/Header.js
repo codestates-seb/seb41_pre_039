@@ -66,7 +66,7 @@ function IsLoginHeader({ setIsLogin }) {
             }}
             onBlur={(e) => {
               console.log(e);
-              setTimeout(() => setIsProfile(false), 50);
+              setTimeout(() => setIsProfile(false), 100);
             }}
             className="isLogin-profile-button"
           >

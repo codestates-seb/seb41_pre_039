@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import './Question.css';
 import timeParse from './time';
 import MarkdownPreview from '@uiw/react-markdown-preview';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 const TagList = styled.li`
   padding: 4.8px 6px;
@@ -21,14 +19,7 @@ const TagList = styled.li`
     cursor: pointer;
   }
 `;
-export default function Question({ setIsKey, questionId }) {
-  const [question, setQuestion] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`/questions/${questionId}`)
-      .then((res) => setQuestion(res.data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function Question({ question, questionId }) {
   return (
     <>
       <div className="content-header">
@@ -79,7 +70,6 @@ export default function Question({ setIsKey, questionId }) {
               <Link
                 to={`/edit/question/${questionId}`}
                 className="content-edit"
-                onClick={() => setIsKey('Question')}
               >
                 Edit
               </Link>

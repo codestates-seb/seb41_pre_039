@@ -1,5 +1,11 @@
 package com.seb_pre_039.stackoverflowclone.auth.jwt;
 
+import com.seb_pre_039.stackoverflowclone.auth.entity.RefreshToken;
+import com.seb_pre_039.stackoverflowclone.auth.repository.RefreshTokenRepository;
+import com.seb_pre_039.stackoverflowclone.exception.BusinessLogicException;
+import com.seb_pre_039.stackoverflowclone.exception.ExceptionCode;
+import com.seb_pre_039.stackoverflowclone.member.entity.Member;
+import com.seb_pre_039.stackoverflowclone.member.repository.MemberRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -15,6 +21,7 @@ import java.security.Key;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class JwtTokenizer {
@@ -29,6 +36,14 @@ public class JwtTokenizer {
     @Getter
     @Value("${jwt.refresh-token-expiration-minutes}")
     private int refreshTokenExpirationMinutes;
+
+    private final MemberRepository memberRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
+
+    public JwtTokenizer(MemberRepository memberRepository, RefreshTokenRepository refreshTokenRepository) {
+        this.memberRepository = memberRepository;
+        this.refreshTokenRepository = refreshTokenRepository;
+    }
 
     public String encodeBase64SecretKey(String secretKey) {
         return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
@@ -52,12 +67,17 @@ public class JwtTokenizer {
     public String generateRefreshToken(String subject, Date expiration, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
-        return Jwts.builder()
+        String value = Jwts.builder()
                 .setSubject(subject)
                 .setIssuedAt(Calendar.getInstance().getTime())
                 .setExpiration(expiration)
                 .signWith(key)
                 .compact();
+
+        RefreshToken refreshToken = new RefreshToken(value, findMemberIdByEmail(subject));
+        refreshTokenRepository.save(refreshToken);
+
+        return value;
     }
 
     // 검증 후, Claims을 반환 하는 용도
@@ -94,5 +114,14 @@ public class JwtTokenizer {
         Key key = Keys.hmacShaKeyFor(keyBytes);
 
         return key;
+    }
+
+    private Long findMemberIdByEmail(String email) {
+        Optional<Member> member = memberRepository.findByEmail(email);
+        Member findMember = member.orElseThrow(
+                ()->new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND)
+        );
+
+        return findMember.getMemberId();
     }
 }

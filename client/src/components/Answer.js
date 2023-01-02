@@ -4,8 +4,9 @@ import './Answer.css';
 import { AnswerEditor } from './Editor';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import timeParse from './time';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const NextButton = styled.button`
   background-color: hsl(206deg 100% 52%);
@@ -39,26 +40,29 @@ const ContentUl = styled.ul`
 export default function Answers({ answer, questionId }) {
   return (
     <>
-      <div className="answer-header">
-        <h2>{answer.length} Answer </h2>
-        <div className="sorted-box">
-          <div className="sorted-info">
-            <span className="sorted-text">Sorted by:</span>
-          </div>
-          <div>
-            <select name="sorted" className="answer-sorted">
-              <option value="Date created">Date created (default)</option>
-              <option value="hightes score">Hightes score</option>
-            </select>
+      {answer.length ? (
+        <div className="answer-header">
+          <h2>{answer.length} Answer </h2>
+          <div className="sorted-box">
+            <div className="sorted-info">
+              <span className="sorted-text">Sorted by:</span>
+            </div>
+            <div>
+              <select name="sorted" className="answer-sorted">
+                <option value="Date created">Date created (default)</option>
+                <option value="hightes score">Hightes score</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
+      ) : undefined}
       <div className="content-layout">
         {answer &&
           answer.map((answer) => (
             <Answer key={answer.commentId} answer={answer} />
           ))}
       </div>
+
       <YourAnswer questionId={questionId} />
     </>
   );
@@ -108,12 +112,17 @@ function Answer({ answer }) {
 function YourAnswer({ questionId }) {
   const [help, setHelp] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const { isLogin } = useSelector((state) => state);
+  const navigate = useNavigate();
   const inputClickHandler = () => {
     setHelp(true);
   };
 
   const submitAnswerHandler = (e) => {
     e.preventDefault();
+    if (!isLogin) navigate('/login');
+    axios.defaults.headers.common['Authorization'] =
+      localStorage.getItem('authorization');
     axios
       .post(`/comments/${questionId}`, {
         content: inputValue,
@@ -124,6 +133,7 @@ function YourAnswer({ questionId }) {
       })
       .catch((err) => console.error(err));
   };
+
   return (
     <>
       <form className="ya-box">

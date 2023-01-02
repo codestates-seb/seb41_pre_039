@@ -90,21 +90,21 @@ function Answer({ answer, setIsKey }) {
           <div className="answer-box">
             <p className="asked-time">{timeParse(createdAt, 'time')}</p>
             <div className="userInfo">
-              <a href="%PUBLIC_URL%">
+              <a href={process.env.PUBLIC_URL}>
                 <img
                   src="http://placeimg.com/24/24/any"
                   alt="answer-avatar"
                   className="answer-avatar"
                 ></img>
               </a>
-              <a href="%PUBLIC_URL%" className="answer-name">
+              <a href={process.env.PUBLIC_URL} className="answer-name">
                 Username
               </a>
             </div>
           </div>
         </div>
         <br />
-        <a href="%PUBLIC_URL%" className="add-comment">
+        <a href={process.env.PUBLIC_URL} className="add-comment">
           Add a comment
         </a>
       </article>

@@ -79,7 +79,7 @@ export default function Question({ setIsKey }) {
                   {timeParse(question.createdAt, 'time')}
                 </p>
                 <div className="userInfo">
-                  <a href="%PUBLIC_URL%">
+                  <a href={process.env.PUBLIC_URL}>
                     <img
                       src="http://placeimg.com/24/24/any"
                       alt="writer-avatar"
@@ -92,7 +92,7 @@ export default function Question({ setIsKey }) {
                 </div>
               </div>
             </div>
-            <a href="%PUBLIC_URL%" className="add-comment">
+            <a href={process.env.PUBLIC_URL} className="add-comment">
               Add a comment
             </a>
           </article>

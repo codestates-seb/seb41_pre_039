@@ -59,51 +59,42 @@
   background-color: rgb(255, 255, 255);
   color: rgb(106, 115, 124);
   font-size: 13px;
-  border-style: solid;
-  border-color: rgb(159, 166, 173);
-  border-width: 1px;
+  border: 1px solid rgb(159, 166, 173);
   border-collapse: collapse;
+  border-right: none;
   padding: 10px;
   cursor: pointer;
   transition: ease background-color 250ms;
   float: left;
 }
 
-.buttonGroup > button:not(:last-child) {
-  border-right: none;
+.buttonGroup > button:first-child {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.buttonGroup > button:last-child {
+  border-right: 1px solid rgb(159, 166, 173);
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .buttonGroup > button:hover {
   background-color: rgb(248, 249, 249);
 }
 
-.buttonGroup > button:focus {
+.buttonGroup > button.active {
   background-color: rgb(227, 230, 232);
   color: rgb(59, 64, 69);
   border-color: rgb(131, 140, 149);
 }
-
+/* 
 .buttonGroup > button:active {
   background-color: rgb(248, 249, 249);
   color: rgb(82, 88, 97);
   outline-color: transparent;
   outline-style: solid;
   box-shadow: 0 0 0 4px rgb(233, 233, 233);
-}
-
-.btn1 {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-  border-block-start-color: rgb(159, 166, 173);
-  border-block-end-color: rgb(159, 166, 173);
-  border-left-color: rgb(159, 166, 173);
-  border-right-color: rgb(159, 166, 173);
-}
-
-.btn5 {
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
+} */
 
 .bottomNotice {
   margin: 17px;

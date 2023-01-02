@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../action';
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(false);
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
+  const { isLogin } = useSelector((state) => state);
 
+  console.log(isLogin);
   const searchHandler = (e) => {
     const { value } = e.target;
     if (e.key === 'Enter') {
@@ -33,14 +36,10 @@ export default function Header() {
         </div>
         <nav className={isLogin ? 'login-box isLogin' : 'login-box'}>
           {isLogin ? (
-            <IsLoginHeader setIsLogin={setIsLogin} />
+            <IsLoginHeader />
           ) : (
             <>
-              <Link
-                to="/login"
-                className="header-login"
-                onClick={() => setIsLogin(!isLogin)}
-              >
+              <Link to="/login" className="header-login">
                 Log in
               </Link>
               <Link to="/signup" className="header-signup">
@@ -54,8 +53,18 @@ export default function Header() {
   );
 }
 
-function IsLoginHeader({ setIsLogin }) {
+function IsLoginHeader() {
   const [isProfile, setIsProfile] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    dispatch(logout);
+    localStorage.removeItem('authorization');
+    localStorage.removeItem('refresh');
+    localStorage.removeItem('expires');
+    navigate('/');
+  };
   return (
     <>
       <ul className="isLogin-ul">
@@ -84,7 +93,7 @@ function IsLoginHeader({ setIsLogin }) {
                 <Link to="/user/setting">Setting</Link>
               </li>
               <li>
-                <Link to="" onClick={() => setIsLogin(false)}>
+                <Link to="" onClick={logoutHandler}>
                   Logout
                 </Link>
               </li>

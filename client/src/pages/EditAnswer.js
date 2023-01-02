@@ -79,7 +79,6 @@ export default function EditAnswer() {
   const [summary, setSummary] = useState('');
   const bodyRef = useRef(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     axios
       .get(`/comments/${commentId}`)
@@ -92,12 +91,12 @@ export default function EditAnswer() {
   const editAnswerHandler = (e) => {
     e.preventDefault();
     axios
-      .patch(`/comments/1`, {
+      .patch(`/comments/${commentId}`, {
         content: body,
       })
       .then((res) => {
         setBody(res.data);
-        navigate(`/question/${commentId}`);
+        navigate(-1);
       })
       .catch((err) => console.error(err));
   };

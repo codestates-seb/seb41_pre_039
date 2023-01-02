@@ -139,13 +139,23 @@
   margin: 25px 0px;
 }
 
-.content-edit {
+.auth-button{
+  display: inline-block;
   color: hsl(214deg 7% 47%);
   font-size: 13px;
+  padding: 0 5px;
+  border: none;
+  outline: none;
+  background: none;
 }
 
-.content-edit:hover {
+.auth-button.delete{
+  color: #541315;
+}
+
+.auth-button:hover {
   color: hsl(210deg 8% 55%);
+  cursor: pointer;
 }
 
 .writer-box {

@@ -38,6 +38,8 @@ const ContentUl = styled.ul`
 `;
 
 export default function Answers({ answer, questionId }) {
+  const { memberId } = useSelector((state) => state);
+
   return (
     <>
       {answer.length ? (
@@ -59,7 +61,11 @@ export default function Answers({ answer, questionId }) {
       <div className="content-layout">
         {answer &&
           answer.map((answer) => (
-            <Answer key={answer.commentId} answer={answer} />
+            <Answer
+              key={answer.commentId}
+              answer={answer}
+              memberId={memberId}
+            />
           ))}
       </div>
 
@@ -68,13 +74,31 @@ export default function Answers({ answer, questionId }) {
   );
 }
 
-function Answer({ answer }) {
+function Answer({ answer, memberId }) {
   const commentId = answer.commentId;
+  const { totalVote, content, createdAt } = answer;
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    const isDelete = confirm('Are you sure you want to delete it?');
+    if (isDelete) {
+      axios.defaults.headers.common['Authorization'] =
+        localStorage.getItem('authorization');
+      axios
+        .delete(`/comments/${commentId}`)
+        .then(() => {
+          alert('Deleted.');
+          location.reload();
+        })
+        .catch(() => {
+          alert('Unable to delete.');
+        });
+    }
+  };
   return (
     <div className="answer-container">
       <div className="content-recommend">
         <button className="content-up"></button>
-        <span className="content-num">{answer.totalVote}</span>
+        <span className="content-num">{totalVote}</span>
         <button className="content-down"></button>
         <button className="content-chosen-button">
           <svg className="svg-icon" width="36" height="36" viewBox="0 0 36 36">
@@ -83,13 +107,25 @@ function Answer({ answer }) {
         </button>
       </div>
       <article className="content-question" data-color-mode="light">
-        <MarkdownPreview source={answer.content} className="answer-p" />
+        <MarkdownPreview source={content} className="answer-p" />
         <div className="content-answerInfo">
-          <Link to={`/edit/answer/${commentId}`} className="content-edit">
-            Edit
-          </Link>
+          <div>
+            {answer.memberId === memberId ? (
+              <div>
+                <Link
+                  to={`/edit/answer/${commentId}`}
+                  className="auth-button edit"
+                >
+                  Edit
+                </Link>
+                <button onClick={deleteHandler} className="auth-button delete">
+                  Delete
+                </button>
+              </div>
+            ) : null}
+          </div>
           <div className="answer-box">
-            <p className="asked-time">{timeParse(answer.createdAt, 'time')}</p>
+            <p className="asked-time">{timeParse(createdAt, 'time')}</p>
             <div className="userInfo">
               <a href={process.env.PUBLIC_URL}>
                 <img
@@ -121,17 +157,19 @@ function YourAnswer({ questionId }) {
   const submitAnswerHandler = (e) => {
     e.preventDefault();
     if (!isLogin) navigate('/login');
-    axios.defaults.headers.common['Authorization'] =
-      localStorage.getItem('authorization');
-    axios
-      .post(`/comments/${questionId}`, {
-        content: inputValue,
-      })
-      .then((res) => {
-        console.log(res);
-        location.reload();
-      })
-      .catch((err) => console.error(err));
+    else {
+      axios.defaults.headers.common['Authorization'] =
+        localStorage.getItem('authorization');
+      axios
+        .post(`/comments/${questionId}`, {
+          content: inputValue,
+        })
+        .then((res) => {
+          console.log(res);
+          location.reload();
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   return (

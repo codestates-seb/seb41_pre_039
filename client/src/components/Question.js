@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import './Question.css';
 import timeParse from './time';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const TagList = styled.li`
   padding: 4.8px 6px;
@@ -21,7 +22,25 @@ const TagList = styled.li`
   }
 `;
 export default function Question({ question, questionId }) {
-  const { isLogin } = useSelector((state) => state);
+  const { isLogin, memberId } = useSelector((state) => state);
+  const navigate = useNavigate();
+  const deleteHandler = (e) => {
+    e.preventDefault();
+    const isDelete = confirm('Are you sure you want to delete it?');
+    if (isDelete) {
+      axios.defaults.headers.common['Authorization'] =
+        localStorage.getItem('authorization');
+      axios
+        .delete(`/questions/${questionId}`)
+        .then(() => {
+          alert('Deleted.');
+          navigate('/');
+        })
+        .catch(() => {
+          alert('Unable to delete.');
+        });
+    }
+  };
   return (
     <>
       <div className="content-header">
@@ -72,12 +91,24 @@ export default function Question({ question, questionId }) {
                 })}
             </ul>
             <div className="content-writerInfo">
-              <Link
-                to={`/edit/question/${questionId}`}
-                className="content-edit"
-              >
-                Edit
-              </Link>
+              <div className="auth-button-container">
+                {question.memberId === memberId ? (
+                  <>
+                    <Link
+                      to={`/edit/question/${questionId}`}
+                      className="auth-button edit"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={deleteHandler}
+                      className="auth-button delete"
+                    >
+                      Delete
+                    </button>
+                  </>
+                ) : undefined}
+              </div>
               <div className="writer-box">
                 <p className="asked-time">
                   {timeParse(question.createdAt, 'time')}

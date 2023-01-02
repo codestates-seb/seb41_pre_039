@@ -39,4 +39,5 @@ export default function timeParse(date = '', value = '') {
       return `${parseDate} at ${parseTime}`;
     }
   }
+  return '';
 }

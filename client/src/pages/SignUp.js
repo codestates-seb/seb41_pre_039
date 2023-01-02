@@ -62,11 +62,9 @@ export default function Signup() {
           password: { password },
         }
       )
-      .then((response) => {
+      .then(() => {
         // Handle success.
         console.log('Well done!');
-        console.log('User profile', response.data.user);
-        console.log('User token', response.data.jwt);
       })
       .catch((error) => {
         // Handle error.

@@ -58,7 +58,15 @@ button {
   flex-direction: column;
 }
 
-.content-chosen-button{
+.content-chosen {
+  width: 36px;
+}
+
+.content-chosen > svg {
+  fill: #2f6f44;
+}
+
+.content-chosen-button {
   width: 36px;
   border: none;
   background: none;
@@ -70,7 +78,7 @@ button {
   fill: #babfc4;
 }
 
-.content-chosen-button > .svg-icon.chosen {
+.content-chosen-button.chosen > .svg-icon {
   fill: #2f6f44;
 }
 

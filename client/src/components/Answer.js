@@ -123,7 +123,7 @@ function Answer({ answer, memberId, question }) {
       localStorage.getItem('authorization');
     axios
       .patch(`/comments/${commentId}`, {
-        adoption: true,
+        adoption: answer.adoption ? false : true,
       })
       .then((res) => {
         console.log(res);
@@ -161,6 +161,17 @@ function Answer({ answer, memberId, question }) {
               <path d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"></path>
             </svg>
           </button>
+        ) : answer.adoption ? (
+          <div className="content-chosen">
+            <svg
+              className="svg-icon"
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+            >
+              <path d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"></path>
+            </svg>
+          </div>
         ) : null}
       </div>
       <article className="content-question" data-color-mode="light">

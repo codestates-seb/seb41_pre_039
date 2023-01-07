@@ -5,6 +5,7 @@ import timeParse from './time';
 import MarkdownPreview from '@uiw/react-markdown-preview';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const TagList = styled.li`
   padding: 4.8px 6px;
@@ -24,6 +25,29 @@ const TagList = styled.li`
 export default function Question({ question, questionId }) {
   const { isLogin, memberId } = useSelector((state) => state);
   const navigate = useNavigate();
+  const [vote, setVote] = useState(0);
+
+  useEffect(() => {
+    setVote(question.totalVote);
+  }, [question]);
+
+  const voteHandler = (e) => {
+    const { name } = e.target;
+    axios.defaults.headers.common['Authorization'] =
+      localStorage.getItem('authorization');
+    if (name === 'voteUp') {
+      axios
+        .patch(`/questions/${questionId}`, { totalVote: vote + 1 })
+        .then((res) => setVote(res.data.totalVote))
+        .catch((err) => console.error(err));
+    } else {
+      axios
+        .patch(`/questions/${questionId}`, { totalVote: vote - 1 })
+        .then((res) => setVote(res.data.totalVote))
+        .catch((err) => console.error(err));
+    }
+  };
+
   const deleteHandler = (e) => {
     e.preventDefault();
     const isDelete = confirm('Are you sure you want to delete it?');
@@ -78,9 +102,17 @@ export default function Question({ question, questionId }) {
       <div className="content-layout">
         <div className="question-container">
           <div className="content-recommend">
-            <button className="content-up"></button>
-            <span className="content-num">{question.totalVote}</span>
-            <button className="content-down"></button>
+            <button
+              name="voteUp"
+              className="content-up"
+              onClick={voteHandler}
+            ></button>
+            <span className="content-num">{vote}</span>
+            <button
+              name="voteDown"
+              className="content-down"
+              onClick={voteHandler}
+            ></button>
           </div>
           <article className="content-question" data-color-mode="light">
             <MarkdownPreview source={question.content} className="question-p" />

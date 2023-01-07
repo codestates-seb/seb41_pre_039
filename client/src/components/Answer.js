@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import './Answer.css';
 import { AnswerEditor } from './Editor';
@@ -37,14 +37,14 @@ const ContentUl = styled.ul`
   margin-left: 30px;
 `;
 
-export default function Answers({ answer, questionId, question }) {
+export default function Answers({ answers, questionId, question }) {
   const { memberId } = useSelector((state) => state);
 
   return (
     <>
-      {answer.length ? (
+      {answers.length ? (
         <div className="answer-header">
-          <h2>{answer.length} Answer </h2>
+          <h2>{answers.length} Answer </h2>
           <div className="sorted-box">
             <div className="sorted-info">
               <span className="sorted-text">Sorted by:</span>
@@ -59,8 +59,8 @@ export default function Answers({ answer, questionId, question }) {
         </div>
       ) : undefined}
       <div className="content-layout">
-        {answer &&
-          answer.map((answer) => (
+        {answers &&
+          answers.map((answer) => (
             <Answer
               key={answer.commentId}
               answer={answer}
@@ -76,8 +76,30 @@ export default function Answers({ answer, questionId, question }) {
 }
 
 function Answer({ answer, memberId, question }) {
-  const commentId = answer.commentId;
-  const { totalVote, content, createdAt } = answer;
+  const { commentId, totalVote, content, createdAt } = answer;
+  const [vote, setVote] = useState(0);
+
+  useEffect(() => {
+    setVote(totalVote);
+  }, [answer]);
+
+  const voteHandler = (e) => {
+    const { name } = e.target;
+    axios.defaults.headers.common['Authorization'] =
+      localStorage.getItem('authorization');
+    if (name === 'voteUp') {
+      axios
+        .patch(`/comments/${commentId}`, { totalVote: vote + 1 })
+        .then((res) => setVote(res.data.totalVote))
+        .catch((err) => console.error(err));
+    } else {
+      axios
+        .patch(`/comments/${commentId}`, { totalVote: vote - 1 })
+        .then((res) => setVote(res.data.totalVote))
+        .catch((err) => console.error(err));
+    }
+  };
+
   const deleteHandler = (e) => {
     e.preventDefault();
     const isDelete = confirm('Are you sure you want to delete it?');
@@ -112,9 +134,17 @@ function Answer({ answer, memberId, question }) {
   return (
     <div className="answer-container">
       <div className="content-recommend">
-        <button className="content-up"></button>
-        <span className="content-num">{totalVote}</span>
-        <button className="content-down"></button>
+        <button
+          name="voteUp"
+          onClick={voteHandler}
+          className="content-up"
+        ></button>
+        <span className="content-num">{vote}</span>
+        <button
+          name="voteDown"
+          onClick={voteHandler}
+          className="content-down"
+        ></button>
         {question.memberId === memberId ? (
           <button
             className={`content-chosen-button ${

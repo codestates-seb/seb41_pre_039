@@ -1,6 +1,9 @@
 import { legacy_createStore as createStore } from '@reduxjs/toolkit';
 
-const initialState = { isLogin: false, memberId: null };
+const initialState = {
+  isLogin: localStorage.getItem('authorization') ? true : false,
+  memberId: null,
+};
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {

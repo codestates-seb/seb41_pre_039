@@ -58,10 +58,10 @@ function IsLoginHeader() {
   const navigate = useNavigate();
 
   const logoutHandler = () => {
-    dispatch(logout);
     localStorage.removeItem('authorization');
     localStorage.removeItem('refresh');
     localStorage.removeItem('expires');
+    dispatch(logout);
     navigate('/');
   };
   return (

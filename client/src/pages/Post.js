@@ -17,8 +17,8 @@ const ContentContainer = styled.div`
 
 export default function Post() {
   const { questionId } = useParams();
-  const [question, setQuestion] = useState([]);
-  const [answer, setAnswer] = useState([]);
+  const [question, setQuestion] = useState({});
+  const [answers, setAnswers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsLoading(false);
@@ -29,7 +29,7 @@ export default function Post() {
     axios
       .get(`/comments/questions/${questionId}`)
       .then((res) => {
-        setAnswer(res.data);
+        setAnswers(res.data);
         setIsLoading(true);
       })
       .catch((err) => console.error(err));
@@ -38,7 +38,7 @@ export default function Post() {
     <ContentContainer>
       {isLoading ? undefined : <Loading />}
       <Question question={question} questionId={questionId} />
-      <Answers answer={answer} questionId={questionId} />
+      <Answers answers={answers} question={question} questionId={questionId} />
     </ContentContainer>
   );
 }

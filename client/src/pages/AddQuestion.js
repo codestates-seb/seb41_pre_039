@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { ContentEditor } from '../components/Editor';
 import './AddQuestion.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const InputBox = styled.div`
   width: 100%;
@@ -172,6 +173,7 @@ const AddQuestion = () => {
   const problemRef = useRef(null);
   const tryForRef = useRef(null);
   const tagsRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.draft) {
@@ -258,15 +260,22 @@ const AddQuestion = () => {
     }
   };
 
-  const askSubmitHandler = () => {
+  const askSubmitHandler = (e) => {
+    e.preventDefault();
+    axios.defaults.headers.common['Authorization'] =
+      localStorage.getItem('authorization');
     axios
       .post(`questions/`, {
         title: title,
-        content: problem + tryFor,
+        content: problem + '\n\n' + tryFor,
         tags: tags,
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.errer(err));
+      .then((res) => {
+        console.log(res.data);
+        localStorage.removeItem('draft');
+        navigate(`/question/${res.data.questionId}`);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (

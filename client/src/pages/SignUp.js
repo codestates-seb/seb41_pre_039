@@ -54,14 +54,7 @@ export default function Signup() {
   const signUp = (data) => {
     const { name, email, password } = data;
     axios
-      .post(
-        'http://ec2-54-180-132-90.ap-northeast-2.compute.amazonaws.com:8080/members',
-        {
-          name: { name },
-          email: { email },
-          password: { password },
-        }
-      )
+      .post('/members', { name, email, password })
       .then(() => {
         // Handle success.
         console.log('Well done!');

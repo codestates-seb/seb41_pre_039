@@ -16,10 +16,18 @@ import SerachPage from './pages/SearchPage';
 import NotFound from './pages/NotFound';
 import EditQuestion from './pages/EditQuestion';
 import EditAnswer from './pages/EditAnswer';
+import { useDispatch } from 'react-redux';
+import { login, logout } from './action';
+import axios from 'axios';
 
 function App() {
   const [isSidebar, setIsSidebar] = useState(true);
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  axios.defaults.baseURL =
+    'http://ec2-54-180-132-90.ap-northeast-2.compute.amazonaws.com:8080';
+
   useEffect(() => {
     if (
       location.pathname.match(/question|user|edit|search/g) ||
@@ -28,6 +36,13 @@ function App() {
       setIsSidebar(true);
     else setIsSidebar(false);
   }, [location]);
+
+  // ! 토큰 인증 api 나오면 교체해야 함.
+  useEffect(() => {
+    if (localStorage.getItem('authorization')) dispatch(login(1));
+    else dispatch(logout());
+  }, []);
+
   return (
     <div className="App">
       <div className="header">

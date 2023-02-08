@@ -18,11 +18,16 @@ import EditQuestion from './pages/EditQuestion';
 import EditAnswer from './pages/EditAnswer';
 import { useDispatch } from 'react-redux';
 import { login, logout } from './action';
+import axios from 'axios';
 
 function App() {
   const [isSidebar, setIsSidebar] = useState(true);
   const location = useLocation();
   const dispatch = useDispatch();
+
+  axios.defaults.baseURL =
+    'http://ec2-54-180-132-90.ap-northeast-2.compute.amazonaws.com:8080';
+
   useEffect(() => {
     if (
       location.pathname.match(/question|user|edit|search/g) ||

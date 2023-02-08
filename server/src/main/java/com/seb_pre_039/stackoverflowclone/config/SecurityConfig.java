@@ -60,14 +60,18 @@ public class SecurityConfig {
                         authorize
                                 .antMatchers(HttpMethod.POST, "/members").permitAll()
                                 .antMatchers(HttpMethod.PATCH, "/members/*").hasRole("USER")
-                                .antMatchers(HttpMethod.GET, "/members/*").hasRole("USER")
-                                .antMatchers(HttpMethod.GET, "/members").hasRole("USER")
+                                .antMatchers(HttpMethod.GET, "/members/*").permitAll()
+                                .antMatchers(HttpMethod.GET, "/members").permitAll()
                                 .antMatchers(HttpMethod.DELETE, "/members/*").hasAnyRole("USER", "ADMIN")
                                 .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
                                 .antMatchers(HttpMethod.PATCH, "/questions/*").hasRole("USER")
-                                .antMatchers(HttpMethod.GET, "/questions/**").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.GET, "/questions/**").permitAll()
                                 .antMatchers(HttpMethod.DELETE, "/questions/*").hasRole("USER")
                                 .antMatchers(HttpMethod.DELETE, "/questions").hasRole("ADMIN")
+                                .antMatchers(HttpMethod.POST, "/comments/*").hasRole("USER")
+                                .antMatchers(HttpMethod.GET, "/comments/**").permitAll()
+                                .antMatchers(HttpMethod.PATCH, "/comments/*").hasAnyRole("USER", "ADMIN")
+                                .antMatchers(HttpMethod.DELETE, "/comments/*").hasAnyRole("USER", "ADMIN")
                 );
 
 

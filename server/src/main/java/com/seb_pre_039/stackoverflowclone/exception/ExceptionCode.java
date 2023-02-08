@@ -12,8 +12,9 @@ public enum ExceptionCode {
     TAG_NOT_FOUND(404, "Tag Not Found"),
     TAG_EXISTS(409, "Tag Exists"),
 
-    UNAUTHORIZED(401, "User Unauthorized");
+    UNAUTHORIZED(401, "User Unauthorized"),
 
+    REFRESHTOKEN_NOT_EXISTS(404, "RefreshToken Not Found");
     @Getter
     private int status;
 
